@@ -47,5 +47,6 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'rspec-rails'
+gem 'acts_as_list'
 
 gem 'rails_12factor', group: :production
