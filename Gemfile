@@ -48,5 +48,6 @@ end
 
 gem 'rspec-rails'
 gem 'acts_as_list'
+gem 'roo'
 
 gem 'rails_12factor', group: :production
