@@ -1,5 +1,8 @@
 SEMAT::Application.routes.draw do
-  get "alphas/show"
+
+  resources :alphas
+
+#  get "alphas/show"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
