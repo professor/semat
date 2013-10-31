@@ -26,8 +26,10 @@ class AlphaCardParser
       handle_new_alpha(row)
     elsif row[5].present?
       handle_new_state(row)
-    else
+    elsif row[6].present?
       handle_new_checklist(row)
+    else
+      puts "**** no action done  " + row.inspect
     end
 
   end
