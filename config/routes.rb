@@ -1,6 +1,9 @@
 SEMAT::Application.routes.draw do
 
   resources :alphas
+  get "simple_alphas" => "alphas#simple_index"
+
+#  get "alphas/show"
 
 #  get "alphas/show"
   # The priority is based upon order of creation: first created -> highest priority.

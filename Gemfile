@@ -51,3 +51,7 @@ gem 'acts_as_list'
 gem 'roo'
 
 gem 'rails_12factor', group: :production
+
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                          :github => 'anjlab/bootstrap-rails',
+                          :branch => '3.0.0'
