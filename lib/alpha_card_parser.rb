@@ -35,18 +35,18 @@ class AlphaCardParser
 
   def self.handle_new_alpha(row)
     puts "handle_new_alpha     " + row.inspect
-    @current_alpha = Alpha.create(:essence_version_id => @version.id, :name => row[0], :concern => row[1], :color => row[2],
-                                  :definition => row[3], :description => row[4])
+    @current_alpha = Alpha.create(:essence_version_id => @version.id, :name => row[0].strip, :concern => row[1].strip, :color => row[2].strip,
+                                  :definition => row[3].strip, :description => row[4].strip)
   end
 
   def self.handle_new_state(row)
     puts "handle_new_state     " + row.inspect
-    @current_state = State.create(:alpha_id => @current_alpha.id, :name => row[5])
+    @current_state = State.create(:alpha_id => @current_alpha.id, :name => row[5].strip)
   end
 
   def self.handle_new_checklist(row)
     puts "handle_new_checklist " + row.inspect
-    Checklist.create(:state_id => @current_state.id, :name => row[6])
+    Checklist.create(:state_id => @current_state.id, :name => row[6].strip)
   end
 
 
