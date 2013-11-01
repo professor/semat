@@ -1,4 +1,4 @@
-class CreateTables < ActiveRecord::Migration
+class CreateEssenceCardsTables < ActiveRecord::Migration
   def change
     create_table :alphas do |t|
       t.string :name
