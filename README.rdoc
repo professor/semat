@@ -29,3 +29,6 @@ Please feel free to use a different markup language if you do not plan to run
 
 heroku run rake db:migrate --app semat
  heroku run rake  semat:import_alpha_cards
+
+
+ http://localhost:3000/api/v1/simple_alphas.json
