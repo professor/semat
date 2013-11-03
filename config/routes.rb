@@ -1,7 +1,20 @@
 SEMAT::Application.routes.draw do
 
+  get "teams/members"
+  get "teams/checklists"
   resources :alphas
   get "simple_alphas" => "alphas#simple_index"
+
+  namespace :api do
+    namespace :v1 do
+       # Directs /admin/products/* to Admin::ProductsController
+       # (app/controllers/admin/products_controller.rb)
+       resources :alphas
+       get "simple_alphas" => "alphas#simple_index"
+       post "progress" => "progress#mark"
+    end
+  end
+
 
 #  get "alphas/show"
 

@@ -1,0 +1,122 @@
+<h1>SEMAT</h1>
+
+
+<%= current_user_id = 10 %>
+<%= team_id = 5 %>
+
+<script>
+    $(document).ready(function () {
+        $('.checklist_checkbox').click(function(){
+            if($(this).is(':checked')){
+                checked = true;
+            } else {
+                checked = false;
+            }
+            id = $(this).val()
+            $.ajax({
+                type:'post',
+                data:"checklist_id=" + id + "&checked=" + checked +  "&team_id=<%=team_id%>&user_id=<%=current_user_id%>",
+                dataType:'script',
+                url:'/api/v1/progress'});
+        });
+
+    });
+</script>
+
+<% state = State.first %>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= state.name%></h3>
+  </div>
+  <div class="panel-body">
+    <% state.checklists.each do |checklist| %>
+
+        <input type="checkbox" class="checklist_checkbox" value="<%= checklist.id %>"> <%= checklist.name %>
+
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+<% @version.alphas.each do |alpha| %>
+
+  <h2><%= alpha.name %></h2>
+
+  <% alpha.states.each do |state| %>
+   <div class="row">
+         <div class="col-sm-6 col-md-4">
+           <div class="thumbnail">
+             <img data-src="holder.js/300x1" alt="...">
+             <div class="caption">
+               <h3><%= state.name%></h3>
+               <% state.checklists.each do |checklist| %>
+
+                   <div class="input-group">
+                         <span class="input-group-addon">
+                           <input type="checkbox" value="<%= checklist.id %>">
+                         </span>
+                     <input type="text" disabled class="form-control" value="<%= checklist.name %>">
+                       </div> <br/>
+               <% end %>
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"></h3>
+      </div>
+      <div class="panel-body">
+        <% state.checklists.each do |checklist| %>
+
+            <div class="input-group">
+                  <span class="input-group-addon">
+                    <input type="checkbox" value="<%= checklist.id %>">
+                  </span>
+              <input type="text" disabled class="form-control" value="<%= checklist.name %>">
+                </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  </br>
+<% end %>
+
+
+<% @version.alphas.each do |alpha| %>
+
+
+  <h2><%= alpha.name %></h2>
+
+  <% alpha.states.each do |state| %>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= state.name%></h3>
+      </div>
+      <div class="panel-body">
+        <% state.checklists.each do |checklist| %>
+
+            <div class="input-group">
+                  <span class="input-group-addon">
+                    <input type="checkbox" value="<%= checklist.id %>">
+                  </span>
+              <input type="text" disabled class="form-control" value="<%= checklist.name %>">
+                </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  </br>
+<% end %>
+
+
+
