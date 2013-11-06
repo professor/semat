@@ -1,5 +1,7 @@
 class AlphasController < ApplicationController
 
+#  before_filter :authenticate_user!
+
 
   def show
     @alpha = Alpha.find(params[:id])

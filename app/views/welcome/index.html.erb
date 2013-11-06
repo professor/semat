@@ -1,0 +1,24 @@
+<p class="lead">SEMAT allows your team to systemically reflect on team progress and identy new tasks to help the team achieve its goal</p>
+ 
+<ul class="list-group">
+  <li class="list-group-item">It provides</li>
+  <li class="list-group-item">- A holistic view of the project</li>
+  <li class="list-group-item">- A structure for retrospective</li>
+  <li class="list-group-item">- A mechanism for monitoring progress</li>
+  <li class="list-group-item">- A mechanism for risk management</li>
+  <li class="list-group-item">- A mechanism for steering projects </li>
+  <li class="list-group-item">In a simple, lightweight, non-prescriptive and method-agnostic fashion. 
+ </li>
+</ul>
+
+
+
+<h2>Sample for Stakeholders</h2>
+<% alpha = @version.alphas.first %>
+
+<div class="row">
+        <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[0]} %></div>
+        <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[1]} %></div>
+        <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[2]} %></div>
+</div>
+

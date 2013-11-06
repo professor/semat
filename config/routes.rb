@@ -1,5 +1,8 @@
 SEMAT::Application.routes.draw do
 
+  devise_for :users
+  root :to => "welcome#index"
+
   get "teams/members"
   get "teams/checklists"
   resources :alphas

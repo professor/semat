@@ -1,4 +1,7 @@
 class TeamsController < ApplicationController
+  
+  before_filter :authenticate_user!
+  
   def members
   end
 
