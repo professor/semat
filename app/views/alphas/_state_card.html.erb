@@ -1,0 +1,17 @@
+<%
+   #Parameters: state
+   state = local_assigns[:state]
+%>
+<div class="panel panel-blue">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= state.name%></h3>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
+    <% state.checklists.each do |checklist| %>
+        <li class="list-group-item">
+        <input type="checkbox" class="checklist_checkbox" value="<%= checklist.id %>"> <%= checklist.name %></li>
+    <% end %>
+        </ul>
+  </div>
+</div>

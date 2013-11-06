@@ -13,3 +13,65 @@
  */
 
 @import "twitter/bootstrap";
+
+//This is derived from twitter bootstrap, I'm just renaming it to make more sense
+//was .panel-success
+.panel-green {
+  border-color: #d6e9c6; }
+  .panel-green > .panel-heading {
+    color: #468847;
+    background-color: #dff0d8;
+    border-color: #d6e9c6; }
+    .panel-green > .panel-heading + .panel-collapse .panel-body {
+      border-top-color: #d6e9c6; }
+  .panel-green > .panel-footer + .panel-collapse .panel-body {
+    border-bottom-color: #d6e9c6; }
+
+//was .panel-info
+.panel-blue {
+  border-color: #bce8f1; }
+  .panel-blue > .panel-heading {
+    color: #3a87ad;
+    background-color: #d9edf7;
+    border-color: #bce8f1; }
+    .panel-blue > .panel-heading + .panel-collapse .panel-body {
+      border-top-color: #bce8f1; }
+  .panel-blue > .panel-footer + .panel-collapse .panel-body {
+    border-bottom-color: #bce8f1; }
+
+//.panel-danger {
+.panel-red {
+  border-color: #eed3d7; }
+  .panel-red > .panel-heading {
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7; }
+    .panel-red > .panel-heading + .panel-collapse .panel-body {
+      border-top-color: #eed3d7; }
+  .panel-red > .panel-footer + .panel-collapse .panel-body {
+    border-bottom-color: #eed3d7; }
+
+//.panel-warning {
+.panel-yellow {
+  border-color: #fbeed5; }
+  .panel-yellow > .panel-heading {
+    color: #c09853;
+    background-color: #fcf8e3;
+    border-color: #fbeed5; }
+    .panel-yellow > .panel-heading + .panel-collapse .panel-body {
+      border-top-color: #fbeed5; }
+  .panel-yellow > .panel-footer + .panel-collapse .panel-body {
+    border-bottom-color: #fbeed5; }
+
+
+//.panel-primary {
+.panel-dark-blue {
+  border-color: #428bca; }
+  .panel-dark-blue > .panel-heading {
+    color: white;
+    background-color: #428bca;
+    border-color: #428bca; }
+    .panel-dark-blue > .panel-heading + .panel-collapse .panel-body {
+      border-top-color: #428bca; }
+  .panel-dark-blue > .panel-footer + .panel-collapse .panel-body {
+    border-bottom-color: #428bca; }
