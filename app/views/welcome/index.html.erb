@@ -11,10 +11,9 @@
  </li>
 </ul>
 
-
-
-<h2>Sample for Stakeholders</h2>
 <% alpha = @version.alphas.first %>
+
+<h2>Sample for <%= alpha.name %></h2><span class="glyphicon glyphicon-info-sign"></span>
 
 <div class="row">
         <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[0]} %></div>

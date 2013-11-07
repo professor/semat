@@ -14,6 +14,18 @@
 
 @import "twitter/bootstrap";
 
+
+//These are from  http://getbootstrap.com/examples/starter-template/starter-template.css
+
+
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
 //This is derived from twitter bootstrap, I'm just renaming it to make more sense
 //was .panel-success
 .panel-green {

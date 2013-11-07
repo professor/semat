@@ -30,6 +30,13 @@ class CreateMarkingTables < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    create_table :teams do |t|
+      t.string :name
+      t.integer :owner_id
+
+      t.timestamps
+    end
     add_index :teams, :owner_id
   end
 

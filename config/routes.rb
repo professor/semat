@@ -3,7 +3,8 @@ SEMAT::Application.routes.draw do
   devise_for :users
   root :to => "welcome#index"
 
-  get "teams/members"
+  resources :teams
+
   get "teams/checklists"
   resources :alphas
   get "simple_alphas" => "alphas#simple_index"
@@ -18,6 +19,7 @@ SEMAT::Application.routes.draw do
     end
   end
 
+  get "users/:email/teams" => "users#my_teams"
 
 #  get "alphas/show"
 

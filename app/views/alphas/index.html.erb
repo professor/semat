@@ -1,7 +1,6 @@
 <h1>SEMAT</h1>
 
 
-<%= current_user_id = 10 %>
 <%= team_id = 5 %>
 
 <script>
@@ -15,7 +14,7 @@
             id = $(this).val()
             $.ajax({
                 type:'post',
-                data:"checklist_id=" + id + "&checked=" + checked +  "&team_id=<%=team_id%>&user_id=<%=current_user_id%>",
+                data:"checklist_id=" + id + "&checked=" + checked +  "&team_id=<%=team_id%>&user_id=<%=current_user.id%>",
                 dataType:'script',
                 url:'/api/v1/progress'});
         });
@@ -25,6 +24,7 @@
 
 <% state = State.first %>
 <% state2 = State.first %>
+
 
 <div class="row">
         <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state} %></div>

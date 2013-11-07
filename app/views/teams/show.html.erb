@@ -1,0 +1,36 @@
+<h1>Team <%= @team.name %></h1>
+
+<%= form_for @team, :html => {:class => "ngb", :id => "edit_job"} do |f| %>
+
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon">Name</span>
+      <%= f.text_field :name, :class => "form-control", :placeholder => "Username" %>
+    </div>
+
+    <h2>Members</h2>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <input type="text" class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Remove</button>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <br/>
+
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon">Name</span>
+      <%= f.text_field :name, :class => "form-control", :placeholder => "Username" %>
+    </div>
+    <button type="button" class="btn btn-link">Remove</button>
+
+
+    <h2>Invite team members</h2>
+    <textarea class="form-control" rows="3"></textarea>
+
+
+<% end %>
+
+

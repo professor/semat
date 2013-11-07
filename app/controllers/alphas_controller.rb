@@ -9,6 +9,7 @@ class AlphasController < ApplicationController
 
   def index
     @version = EssenceVersion.first
+
   end
 
   def simple_index
