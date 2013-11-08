@@ -6,7 +6,8 @@ SEMAT::Application.routes.draw do
   resources :teams
 
   get "teams/checklists"
-  resources :alphas
+  get "alphas" => "alphas#index"
+#  resources :alphas
   get "simple_alphas" => "alphas#simple_index"
 
   namespace :api do

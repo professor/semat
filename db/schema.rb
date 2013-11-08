@@ -51,6 +51,10 @@ ActiveRecord::Schema.define(version: 20131107002523) do
     t.datetime "updated_at"
   end
 
+  add_index "logs", ["checklist_id"], name: "index_logs_on_checklist_id", using: :btree
+  add_index "logs", ["scribe_id"], name: "index_logs_on_scribe_id", using: :btree
+  add_index "logs", ["team_id"], name: "index_logs_on_team_id", using: :btree
+
   create_table "states", force: true do |t|
     t.string   "name"
     t.integer  "order"
@@ -66,6 +70,11 @@ ActiveRecord::Schema.define(version: 20131107002523) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "team_checklists", ["checklist_id"], name: "index_team_checklists_on_checklist_id", using: :btree
+  add_index "team_checklists", ["scribe_id"], name: "index_team_checklists_on_scribe_id", using: :btree
+  add_index "team_checklists", ["team_id", "checklist_id"], name: "index_team_checklists_on_team_id_and_checklist_id", unique: true, using: :btree
+  add_index "team_checklists", ["team_id"], name: "index_team_checklists_on_team_id", using: :btree
 
   create_table "team_users", force: true do |t|
     t.integer  "team_id"
@@ -83,6 +92,8 @@ ActiveRecord::Schema.define(version: 20131107002523) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "teams", ["owner_id"], name: "index_teams_on_owner_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

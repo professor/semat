@@ -22,7 +22,7 @@ class CreateMarkingTables < ActiveRecord::Migration
     add_index :team_checklists, :team_id
     add_index :team_checklists, :checklist_id
     add_index :team_checklists, :scribe_id
-    add_index :team_checklists, [:team_id, :checklist_id]
+    add_index :team_checklists, [:team_id, :checklist_id], :unique => true
 
     create_table :teams do |t|
       t.string :name

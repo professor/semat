@@ -1,8 +1,9 @@
 <%
    #Parameters: state
    state = local_assigns[:state]  
+   color = local_assigns[:color] || "blue"
 %>
-<div class="panel panel-blue">
+<div class="panel panel-<%= color.downcase %>">
   <div class="panel-heading">
     <h3 class="panel-title"><%= state.name%></h3>
   </div>

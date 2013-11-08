@@ -8,11 +8,18 @@ class Api::V1::ProgressController < ApplicationController
       user = User.find(params[:user_id])
       checked = params[:checked]
 
-      if(checked)
-          checklist = TeamChecklist.create(:team_id => team.id, :checklist_id => checklist_id, :scribe_id => user.id)
-          @response = true
+      if checked == "true"
+        puts "*** checked"
+          checklist_present = TeamChecklist.where(:team_id => team.id, :checklist_id => checklist.id).first
+          if checklist_present.nil?
+            checklist = TeamChecklist.create(:team_id => team.id, :checklist_id => checklist.id, :scribe_id => user.id)
+            @response = true
+          else
+            @response = "warning - already present"
+          end
       else
-        checklist = TeamChecklist.where(:team_id => team.id, :checklist_id => checklist_id).first
+        puts "*** unchecked"
+        checklist = TeamChecklist.where(:team_id => team.id, :checklist_id => checklist.id).first
         if (checklist)
           checklist.destroy
           @response = true
