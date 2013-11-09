@@ -25,27 +25,24 @@
         <li><a href="#about">About</a></li>
 		<% if user_signed_in? %>
         <li><a href="#contact"><% current_user.email %></a></li>
-        <li><a href="<%= destroy_user_session_path %>">Log out</a></li>
 		<% else %>
         <li><a href="<%= new_user_registration_path %>">Sign up</a></li>		
-        <li><a href="<%= new_user_session_path %>">Sign in</a></li>		
 		<% end %>
       </ul>
       <% if user_signed_in? %>
           <a href="#contact"><% current_user.email %></a>
           <form class="navbar-form navbar-right">
-          <a href="<%= destroy_user_session_path %>" class="btn btn-success" role="button">Log out</a>
+            <%= link_to "Log out ", destroy_user_session_path, :method => :delete, :class => "btn btn-success", :role => "button" %>
           </form>
       <% else %>
-      <form class="navbar-form navbar-right">
+      <%= form_tag(user_session_path, method: "post", class: "navbar-form navbar-right", id: "new_user") %>
                   <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
+                    <input type="text" placeholder="Email" class="form-control" name="user[email]" id="user_email">
                   </div>
                   <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
+                    <input type="password" placeholder="Password" class="form-control" name="user[password]" id="user_password">
                   </div>
                   <button type="submit" class="btn btn-success">Sign in</button>
-                </form>
        <% end %>
     </div><!--/.nav-collapse -->
   </div>
