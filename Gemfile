@@ -38,7 +38,8 @@ end
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+#gem 'unicorn'
+gem 'thin'
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
@@ -50,6 +51,8 @@ gem 'rspec-rails'
 gem 'acts_as_list'
 gem 'roo'
 gem 'devise'
+
+gem 'foreman', group: [:development, :test]
 
 
 gem 'rails_12factor', group: :production
