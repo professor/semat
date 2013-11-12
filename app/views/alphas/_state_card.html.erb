@@ -2,6 +2,8 @@
    #Parameters: state
    state = local_assigns[:state]  
    color = local_assigns[:color] || "blue"
+   checklist_ids_hash = local_assigns[:checklist_ids_hash] || Hash.new
+
 %>
 <div class="panel panel-<%= color.downcase %>">
   <div class="panel-heading">
@@ -11,7 +13,11 @@
     <ul class="list-group">
     <% state.checklists.each do |checklist| %>
         <li class="list-group-item">
-        <input type="checkbox" class="checklist_checkbox" value="<%= checklist.id %>"> <%= checklist.name %></li>
+         <% if checklist_ids_hash.has_key?(checklist.id) %>
+            <input type="checkbox" class="checklist_checkbox" value="<%= checklist.id %>" checked> <%= checklist.name %></li>
+         <% else %>
+            <input type="checkbox" class="checklist_checkbox" value="<%= checklist.id %>"> <%= checklist.name %></li>
+         <% end %>
     <% end %>
         </ul>
   </div>

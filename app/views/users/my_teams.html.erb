@@ -1,0 +1,11 @@
+<h1>My Teams</h1>
+<div class="list-group">
+<% @teams.each do |team| %>
+      <% if team.id == session[:selected_team_id] %>
+        <%= link_to team.name, team_path(team), :class=> "list-group-item active" %>
+      <% else %>
+        <%= link_to team.name, team_path(team), :class=> "list-group-item" %>
+      <% end %>
+<% end %>
+<%= link_to "Add a team", new_team_path, :class=> "list-group-item" %>
+</div>

@@ -7,8 +7,14 @@ SEMAT::Application.routes.draw do
 
   get "teams/checklists"
   get "alphas" => "alphas#index"
+  get "alphas/:team_id" => "alphas#index"
+
 #  resources :alphas
   get "simple_alphas" => "alphas#simple_index"
+  get "users/:email/teams" => "users#my_teams", as: :my_teams, :email => /[A-Za-z0-9@\.]+?/
+  get 'static/about' => 'static#about', as: :about
+#  get 'static/:action' => 'static#:action'
+
 
   namespace :api do
     namespace :v1 do
@@ -17,10 +23,14 @@ SEMAT::Application.routes.draw do
        resources :alphas
        get "simple_alphas" => "alphas#simple_index"
        post "progress" => "progress#mark"
+       get "progress/:team_id" => "progress#show"
+       get "users/:email/teams" => "users#my_teams", as: :my_teams, :email => /[A-Za-z0-9@\.]+?/
+       post "teams/:team_id/rename" => "teams#rename"
+       post "teams/:team_id/add_member" => "teams#add_member"
+       post "teams/:team_id/remove_member" => "teams#remove_member"
     end
   end
 
-  get "users/:email/teams" => "users#my_teams"
 
 #  get "alphas/show"
 

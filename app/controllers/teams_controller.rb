@@ -3,7 +3,16 @@ class TeamsController < ApplicationController
   before_filter :authenticate_user!
 
   def new
-    @team = Team.new(:owner_id => current_user.id)
+    @team = Team.new(:owner_id => current_user.id, :name => "Unnamed")
+    @team.members = [current_user]
+    if @team.save
+      #@team.members = [current_user]
+      #@team.save
+      session[:team_id] = @team.id
+      redirect_to(team_path(@team), :notice => 'Team was successfully created.')
+    else
+      redirect_to(root_path, :error => 'Unable to add a new team.')
+    end
   end
 
   def edit

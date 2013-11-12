@@ -31,4 +31,11 @@ class Api::V1::ProgressController < ApplicationController
     end
   end
 
+  # http://localhost:3000/api/v1/progress/1.json
+  def show
+    team = Team.find(params[:team_id])
+    checklists = team.checklists
+    @checklists_ids = checklists.collect { |d| d.id }
+  end
+
 end

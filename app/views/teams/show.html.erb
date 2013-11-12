@@ -1,3 +1,36 @@
+<script>
+    $(document).ready(function () {
+        $('#team_name').change(function(){
+            name = $(this).val();
+            alert(name);
+            $.ajax({
+                type:'post',
+                data:"name=" + name +  "&user_id=<%=current_user.id%>",
+                dataType:'script',
+                url:'/api/v1/teams/<%= @team.id %>/rename'});
+        });
+        $('.remove-member-action').click(function(){
+            email = $(this).parent().siblings("input").val();
+
+                  alert(email);
+                  $.ajax({
+                      type:'post',
+                      data:"email=" + email +  "&user_id=<%=current_user.id%>",
+                      dataType:'script',
+                      url:'/api/v1/teams/<%= @team.id %>/remove_member'});
+        });
+        $('#add-member-action').click(function(){
+            email = $('#add-member').val();
+            alert(email);
+            $.ajax({
+                type:'post',
+                data:"email=" + email +  "&user_id=<%=current_user.id%>",
+                dataType:'script',
+                url:'/api/v1/teams/<%= @team.id %>/add_member'});
+        });
+    });
+</script>
+
 <h1>Team <%= @team.name %></h1>
 
 <%= form_for @team, :html => {:class => "ngb", :id => "edit_job"} do |f| %>
@@ -10,26 +43,35 @@
     <h2>Members</h2>
     <div class="row">
       <div class="col-lg-6">
-        <div class="input-group">
-          <input type="text" class="form-control">
+        <% @team.members.each do |member| %>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon">Email</span>
+          <input type="text" class="form-control" disabled value="<%= member.email %>">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button">Remove</button>
+            <button class="btn btn-default remove-member-action" type="button">Remove</button>
           </span>
         </div><!-- /input-group -->
+        <% end %>
       </div><!-- /.col-lg-6 -->
     </div><!-- /.row -->
     <br/>
 
+    <div class="row">
+    <div class="col-lg-6">
     <div class="input-group input-group-lg">
-      <span class="input-group-addon">Name</span>
-      <%= f.text_field :name, :class => "form-control", :placeholder => "Username" %>
+      <span class="input-group-addon">Email</span>
+      <input type="email" class="form-control" id="add-member" placeholder="first.last@email.com">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="add-member-action">Add</button>
+      </span>
+    </div><!-- /input-group -->
     </div>
-    <button type="button" class="btn btn-link">Remove</button>
+    </div>
 
+    <h2>Mass invite</h2>
+    <textarea class="form-control" rows="3" placeholder="Separate with commas using either first.last@email.com or First Last <first.last@email.com>"></textarea>
 
-    <h2>Invite team members</h2>
-    <textarea class="form-control" rows="3"></textarea>
-
+    <small>Created by <%= @team.owner.email %></small>
 
 <% end %>
 

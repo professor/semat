@@ -13,16 +13,28 @@
                 dataType:'script',
                 url:'/api/v1/progress'});
         });
+        $('select#teams').on('change', function() {
+          new_page = "<%= alphas_path %>/" + $(this).val();
+          window.location.replace(new_page);
+        });
+//        $('#example').popover(options)
+        $("[data-toggle=popover]")
+          .popover()
 
     });
 </script>
 
+<% if @teams.count > 1 %>
+<%= select_tag "teams", options_from_collection_for_select(@teams, "id", "name", @team.id), class: "form-control" %>
+<% end %>
+
 <% @version.alphas.each do |alpha| %>
-    <h2><%= alpha.name %></h2>
+    <h2 class="alpha-header"><%= alpha.name %></h2>
+    <span class="alpha-tooltip glyphicon glyphicon-info-sign"  data-toggle="popover" title=""  data-content="<%= alpha.definition %><br/><%= alpha.description %>" role="button" data-original-title="Definition & Description" ></span>
 
 <div class="row">
   <% alpha.states.each do |state| %>
-        <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color} %></div>
+        <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color, :checklist_ids_hash => @checklist_ids_hash} %></div>
   <% end %>
 </div>
 <% end %>

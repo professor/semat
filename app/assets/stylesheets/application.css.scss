@@ -87,3 +87,21 @@ body {
       border-top-color: #428bca; }
   .panel-dark-blue > .panel-footer + .panel-collapse .panel-body {
     border-bottom-color: #428bca; }
+
+
+h2.alpha-header, span.alpha-tooltip {
+    display: inline-block;
+}
+
+span.alpha-tooltip {
+  vertical-align: top;
+    margin-top: 20px;
+}
+
+//h2 span {
+//  font-size: 18px;
+//}
+//
+//.popover-content {
+//  font-size: 14px;
+//}

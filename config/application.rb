@@ -27,5 +27,10 @@ module SEMAT
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    # Todd Sedano added
+    # Source: http://stackoverflow.com/questions/19840540/bootstrap-glyphicons-error-404-in-production
+    # Removes  ActionController::RoutingError (No route matches [GET] "/assets/twitter/glyphicons-halflings-regular.svg"):
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

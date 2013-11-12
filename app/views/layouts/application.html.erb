@@ -21,9 +21,13 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-		<% if user_signed_in? %>
+<!--        <li class="<%= 'active' if current_page?(root_path) %>"><a class="navbar-brand" href="<%= root_path %>">SEMAT</a></li> -->
+        <li class="<%= 'active' if current_page?(about_path) %>"><a href="/static/about">About</a></li>
+
+        <% if user_signed_in? %>
+        <li class="<%= 'active' if current_page?(alphas_path) %>"><a href="<%= alphas_path %>">Alphas</a></li>
+        <li class="<%= 'active' if current_page?(my_teams_path(current_user)) %>"><a href="<%= my_teams_path(current_user) %>">Teams</a></li>
+
         <li><a href="#contact"><% current_user.email %></a></li>
 		<% else %>
         <li><a href="<%= new_user_registration_path %>">Sign up</a></li>		
