@@ -51,7 +51,7 @@ gem 'rspec-rails'
 gem 'acts_as_list'
 gem 'roo'
 gem 'devise'
-gem 'exception_notification', :require => 'exception_notifier'
+gem 'exception_notification' #, :require => 'exception_notifier'
 gem 'rack-google_analytics', :require => "rack/google_analytics", group: :production
 
 gem 'foreman', group: [:development, :test]
