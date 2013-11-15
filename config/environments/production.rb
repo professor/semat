@@ -89,5 +89,5 @@ SEMAT::Application.configure do
       :exception_recipients => %w(todd.sedano@sv.cmu.edu)
     }
 
-#  config.middleware.use("Rack::GoogleAnalytics", :web_property_id => "UA-8300440-2")  
+  config.middleware.use("Rack::GoogleAnalytics", :web_property_id => "UA-45782592-1")
 end
