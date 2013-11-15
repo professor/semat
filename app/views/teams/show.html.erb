@@ -41,24 +41,31 @@
     </div>
 
     <h2>Members</h2>
-    <div class="row">
-      <div class="col-lg-6">
-        <% @team.members.each do |member| %>
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon">Email</span>
-          <input type="text" class="form-control" disabled value="<%= member.email %>">
+    <% @team.members.each do |member| %>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon">Email</span>
+              <input type="text" class="form-control" disabled value="<%= member.email %>">
           <span class="input-group-btn">
             <button class="btn btn-default remove-member-action" type="button">Remove</button>
           </span>
-        </div><!-- /input-group -->
+            </div>
+            <!-- /input-group -->
+          </div>
+          <div class="col-lg-2">
+
             <% if member.encrypted_password.present? %>
                 <span class="icon-green"><span class="glyphicon glyphicon-check"></span> Registered</span>
             <% else %>
                 <span class="icon-yellow"><span class="glyphicon glyphicon-unchecked icon-warning"></span> Invite sent</span>
-            <% end%>
-        <% end %>
-      </div><!-- /.col-lg-6 -->
-    </div><!-- /.row -->
+            <% end %>
+          </div>
+          <!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+        <br/>
+
+    <% end %>
     <br/>
 
     <div class="row">
