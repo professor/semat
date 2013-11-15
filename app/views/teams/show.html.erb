@@ -51,6 +51,11 @@
             <button class="btn btn-default remove-member-action" type="button">Remove</button>
           </span>
         </div><!-- /input-group -->
+            <% if member.encrypted_password.present? %>
+                <span class="icon-green"><span class="glyphicon glyphicon-check"></span> Registered</span>
+            <% else %>
+                <span class="icon-yellow"><span class="glyphicon glyphicon-unchecked icon-warning"></span> Invite sent</span>
+            <% end%>
         <% end %>
       </div><!-- /.col-lg-6 -->
     </div><!-- /.row -->
@@ -69,7 +74,7 @@
     </div>
 
     <h2>Mass invite</h2>
-    <textarea class="form-control" rows="3" placeholder="Separate with commas using either first.last@email.com or First Last <first.last@email.com>"></textarea>
+    <textarea class="form-control" rows="3" disabled placeholder="Separate with commas using either first.last@email.com or First Last <first.last@email.com>"></textarea>
 
     <small>Created by <%= @team.owner.email %></small>
 

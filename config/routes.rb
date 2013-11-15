@@ -25,6 +25,7 @@ SEMAT::Application.routes.draw do
        post "progress" => "progress#mark"
        get "progress/:team_id" => "progress#show"
        get "users/:email/teams" => "users#my_teams", as: :my_teams, :email => /[A-Za-z0-9@\.]+?/
+       post "users/find_or_register" => "users#find_or_register"
        post "teams/:team_id/rename" => "teams#rename"
        post "teams/:team_id/add_member" => "teams#add_member"
        post "teams/:team_id/remove_member" => "teams#remove_member"

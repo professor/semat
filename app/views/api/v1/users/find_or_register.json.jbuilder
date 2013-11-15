@@ -1,1 +1,1 @@
-json.teams  @teams, :id, :name
+json.response @response

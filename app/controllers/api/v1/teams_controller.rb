@@ -35,10 +35,9 @@ class Api::V1::TeamsController < ApplicationController
     puts user
     if user.nil?
       puts "*** creating user"
-      user = User.create(:email => params[:email])
+      user = User.invite!(:email => params[:email], :invited_by_id => current_user.id)
     end
     team.members << user
-    #team.save
 
 
   end

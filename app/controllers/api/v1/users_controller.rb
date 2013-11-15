@@ -5,4 +5,13 @@ class Api::V1::UsersController < ApplicationController
     @teams = user.teams.order(:name)
   end
 
+  def find_or_register
+    user = User.where(:email => params[:email]).first
+    if user.nil?
+      user = User.invite!(:email => params[:email])
+    end
+
+    @response = user.id
+  end
+
 end
