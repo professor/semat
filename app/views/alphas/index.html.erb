@@ -38,7 +38,7 @@
 
 <% @version.alphas.each do |alpha| %>
     <h2 class="alpha-header"><%= alpha.name %></h2>
-    <span class="alpha-tooltip glyphicon glyphicon-info-sign"  data-toggle="popover" title=""  data-content="<%= alpha.definition %><br/><%= alpha.description %>" role="button" data-original-title="Definition & Description" ></span>
+    <span class="alpha-tooltip glyphicon glyphicon-info-sign"  data-toggle="popover" title="" data-html="true" data-content="<%= alpha.definition %><br/><br/><%= alpha.description %>" role="button" data-original-title="Definition & Description" ></span>
 
 <div class="row">
   <% alpha.states.each do |state| %>
