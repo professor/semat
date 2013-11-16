@@ -1,6 +1,8 @@
 <p>Hello <%= @resource.email %>!</p>
 
-<p>Someone has invited you to <%= root_url %>, you can accept it through the link below.</p>
+<p><%= @resource.invited_by.email %> has invited you to the SEMAT Kernel Tool, <%= root_url %></p>
+
+<p>You can accept your invitation through the link below.</p>
 
 <p><%= link_to 'Accept invitation', accept_invitation_url(@resource, :invitation_token => @token) %></p>
 

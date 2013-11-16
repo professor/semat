@@ -25,13 +25,12 @@
                 data: "email=" + email + "&user_id=<%=current_user.id%>",
                 dataType: 'script',
                 url: '/api/v1/teams/<%= @team.id %>/add_member'});
-            location.reload();
+//            location.reload();
         });
     });
 </script>
 
 <h1 class="team-header">Team <%= @team.name %></h1>
-
 <%= form_for @team, :html => {:class => "ngb", :id => "edit_job"} do |f| %>
 
     <div class="input-group input-group-lg">
@@ -79,12 +78,18 @@
         <!-- /input-group -->
       </div>
     </div>
-
-    <h2>Mass invite</h2>
-    <textarea class="form-control" rows="3" disabled placeholder="Separate with commas using either first.last@email.com or First Last <first.last@email.com>"></textarea>
-
-    <small>Created by <%= @team.owner.email %></small>
-
 <% end %>
+
+<%= form_tag(mass_invite_path(@team), method: "post", class: "ngb", id: "mass-invite-form") %>
+    <h2>Mass invite</h2>
+    <div class="form-group">
+      <label for="mass-invite-textarea">Email addresses</label>
+      <textarea id="mass_invite" name="mass_invite" class="form-control" rows="3" placeholder="Separate with commas using either first.last@email.com or First Last <first.last@email.com>"></textarea>
+    </div>
+      <button class="btn btn-default" type="submit">Send Invites</button>
+</form>
+
+    <br/>
+    <small>Team created by <%= @team.owner.email %></small>
 
 

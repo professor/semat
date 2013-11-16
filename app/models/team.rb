@@ -10,4 +10,19 @@ class Team < ActiveRecord::Base
 
 #  default_scope
 
+  def add_member_or_invite(email, current_user)
+    user = User.where(:email => email).first
+    puts "***"
+    puts user
+    if user.nil?
+      puts "*** creating user"
+      user = User.invite!({:email => email}, current_user)
+    end
+    puts "user email*****"
+    puts user.email
+    unless self.members.include?(user)
+      self.members << user
+    end
+  end
+
 end

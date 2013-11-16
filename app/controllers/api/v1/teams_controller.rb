@@ -30,16 +30,9 @@ class Api::V1::TeamsController < ApplicationController
 
   def add_member
     team = Team.find(params[:team_id])
-    user = User.where(:email => params[:email]).first
-    puts "***"
-    puts user
-    if user.nil?
-      puts "*** creating user"
-      user = User.invite!(:email => params[:email], :invited_by_id => current_user.id)
-    end
-    team.members << user
-
-
+    invited_user_id = params[:user_id]
+    email = params[:email]
+    team.add_member_or_invite(email, current_user)
   end
 
 end

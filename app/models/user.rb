@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable, :confirmable,
+  devise :invitable, :database_authenticatable, :registerable, #:confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
   after_create :put_user_on_default_team
@@ -23,9 +23,34 @@ class User < ActiveRecord::Base
   end
 
   def put_user_on_default_team
-    default_team = Team.create(:name => "Default", :owner_id => self.id)
+    default_team = Team.create(:name => "Sample", :owner_id => self.id)
     self.teams = [default_team]
     self.save
   end
+
+#  # Source: http://stackoverflow.com/questions/6052376/devise-invitable-confirm-after-invitation
+#  # devise confirm! method overriden
+#  def confirm!
+#    welcome_message
+#    super
+#  end
+#    # devise_invitable accept_invitation! method overriden
+#  def accept_invitation!
+#    self.confirm!
+#    super
+#  end
+#
+#  #  # devise_invitable invite! method overriden
+#  def invite!
+#    super
+#    self.confirmed_at = nil
+#    self.save
+#  end
+#
+#private
+#
+#  def welcome_message
+#    UserMailer.welcome_message(self).deliver
+#  end
 
 end

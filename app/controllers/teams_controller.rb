@@ -49,8 +49,14 @@ class TeamsController < ApplicationController
     @members = @team.members
   end
 
-  def add_member
+  def mass_invite
+    team = Team.find(params[:team_id])
+    mass_invite = params[:mass_invite]
+    mass_invite.split(",").each do |email|
+      team.add_member_or_invite(email, current_user) if email.present?
+    end
 
+    redirect_to team_path(team)
   end
 
   def checklists

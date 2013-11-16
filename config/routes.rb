@@ -6,6 +6,7 @@ SEMAT::Application.routes.draw do
   resources :teams
 
   get "teams/checklists"
+  post "teams/:team_id/mass_invite" => "teams#mass_invite", as: :mass_invite
   get "alphas" => "alphas#index"
   get "alphas/:team_id" => "alphas#index"
 
