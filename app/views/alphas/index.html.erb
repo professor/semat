@@ -25,7 +25,15 @@
 </script>
 
 <% if @teams.count > 1 %>
-<%= select_tag "teams", options_from_collection_for_select(@teams, "id", "name", @team.id), class: "form-control" %>
+<div class="row">
+  <div class="pull-right">
+    <div class="input-group input-group-lg">
+    <label for="teams">Select team:</label>
+<!--    <span class="input-group-addon">Select team:</span> -->
+    <%= select_tag "teams", options_from_collection_for_select(@teams, "id", "name", @team.id), class: "form-control" %>
+      </div>
+    </div>
+</div>
 <% end %>
 
 <% @version.alphas.each do |alpha| %>
