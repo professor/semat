@@ -1,37 +1,36 @@
 <script>
     $(document).ready(function () {
-        $('#team_name').change(function(){
+        $('#team_name').change(function () {
             name = $(this).val();
-            alert(name);
             $.ajax({
-                type:'post',
-                data:"name=" + name +  "&user_id=<%=current_user.id%>",
-                dataType:'script',
-                url:'/api/v1/teams/<%= @team.id %>/rename'});
+                type: 'post',
+                data: "name=" + name + "&user_id=<%=current_user.id%>",
+                dataType: 'script',
+                url: '/api/v1/teams/<%= @team.id %>/rename'});
+            $('h1.team-header').text(name);
         });
-        $('.remove-member-action').click(function(){
+        $('.remove-member-action').click(function () {
             email = $(this).parent().siblings("input").val();
-
-                  alert(email);
-                  $.ajax({
-                      type:'post',
-                      data:"email=" + email +  "&user_id=<%=current_user.id%>",
-                      dataType:'script',
-                      url:'/api/v1/teams/<%= @team.id %>/remove_member'});
-        });
-        $('#add-member-action').click(function(){
-            email = $('#add-member').val();
-            alert(email);
             $.ajax({
-                type:'post',
-                data:"email=" + email +  "&user_id=<%=current_user.id%>",
-                dataType:'script',
-                url:'/api/v1/teams/<%= @team.id %>/add_member'});
+                type: 'post',
+                data: "email=" + email + "&user_id=<%=current_user.id%>",
+                dataType: 'script',
+                url: '/api/v1/teams/<%= @team.id %>/remove_member'});
+            $(this).parents(".row").remove();
+        });
+        $('#add-member-action').click(function () {
+            email = $('#add-member').val();
+            $.ajax({
+                type: 'post',
+                data: "email=" + email + "&user_id=<%=current_user.id%>",
+                dataType: 'script',
+                url: '/api/v1/teams/<%= @team.id %>/add_member'});
+            location.reload();
         });
     });
 </script>
 
-<h1>Team <%= @team.name %></h1>
+<h1 class="team-header">Team <%= @team.name %></h1>
 
 <%= form_for @team, :html => {:class => "ngb", :id => "edit_job"} do |f| %>
 
@@ -69,15 +68,16 @@
     <br/>
 
     <div class="row">
-    <div class="col-lg-6">
-    <div class="input-group input-group-lg">
-      <span class="input-group-addon">Email</span>
-      <input type="email" class="form-control" id="add-member" placeholder="first.last@email.com">
+      <div class="col-lg-6">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon">Email</span>
+          <input type="email" class="form-control" id="add-member" placeholder="first.last@email.com">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button" id="add-member-action">Add</button>
       </span>
-    </div><!-- /input-group -->
-    </div>
+        </div>
+        <!-- /input-group -->
+      </div>
     </div>
 
     <h2>Mass invite</h2>
