@@ -30,6 +30,8 @@ SEMAT::Application.routes.draw do
        post "teams/:team_id/rename" => "teams#rename"
        post "teams/:team_id/add_member" => "teams#add_member"
        post "teams/:team_id/remove_member" => "teams#remove_member"
+       get "test/get" => "test#get"
+       post "test/post" => "test#post"
     end
   end
 
