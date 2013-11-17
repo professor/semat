@@ -1,6 +1,10 @@
 <p>Hello <%= @resource.email %>!</p>
 
+<% if @resource.invited_by.present? %>
 <p><%= @resource.invited_by.email %> has invited you to the SEMAT Kernel Tool, <%= root_url %></p>
+<% else %>
+<p>You've been invited to use the SEMAT Kernel Tool, <%= root_url %></p>
+<% end %>
 
 <p>You can accept your invitation through the link below.</p>
 
