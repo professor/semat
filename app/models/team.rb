@@ -25,4 +25,12 @@ class Team < ActiveRecord::Base
     end
   end
 
+  def checklist_ids_hash
+    checklists = self.checklists
+    checklist_ids_hash = Hash.new
+    checklists.collect { |d| checklist_ids_hash.store(d.id, true) }
+    checklist_ids_hash
+  end
+
+
 end

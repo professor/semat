@@ -15,10 +15,8 @@ class AlphasController < ApplicationController
     end
 
 
+    @checklist_ids_hash = team.checklist_ids_hash
 
-    checklists = @team.checklists
-    @checklist_ids_hash = Hash.new
-    checklists.collect { |d| @checklist_ids_hash.store(d.id, true) }
     puts "***"
     puts @checklist_ids_hash
   end
