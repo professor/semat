@@ -22,6 +22,10 @@ SEMAT::Application.routes.draw do
        # Directs /admin/products/* to Admin::ProductsController
        # (app/controllers/admin/products_controller.rb)
        resources :alphas
+       devise_scope :user do
+         post 'sessions' => 'sessions#create', :as => 'login'
+         delete 'sessions' => 'sessions#destroy', :as => 'logout'
+       end
        get "simple_alphas" => "alphas#simple_index"
        post "progress" => "progress#mark"
        get "progress/:team_id" => "progress#show"
