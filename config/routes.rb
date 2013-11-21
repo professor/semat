@@ -25,6 +25,7 @@ SEMAT::Application.routes.draw do
        get "simple_alphas" => "alphas#simple_index"
        post "progress" => "progress#mark"
        get "progress/:team_id" => "progress#show"
+       get "progress/:team_id/current_alpha_states" => "progress#current_alpha_states"
        get "users/:email/teams" => "users#my_teams", as: :my_teams, :email => /[A-Za-z0-9@\.]+?/
        post "users/find_or_register" => "users#find_or_register"
        post "teams/:team_id/rename" => "teams#rename"
