@@ -16,9 +16,11 @@ class Api::V1::UsersController < Api::V1::AlphasController
     user = User.where(:email => params[:email]).first
     if user.nil?
       user = User.invite!(:email => params[:email])
-      @response = "Confirm email"
+      @response = "Confirm email sent"
+    elsif user.confirmed_at?
+      @response = true      
     else
-      @response = true
+      @response = "Check confirmation email"
     end
 
     @user_id = user.id
