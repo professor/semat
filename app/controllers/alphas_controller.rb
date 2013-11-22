@@ -15,7 +15,7 @@ class AlphasController < ApplicationController
     end
 
 
-    @checklist_ids_hash = team.checklist_ids_hash
+    @checklist_ids_hash = @team.checklist_ids_hash
 
     puts "***"
     puts @checklist_ids_hash

@@ -25,7 +25,7 @@
 </script>
 
 <% if @teams.count > 1 %>
-<div class="row alpha-row">
+<div class="row">
   <div class="pull-right">
     <div class="input-group input-group-lg">
     <label for="teams">Select team:</label>
@@ -41,8 +41,8 @@
     <span class="alpha-tooltip glyphicon glyphicon-info-sign"  data-toggle="popover" title="" data-html="true" data-content="<%= alpha.definition %><br/><br/><%= alpha.description %>" role="button" data-original-title="Definition & Description" ></span>
 
 <div class="row">
-  <% alpha.states.each do |state| %>
-        <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color, :checklist_ids_hash => @checklist_ids_hash} %></div>
+  <% alpha.states.each_with_index do |state, index| %>
+        <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color, :index => index, :checklist_ids_hash => @checklist_ids_hash} %></div>
   <% end %>
 </div>
 <% end %>

@@ -4,10 +4,32 @@
    color = local_assigns[:color] || "blue"
    checklist_ids_hash = local_assigns[:checklist_ids_hash] || Hash.new
 
+   if local_assigns[:index]
+     index = (local_assigns[:index] + 1).to_s + ". "
+   else
+    index = ""
+   end
+
+
 %>
-<div class="panel panel-<%= color.downcase %>">
+
+<% #It would be nice to move this logic into javascript, but its easier today to put it here...
+   all_checked = true
+   state.checklists.each do |checklist|
+     all_checked = false unless checklist_ids_hash.has_key?(checklist.id)
+   end
+%>
+
+<%
+   if all_checked
+    all_checked_class = "all-checked"
+   else
+    all_checked_class = ""
+   end
+%>
+<div class="panel panel-<%= color.downcase %> <%= all_checked_class%>">
   <div class="panel-heading">
-    <h3 class="panel-title"><%= state.name%></h3>
+    <h3 class="panel-title"><%= index %><%= state.name%></h3>
   </div>
   <div class="panel-body">
     <ul class="list-group">
