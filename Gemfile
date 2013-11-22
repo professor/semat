@@ -57,6 +57,7 @@ gem 'rack-google_analytics', :require => "rack/google_analytics", group: :produc
 
 gem 'foreman', group: [:development, :test]
 
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem 'rails_12factor', group: :production
 

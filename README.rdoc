@@ -45,3 +45,8 @@ heroku run rails console
 
  http://localhost:3000/api/v1/simple_alphas.json
 
+
+
+## Setup
+rails console
+AdminUser.create!(:email => 'admin@example.com', :password => 'password', :password_confirmation => 'password')
