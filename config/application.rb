@@ -32,5 +32,11 @@ module SEMAT
     # Source: http://stackoverflow.com/questions/19840540/bootstrap-glyphicons-error-404-in-production
     # Removes  ActionController::RoutingError (No route matches [GET] "/assets/twitter/glyphicons-halflings-regular.svg"):
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
+    # Todd Sedano added
+    # Source: http://mrdanadams.com/2011/exclude-active-admin-js-css-rails/#.Uo_kqmRgZ3Y
+    # Allows active admin to be pre-compiled
+   config.assets.precompile += %w[admin/active_admin.css admin/active_admin.js]
+
   end
 end
