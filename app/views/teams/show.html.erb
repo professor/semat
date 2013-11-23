@@ -21,17 +21,11 @@
         $('#add-member-action').click(function () {
             email = $('#add-member').val();
             $.ajax({
-                type: 'post',
-                data: "email=" + email,
-                dataType: 'script',
-                url: '/api/v1/test/post'});
-//                url: '/api/v1/users/find_or_register'});
-            // $.ajax({
-            //     type: 'post',
-            //     data: "email=" + email + "&user_id=<%=current_user.id%>",
-            //     dataType: 'script',
-            //     url: '/api/v1/teams/<%= @team.id %>/add_member'});
-//            location.reload();
+                 type: 'post',
+                 data: "email=" + email + "&user_id=<%=current_user.id%>",
+                 dataType: 'script',
+                 url: '/api/v1/teams/<%= @team.id %>/add_member'});
+            location.reload();
         });
     });
 </script>
