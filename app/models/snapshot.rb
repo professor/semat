@@ -14,7 +14,7 @@ class Snapshot < ActiveRecord::Base
     new_snapshot.order = nil
 
     self.snapshot_checklists.each { |checklist| new_snapshot.snapshot_checklists << checklist.dup } if self.snapshot_checklists.present?
-#    self.snapshot_alphas.each { |alpha_status| new_snapshot.snapshot_alphas << checklist.copy_as_new_alpha_status } if self.snapshot_alphas.present?
+    self.snapshot_alphas.each { |alpha_status| new_snapshot.snapshot_alphas << alpha_status.copy_as_new_alpha_status } if self.snapshot_alphas.present?
 
     new_snapshot
   end
