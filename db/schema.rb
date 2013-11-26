@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131122171024) do
+ActiveRecord::Schema.define(version: 20131125212834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,46 @@ ActiveRecord::Schema.define(version: 20131122171024) do
   add_index "logs", ["checklist_id"], name: "index_logs_on_checklist_id", using: :btree
   add_index "logs", ["scribe_id"], name: "index_logs_on_scribe_id", using: :btree
   add_index "logs", ["team_id"], name: "index_logs_on_team_id", using: :btree
+
+  create_table "snapshot_alphas", force: true do |t|
+    t.integer  "snapshot_id"
+    t.integer  "alpha_id"
+    t.integer  "scribe_id"
+    t.integer  "current_state_id"
+    t.text     "notes"
+    t.text     "actions"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "snapshot_alphas", ["alpha_id"], name: "index_snapshot_alphas_on_alpha_id", using: :btree
+  add_index "snapshot_alphas", ["current_state_id"], name: "index_snapshot_alphas_on_current_state_id", using: :btree
+  add_index "snapshot_alphas", ["scribe_id"], name: "index_snapshot_alphas_on_scribe_id", using: :btree
+  add_index "snapshot_alphas", ["snapshot_id", "alpha_id"], name: "index_snapshot_alphas_on_snapshot_id_and_alpha_id", unique: true, using: :btree
+  add_index "snapshot_alphas", ["snapshot_id"], name: "index_snapshot_alphas_on_snapshot_id", using: :btree
+
+  create_table "snapshot_checklists", force: true do |t|
+    t.integer  "snapshot_id"
+    t.integer  "checklist_id"
+    t.integer  "scribe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "snapshot_checklists", ["checklist_id"], name: "index_snapshot_checklists_on_checklist_id", using: :btree
+  add_index "snapshot_checklists", ["scribe_id"], name: "index_snapshot_checklists_on_scribe_id", using: :btree
+  add_index "snapshot_checklists", ["snapshot_id", "checklist_id"], name: "index_snapshot_checklists_on_snapshot_id_and_checklist_id", unique: true, using: :btree
+  add_index "snapshot_checklists", ["snapshot_id"], name: "index_snapshot_checklists_on_snapshot_id", using: :btree
+
+  create_table "snapshots", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "snapshots", ["team_id", "order"], name: "index_snapshots_on_team_id_and_order", unique: true, using: :btree
+  add_index "snapshots", ["team_id"], name: "index_snapshots_on_team_id", using: :btree
 
   create_table "states", force: true do |t|
     t.string   "name"

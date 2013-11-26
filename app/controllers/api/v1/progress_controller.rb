@@ -11,26 +11,49 @@ class Api::V1::ProgressController < ApplicationController
 
       if checked == "true"
         puts "*** checked"
-          checklist_present = TeamChecklist.where(:team_id => team.id, :checklist_id => checklist.id).first
-          if checklist_present.nil?
-            checklist = TeamChecklist.create(:team_id => team.id, :checklist_id => checklist.id, :scribe_id => user.id)
-            @response = true
-          else
-            @response = "warning - already present"
-          end
+        checklist = Snapshot.add_check(team, checklist, user)
+        checklist = Checklist.add_check(team, checklist, user)
+        @response = true
       else
         puts "*** unchecked"
-        checklist = TeamChecklist.where(:team_id => team.id, :checklist_id => checklist.id).first
-        if (checklist)
-          checklist.destroy
-          @response = true
-        end
+        result = Snapshot.remove_check(team, checklist)
+        result = Checklist.remove_check(team, checklist)
+        @response = true
       end
 
     rescue ActiveRecord::RecordNotFound => e
       @response = e.message
     end
   end
+
+  def save_actions
+    begin
+      team = Team.find(params[:team_id])
+      user = User.find(params[:user_id])
+
+      Snapshot.save_actions(team, params[:alpha_id], user, params[:actions] )
+
+      @response = true
+
+    rescue ActiveRecord::RecordNotFound => e
+      @response = e.message
+    end
+  end
+
+  def save_notes
+    begin
+      team = Team.find(params[:team_id])
+      user = User.find(params[:user_id])
+
+      Snapshot.save_notes(team, params[:alpha_id], user, params[:notes] )
+
+      @response = true
+
+    rescue ActiveRecord::RecordNotFound => e
+      @response = e.message
+    end
+  end
+
 
   # http://localhost:3000/api/v1/progress/1.json
   def show
@@ -51,14 +74,8 @@ class Api::V1::ProgressController < ApplicationController
     @current_alpha_states = Hash.new()
 
     alphas.each do |alpha|
-      index_of_first_unachieved_card = 0
-      alpha.states.each_with_index do |state, index|
-        if state.achieved?(checklist_ids_hash)
-          index_of_first_unachieved_card += 1
-          break
-        end
-      end
-      @current_alpha_states.store(alpha.id, index_of_first_unachieved_card + 1)
+      @current_alpha_states.store(alpha.id,
+                                  alpha.index_of_first_unachieved_card(checklist_ids_hash))
     end
   end
 

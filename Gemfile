@@ -53,6 +53,7 @@ gem 'roo'
 gem 'devise', '3.2.0'
 gem 'devise_invitable', '1.3.1'
 gem 'exception_notification'
+#gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git' #This supports rails 4
 gem 'rack-google_analytics', :require => "rack/google_analytics", group: :production
 
 gem 'foreman', group: [:development, :test]
