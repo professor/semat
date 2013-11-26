@@ -55,42 +55,31 @@ class Snapshot < ActiveRecord::Base
   def self.save_actions(team, alpha_id, scribe, action_text )
     snapshot = team.find_latest_or_create_new_snapshot
 
-
-    alpha_summary_present = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
-    #
-    #alpha_summary_present = SnapshotAlpha.where(:snapshot_id => snapshot.id, :alpha_id => alpha_id).first
-    #if alpha_summary_present.nil?
-    #  alpha_summary_present = SnapshotAlpha.create(:snapshot_id => snapshot.id, :alpha_id => alpha_id, :scribe_id => scribe.id)
-    #end
+    alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
     # remove this is once we set default in migration
-    if alpha_summary_present.actions.nil?
-      alpha_summary_present.actions = action_text
+    if alpha_summary.actions.nil?
+      alpha_summary.actions = action_text
     else
-      alpha_summary_present.actions += action_text
+      alpha_summary.actions += action_text
     end
-    alpha_summary_present.scribe_id = scribe.id
-    alpha_summary_present.save
+    alpha_summary.scribe_id = scribe.id
+    alpha_summary.save
   end
 
   def self.save_notes(team, alpha_id, scribe, notes_text )
     snapshot = team.find_latest_or_create_new_snapshot
 
-    alpha_summary_present = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
-    #
-    #alpha_summary_present = SnapshotAlpha.where(:snapshot_id => snapshot.id, :alpha_id => alpha_id).first
-    #if alpha_summary_present.nil?
-    #  alpha_summary_present = SnapshotAlpha.create(:snapshot_id => snapshot.id, :alpha_id => alpha_id, :scribe_id => scribe.id)
-    #end
+    alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
     # remove this is once we set default in migration
-    if alpha_summary_present.notes.nil?
-      alpha_summary_present.notes =  notes_text
+    if alpha_summary.notes.nil?
+      alpha_summary.notes =  notes_text
     else
-      alpha_summary_present.notes += notes_text
+      alpha_summary.notes += notes_text
     end
-    alpha_summary_present.scribe_id = scribe.id
-    alpha_summary_present.save
+    alpha_summary.scribe_id = scribe.id
+    alpha_summary.save
   end
 
 
