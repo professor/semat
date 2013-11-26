@@ -25,6 +25,7 @@
                 data: "alpha_id=" + alpha_id + "&user_id=<%=current_user.id%>" + "&notes=" + text,
                 dataType: 'script',
                 url: '/api/v1/progress/<%= @team.id %>/save_notes'});
+            $('#alert-notes-' + alpha_id).slideDown("slow").delay(1000).slideUp("slow");
         });
         $('.alpha-actions').change(function () {
             text = $(this).val();
@@ -34,7 +35,10 @@
                 data: "alpha_id=" + alpha_id + "&user_id=<%=current_user.id%>" + "&actions=" + text,
                 dataType: 'script',
                 url: '/api/v1/progress/<%= @team.id %>/save_actions'});
+            $('#alert-actions-' + alpha_id).slideDown("slow").delay(1000).slideUp("slow");
+
         });
+
 //        $('#example').popover(options)
         $("[data-toggle=popover]").popover()
 
@@ -60,6 +64,9 @@
 <div class="row">
   <% alpha.states.each_with_index do |state, index| %>
         <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color, :index => index, :checklist_ids_hash => @checklist_ids_hash} %></div>
+        <% if index % 3 == 2 %>
+        </div><div class='row'>
+        <% end %>
   <% end %>
 
 </div>
@@ -70,12 +77,14 @@
           <label for="mass-invite-textarea">Notes</label>
           <textarea id="alpha_notes_<%= alpha.id%>" name="alpha_notes" data-id="<%= alpha.id %>" class="form-control alpha-notes" rows="5" placeholder="Enter notes about your current situation."></textarea>
         </div>
+        <div id="alert-notes-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <label for="mass-invite-textarea">Possible Actions</label>
           <textarea id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="5" placeholder="Enter possible actions your team can perform to achieve the next state."></textarea>
         </div>
+        <div id="alert-actions-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
       </div>
     </div>
 <% end %>
