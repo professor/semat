@@ -27,10 +27,17 @@ class Team < ActiveRecord::Base
     end
   end
 
+  #def checklist_ids_hash
+  #  checklists = self.checklists
+  #  checklist_ids_hash = Hash.new
+  #  checklists.collect { |d| checklist_ids_hash.store(d.id, true) }
+  #  checklist_ids_hash
+  #end
+
   def checklist_ids_hash
-    checklists = self.checklists
+    latest_snapshot = self.snapshots.last
     checklist_ids_hash = Hash.new
-    checklists.collect { |d| checklist_ids_hash.store(d.id, true) }
+    latest_snapshot.checklists.collect { |d| checklist_ids_hash.store(d.id, true) } if latest_snapshot.present?
     checklist_ids_hash
   end
 

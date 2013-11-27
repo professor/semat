@@ -28,7 +28,7 @@ class Snapshot < ActiveRecord::Base
       checklist_present = SnapshotChecklist.create(:snapshot_id => snapshot.id, :checklist_id => checklist.id, :scribe_id => scribe.id)
     end
 
-    #snapshot.update_current_alpha_state(checklist.state.alpha)
+    snapshot.update_current_alpha_state(checklist.state.alpha)
 
     checklist_present
   end
@@ -40,17 +40,25 @@ class Snapshot < ActiveRecord::Base
     if (checklist)
       result = checklist.destroy
     end
+
+    snapshot.update_current_alpha_state(checklist.state.alpha)
+
     result
   end
 
-  #def update_current_alpha_state(alpha)
-  #  checklist_ids_hash = self.team.checklist_ids_hash
-  #    alpha.first_unachieved_card(checklist_ids_hash)
-  #
-  #  SnapshotAlpha.where()
-  #  snapshot_alphas
-  #
-  #end
+  def update_current_alpha_state(alpha)
+    checklist_ids_hash = self.team.checklist_ids_hash
+    state = alpha.first_unachieved_card(checklist_ids_hash)
+
+    if state.present?
+      logger.info "first_unachieved_card is " + state.id.to_s
+      alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => self.id, :alpha_id => alpha.id)
+      alpha_summary.current_state_id = state.id
+      alpha_summary.save
+    else
+      logger.info "first_unachieved_card is 0 / nil"
+    end
+  end
 
   def self.save_actions(team, alpha_id, scribe, action_text )
     snapshot = team.find_latest_or_create_new_snapshot

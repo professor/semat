@@ -20,7 +20,7 @@ class Alpha < ActiveRecord::Base
   def first_unachieved_card(checklist_ids_hash)
     first_unachieved_card = nil
     self.states.each_with_index do |state, index|
-      if state.achieved?(checklist_ids_hash)
+      if !state.achieved?(checklist_ids_hash)
         first_unachieved_card = state
         break
       end

@@ -11,13 +11,13 @@ class Api::V1::ProgressController < ApplicationController
 
       if checked == "true"
         puts "*** checked"
-        checklist = Snapshot.add_check(team, checklist, user)
-        checklist = Checklist.add_check(team, checklist, user)
+        result1 = Checklist.add_check(team, checklist, user)
+        result = Snapshot.add_check(team, checklist, user)
         @response = true
       else
         puts "*** unchecked"
-        result = Snapshot.remove_check(team, checklist)
         result = Checklist.remove_check(team, checklist)
+        result = Snapshot.remove_check(team, checklist)
         @response = true
       end
 
