@@ -62,6 +62,4 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 
 gem 'rails_12factor', group: :production
 
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
-                          :github => 'anjlab/bootstrap-rails',
-                          :branch => '3.0.0'
+gem 'anjlab-bootstrap-rails', '~> 3.0.2.0', :require => 'bootstrap-rails'
