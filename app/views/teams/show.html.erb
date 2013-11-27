@@ -4,7 +4,7 @@
             name = $(this).val();
             $.ajax({
                 type: 'post',
-                data: "name=" + name + "&user_id=<%=current_user.id%>",
+                data: "name=" + name + "&user_email=<%=current_user.email%>",
                 dataType: 'script',
                 url: '/api/v1/teams/<%= @team.id %>/rename'});
             $('h1.team-header').text(name);
@@ -13,7 +13,7 @@
             email = $(this).parent().siblings("input").val();
             $.ajax({
                 type: 'post',
-                data: "email=" + email + "&user_id=<%=current_user.id%>",
+                data: "email=" + email + "&user_email=<%=current_user.email%>",
                 dataType: 'script',
                 url: '/api/v1/teams/<%= @team.id %>/remove_member'});
             $(this).parents(".row").remove();
@@ -22,7 +22,7 @@
             email = $('#add-member').val();
             $.ajax({
                  type: 'post',
-                 data: "email=" + email + "&user_id=<%=current_user.id%>",
+                 data: "email=" + email + "&user_email=<%=current_user.email%>",
                  dataType: 'script',
                  url: '/api/v1/teams/<%= @team.id %>/add_member'});
             location.reload();

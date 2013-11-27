@@ -9,7 +9,7 @@
             id = $(this).val()
             $.ajax({
                 type:'post',
-                data:"checklist_id=" + id + "&checked=" + checked +  "&team_id=<%=@team.id%>&user_id=<%=current_user.id%>",
+                data:"checklist_id=" + id + "&checked=" + checked +  "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
                 dataType:'script',
                 url:'/api/v1/progress'});
         });
@@ -22,7 +22,7 @@
             alpha_id = $(this).data("id");
             $.ajax({
                 type: 'post',
-                data: "alpha_id=" + alpha_id + "&user_id=<%=current_user.id%>" + "&notes=" + text,
+                data: "alpha_id=" + alpha_id + "&user_email=<%=current_user.email%>" + "&notes=" + text,
                 dataType: 'script',
                 url: '/api/v1/progress/<%= @team.id %>/save_notes'});
             $('#alert-notes-' + alpha_id).slideDown("slow").delay(1000).slideUp("slow");
@@ -32,7 +32,7 @@
             alpha_id = $(this).data("id");
             $.ajax({
                 type: 'post',
-                data: "alpha_id=" + alpha_id + "&user_id=<%=current_user.id%>" + "&actions=" + text,
+                data: "alpha_id=" + alpha_id + "&user_email=<%=current_user.email%>" + "&actions=" + text,
                 dataType: 'script',
                 url: '/api/v1/progress/<%= @team.id %>/save_actions'});
             $('#alert-actions-' + alpha_id).slideDown("slow").delay(1000).slideUp("slow");

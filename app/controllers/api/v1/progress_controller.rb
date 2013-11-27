@@ -6,13 +6,12 @@ class Api::V1::ProgressController < ApplicationController
     begin
       team = Team.find(params[:team_id])
       checklist = Checklist.find(params[:checklist_id])
-      user = User.find(params[:user_id])
       checked = params[:checked]
 
       if checked == "true"
         puts "*** checked"
-        result1 = Checklist.add_check(team, checklist, user)
-        result = Snapshot.add_check(team, checklist, user)
+        result1 = Checklist.add_check(team, checklist, current_user)
+        result = Snapshot.add_check(team, checklist, current_user)
         @response = true
       else
         puts "*** unchecked"
@@ -29,9 +28,8 @@ class Api::V1::ProgressController < ApplicationController
   def save_actions
     begin
       team = Team.find(params[:team_id])
-      user = User.find(params[:user_id])
 
-      Snapshot.save_actions(team, params[:alpha_id], user, params[:actions] )
+      Snapshot.save_actions(team, params[:alpha_id], current_user, params[:actions] )
 
       @response = true
 
@@ -43,9 +41,8 @@ class Api::V1::ProgressController < ApplicationController
   def save_notes
     begin
       team = Team.find(params[:team_id])
-      user = User.find(params[:user_id])
 
-      Snapshot.save_notes(team, params[:alpha_id], user, params[:notes] )
+      Snapshot.save_notes(team, params[:alpha_id], current_user, params[:notes] )
 
       @response = true
 
