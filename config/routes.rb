@@ -30,7 +30,7 @@ SEMAT::Application.routes.draw do
          delete 'sessions' => 'sessions#destroy', :as => 'logout'
        end
        get "simple_alphas" => "alphas#simple_index"
-       post "progress" => "progress#mark"
+       post "progress/:team_id/mark" => "progress#mark"
        post "progress/:team_id/save_notes" => "progress#save_notes"
        post "progress/:team_id/save_actions" => "progress#save_actions"
        get "progress/:team_id" => "progress#show"

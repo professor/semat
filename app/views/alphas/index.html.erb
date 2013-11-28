@@ -11,7 +11,7 @@
                 type:'post',
                 data:"checklist_id=" + id + "&checked=" + checked +  "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
                 dataType:'script',
-                url:'/api/v1/progress'});
+                url: '/api/v1/progress/<%= @team.id %>/mark'});
         });
         $('select#teams').on('change', function() {
           new_page = "<%= alphas_path %>/" + $(this).val();
