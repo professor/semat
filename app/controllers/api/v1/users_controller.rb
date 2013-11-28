@@ -1,4 +1,4 @@
-class Api::V1::UsersController < Api::V1::AlphasController
+class Api::V1::UsersController < Api::V1::APIController
   skip_before_filter :verify_authenticity_token,
                      :if => Proc.new { |c| c.request.format == 'application/json' }
 
