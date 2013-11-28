@@ -8,7 +8,7 @@ class Api::V1::ProgressController < ApplicationController
       checklist = Checklist.find(params[:checklist_id])
       checked = params[:checked]
 
-      if checked == "true"
+      if checked == true || checked == "true"
         puts "*** checked"
         result1 = Checklist.add_check(team, checklist, current_user)
         result = Snapshot.add_check(team, checklist, current_user)
