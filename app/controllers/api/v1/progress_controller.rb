@@ -1,6 +1,9 @@
-class Api::V1::ProgressController < ApplicationController
+class Api::V1::ProgressController < Api::V1::APIController  # ApplicationController
   skip_before_filter :verify_authenticity_token,
                      :if => Proc.new { |c| c.request.format == 'application/json' }
+
+  before_filter :authenticate_user_from_token!
+
   def mark
     #Maybe we can remove these finds if saving TeamChecklist fails if the FK's don't exist
     begin
@@ -8,13 +11,20 @@ class Api::V1::ProgressController < ApplicationController
       checklist = Checklist.find(params[:checklist_id])
       checked = params[:checked]
 
+      if current_user.nil?
+        logger.info("current_user is nil")
+      else
+        logger.info("current_user is " + current_user.email)
+      end
+
+
       if checked == true || checked == "true"
-        puts "*** checked"
+        logger.info "*** checked"
         result1 = Checklist.add_check(team, checklist, current_user)
         result = Snapshot.add_check(team, checklist, current_user)
         @response = true
       else
-        puts "*** unchecked"
+        logger.info "*** unchecked"
         result = Checklist.remove_check(team, checklist)
         result = Snapshot.remove_check(team, checklist)
         @response = true
