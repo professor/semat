@@ -50,3 +50,7 @@ heroku run rails console
 ## Setup
 rails console
 AdminUser.create!(:email => 'admin@example.com', :password => 'password', :password_confirmation => 'password')
+
+## Great Tools
+http://jsonlint.com/
+

@@ -65,7 +65,7 @@ class Snapshot < ActiveRecord::Base
     alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
     # remove this is once we set default in migration
-    if alpha_summary.actions.nil?
+    if alpha_summary.actions.empty?
       alpha_summary.actions = action_text
     else
       alpha_summary.actions += action_text
@@ -80,7 +80,7 @@ class Snapshot < ActiveRecord::Base
     alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
     # remove this is once we set default in migration
-    if alpha_summary.notes.nil?
+    if alpha_summary.notes.empty?
       alpha_summary.notes =  notes_text
     else
       alpha_summary.notes += notes_text

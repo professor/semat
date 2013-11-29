@@ -9,6 +9,8 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
     begin
       team = Team.find(params[:team_id])
       checklist = Checklist.find(params[:checklist_id])
+      authorize! :mark, team
+
       checked = params[:checked]
 
       if current_user.nil?
@@ -38,6 +40,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
   def save_actions
     begin
       team = Team.find(params[:team_id])
+#      authorize! :save_actions, team
 
       Snapshot.save_actions(team, params[:alpha_id], current_user, params[:actions] )
 
@@ -51,6 +54,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
   def save_notes
     begin
       team = Team.find(params[:team_id])
+#      authorize! :save_notes, team
 
       Snapshot.save_notes(team, params[:alpha_id], current_user, params[:notes] )
 
@@ -65,6 +69,8 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
   # http://localhost:3000/api/v1/progress/1.json
   def show
     team = Team.find(params[:team_id])
+    authorize! :read, team
+
     checklists = team.checklists
     @checklists_ids = checklists.collect { |d| d.id }
   end
@@ -74,6 +80,8 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
   #
   def current_alpha_states
     team = Team.find(params[:team_id])
+    authorize! :read, team
+
     version = EssenceVersion.first
     alphas = version.alphas
     checklist_ids_hash = team.checklist_ids_hash

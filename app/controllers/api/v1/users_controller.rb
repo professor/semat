@@ -9,6 +9,8 @@ class Api::V1::UsersController < Api::V1::APIController
 
   def my_teams
     user = User.where(:email => params[:email]).first
+    authorize! :my_teams, user
+
     @teams = user.teams.order(:name)
   end
 
