@@ -17,7 +17,7 @@ GIT
       sass-rails
 
 GIT
-  remote: git@github.com:professor/cancan.git
+  remote: git://github.com/professor/cancan.git
   revision: 912c55a4d9f74f0fc83da5c006ed2ebc159d7a43
   specs:
     cancan (1.6.10)
