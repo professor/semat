@@ -46,6 +46,10 @@ SEMAT::Application.routes.draw do
     end
   end
 
+  constraints(:host => /essence.sv.cmu.edu/) do
+    match "/(*path)" => redirect {|params, req| "http://semat.herokuapp.com/#{params[:path]}"}, via: [:get, :post]
+  end
+
 
 #  get "alphas/show"
 
