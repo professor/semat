@@ -1,6 +1,15 @@
 SEMAT::Application.routes.draw do
 
 
+  constraints(:host => /essence.sv.cmu.edu/) do
+    match "/(*path)" => redirect {|params, req| "http://semat.herokuapp.com/#{params[:path]}"}, via: [:get, :post]
+  end
+
+  constraints(:host => /essence.ece.cmu.edu/) do
+    match "/(*path)" => redirect {|params, req| "http://semat.herokuapp.com/#{params[:path]}"}, via: [:get, :post]
+  end
+
+  
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, :controllers => { :registrations => "registrations" }
@@ -46,13 +55,6 @@ SEMAT::Application.routes.draw do
     end
   end
 
-  constraints(:host => /essence.sv.cmu.edu/) do
-    match "/(*path)" => redirect {|params, req| "http://semat.herokuapp.com/#{params[:path]}"}, via: [:get, :post]
-  end
-
-  constraints(:host => /essence.ece.cmu.edu/) do
-    match "/(*path)" => redirect {|params, req| "http://semat.herokuapp.com/#{params[:path]}"}, via: [:get, :post]
-  end
 
 #  get "alphas/show"
 
