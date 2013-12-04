@@ -53,4 +53,5 @@ AdminUser.create!(:email => 'admin@example.com', :password => 'password', :passw
 
 ## Great Tools
 http://jsonlint.com/
+Excellent Tutorial on Android and Rails: http://lucatironi.github.io/tutorial/2012/10/15/ruby_rails_android_app_authentication_devise_tutorial_part_one/
 
