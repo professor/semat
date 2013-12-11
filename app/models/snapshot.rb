@@ -38,8 +38,9 @@ class Snapshot < ActiveRecord::Base
 
     checklist = SnapshotChecklist.where(:snapshot_id => snapshot.id, :checklist_id => checklist.id).first
     if (checklist)
+      alpha = checklist.state.alpha
       result = checklist.destroy
-      snapshot.update_current_alpha_state(checklist.state.alpha)
+      snapshot.update_current_alpha_state(alpha)
     end
 
     result
