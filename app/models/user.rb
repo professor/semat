@@ -28,6 +28,18 @@ class User < ActiveRecord::Base
     self.save
   end
 
+  #def self.today_new_users
+  #    where("created_at >= ?", Time.zone.now.beginning_of_day)
+  #end
+
+  def self.yesterday_new_users
+    where("created_at >= ?", Date.yesterday)
+  end
+
+  def self.email_admins_about_new_user
+    users = User.yesterday_new_users
+    AdminMailer.new_users(users).deliver if users.size > 0
+  end
 
   before_save :ensure_authentication_token
 

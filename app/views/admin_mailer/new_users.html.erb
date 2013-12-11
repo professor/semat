@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Here are our new <%= @users.count %> users</h1>
+    <% @users.each do |user| %>
+      <div><%=mail_to user.email, user.email, :subject => "Need any help with SEMAT Essence?" %></div>
+    <% end  %>
+  </body>
+</html>
