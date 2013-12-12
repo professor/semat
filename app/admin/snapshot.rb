@@ -15,6 +15,7 @@ ActiveAdmin.register Snapshot do
       f.input :created_at, :as => :datetime_picker, :hint => "This works in Chrome"
       f.input :updated_at, :as => :datetime_picker, :hint => "This works in Chrome"
     end
+    f.actions
   end
 
 
