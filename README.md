@@ -36,22 +36,31 @@ $ echo "RACK_ENV=development" >>.env
 $ echo "PORT=3000" >> .env
 foreman start
 
-heroku run rake db:migrate --app semat
-heroku run rake  semat:import_alpha_cards
 
 rake assets:precompile RAILS_ENV=production
 
-heroku pgbackups:capture --expire --app semat
 
-heroku run rails console
 
  http://localhost:3000/api/v1/simple_alphas.json
 
 
 
 ## Setup
+rake semat:import_alpha_cards
+
 rails console
 AdminUser.create!(:email => 'admin@example.com', :password => 'password', :password_confirmation => 'password')
+
+
+## Admin on production
+heroku run rails console
+git push heroku master
+heroku pgbackups:capture --expire --app semat
+heroku run rake db:migrate --app semat
+
+## Initialize on production
+heroku run rake semat:import_alpha_cards
+
 
 ## Great Tools
 http://jsonlint.com/
