@@ -28,6 +28,10 @@ ActiveAdmin.register Team do
 #          link_to(snapshot.id, admin_snapshots_path(snapshot))
           link_to(snapshot.id, "/admin/snapshots/" + snapshot.id.to_s)
         end
+        column "position" do |snapshot|
+          link_to(snapshot.position, "/admin/snapshots/" + snapshot.id.to_s)
+        end
+        column "created_at"
       end
     end
 
