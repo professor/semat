@@ -1,4 +1,7 @@
 ActiveAdmin.register User do
+
+  permit_params :email
+
   index do
     selectable_column
     column :email

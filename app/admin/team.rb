@@ -1,5 +1,7 @@
 ActiveAdmin.register Team do
 
+  permit_params :name, :owner
+
   index do
     selectable_column
     column :name
