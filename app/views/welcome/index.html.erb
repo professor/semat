@@ -30,8 +30,8 @@
 <h2>Sample for <%= alpha.name %> <small><span class="glyphicon glyphicon-info-sign"></span></small></h2>
 
 <div class="row">
-        <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[0]} %></div>
-        <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[1]} %></div>
-        <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[2]} %></div>
+        <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[0], :color => alpha.color} %></div>
+        <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[1], :color => alpha.color} %></div>
+        <div class="col-md-4"><%= render :partial => "/alphas/state_card", :locals => {:state => alpha.states[2], :color => alpha.color} %></div>
 </div>
 
