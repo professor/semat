@@ -7,10 +7,17 @@ require 'roo'
 class AlphaCardParser
 
 
-  def self.import
-    s = Roo::Spreadsheet.open("./lib/SEMAT_Alpha_Cards_OMG_1.0.xlsx")
+  def self.import(file, version_name)
+#    s = Roo::Spreadsheet.open("./lib/SEMAT_Alpha_Cards_OMG_1.0.xlsx")
+#    s = Roo::Spreadsheet.open("./lib/SEMAT_Alpha_Cards_Printed_Cards.xlsx")
 #    s = Roo::Spreadsheet.open("./lib/simple.xlsx")
-    @version = EssenceVersion.create(:name => "OMG 1.0")
+#    @version = EssenceVersion.create(:name => "OMG 1.0")
+#    @version = EssenceVersion.create(:name => "Printed Cards 1.0")
+
+    s = Roo::Spreadsheet.open(file)
+    @version = EssenceVersion.create(:name => version_name)
+    @current_alpha = nil
+    @current_state = nil
 
     row_index = 2
     while (row_index < s.last_row)
