@@ -36,11 +36,10 @@ class Snapshot < ActiveRecord::Base
   def self.remove_check(team, checklist)
     snapshot = team.find_latest_or_create_new_snapshot
 
-    checklist = SnapshotChecklist.where(:snapshot_id => snapshot.id, :checklist_id => checklist.id).first
-    if (checklist)
-      alpha = checklist.state.alpha
-      result = checklist.destroy
-      snapshot.update_current_alpha_state(alpha)
+    checklist_present = SnapshotChecklist.where(:snapshot_id => snapshot.id, :checklist_id => checklist.id).first
+    if (checklist_present)
+      result = checklist_present.destroy
+      snapshot.update_current_alpha_state(checklist.state.alpha)
     end
 
     result
