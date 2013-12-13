@@ -6,7 +6,7 @@ class Team < ActiveRecord::Base
   has_many :team_users
   has_many :members, :through => :team_users, :source => :user
 
-  has_many :snapshots
+  has_many :snapshots, -> { order("position ASC") }
 
   belongs_to :owner, :class_name => :User
 

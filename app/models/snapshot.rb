@@ -1,6 +1,7 @@
 class Snapshot < ActiveRecord::Base
 
-  acts_as_list :column => "order"
+  acts_as_list scope: :team
+
   belongs_to :team
 
   has_many :snapshot_checklists

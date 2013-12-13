@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131211233306) do
+ActiveRecord::Schema.define(version: 20131213193147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20131211233306) do
     t.string   "concern"
     t.string   "definition"
     t.text     "description"
-    t.integer  "order"
+    t.integer  "position"
     t.integer  "essence_version_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20131211233306) do
 
   create_table "checklists", force: true do |t|
     t.string   "name"
-    t.integer  "order"
+    t.integer  "position"
     t.integer  "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -120,17 +120,17 @@ ActiveRecord::Schema.define(version: 20131211233306) do
 
   create_table "snapshots", force: true do |t|
     t.integer  "team_id"
-    t.integer  "order"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "snapshots", ["team_id", "order"], name: "index_snapshots_on_team_id_and_order", unique: true, using: :btree
+  add_index "snapshots", ["team_id", "position"], name: "index_snapshots_on_team_id_and_position", unique: true, using: :btree
   add_index "snapshots", ["team_id"], name: "index_snapshots_on_team_id", using: :btree
 
   create_table "states", force: true do |t|
     t.string   "name"
-    t.integer  "order"
+    t.integer  "position"
     t.integer  "alpha_id"
     t.datetime "created_at"
     t.datetime "updated_at"

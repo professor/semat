@@ -1,7 +1,8 @@
 class Alpha < ActiveRecord::Base
   
-  acts_as_list :column => "order"
-  has_many :states
+  acts_as_list scope: :essence_version
+  has_many :states, -> { order("position ASC") }
+
   belongs_to :essence_version
 
 
