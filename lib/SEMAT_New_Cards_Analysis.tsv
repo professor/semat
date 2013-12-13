@@ -1,0 +1,266 @@
+
+Alpha	Stakeholders
+State	1 - Recognized
+
+Severity	Medium wording changes
+OMG 1.0	All the different groups of stakeholders that are, or will be, affected by the development and operation of the software system are identified.
+Short-hand Cards 1.0	stakeholders have been identified
+Proposal	possible stakeholders groups are identified
+Rationale	The key behind this state is identifying possible stakeholder groups. All stakeholders groups might not be known at the start of a project. A team should be able to enumerate the stakeholder groups.
+
+Severity	Medium wording changes
+OMG 1.0	There is agreement on the stakeholder groups to be represented. At a minimum, the stakeholders groups that fund, use, support, and maintain the system have been considered.
+Short-hand Cards 1.0	there is an agreement for stakeholder groups to be represented
+Proposal	team agrees on relevant stakeholder groups to be represented
+Rationale	"Eliminates ""to be"" verb. Clarifies that the key is to select relevant stakeholders. This acknowledges the dynamic where not all stakeholder groups have equal voice in the project."
+
+Severity	Minor wording changes
+OMG 1.0	The responsibilities of the stakeholder representatives have been defined.
+Short-hand Cards 1.0	responsibilities of stakeholder representatives defined
+Proposal	responsibilities of stakeholder representatives are defined
+Rationale	Now uses active tense
+State	2 - Represented
+
+Severity	Minor wording changes
+OMG 1.0	Stakeholder representatives appointed.
+Short-hand Cards 1.0	stakeholder representatives appointed
+Proposal	stakeholder representatives are appointed
+Rationale	Added a verb to the phrase
+
+Severity	Revert back to OMG
+OMG 1.0	The stakeholder representatives have agreed to take on their responsibilities.
+Short-hand Cards 1.0	stakeholder representatives agreed to take on responsibilities & authorized
+Proposal	stakeholder representatives agreed to take on responsibilities
+Rationale	The Shord-Hand combined the second and fifth checklists from OMG. These are independent concepts and should be treated separately
+
+Severity	Minor wording changes
+OMG 1.0	The collaboration approach among the stakeholder representatives has been agreed.
+Short-hand Cards 1.0	collaboration approach agreed
+Proposal	stakeholders agree on collaboration approach
+Rationale	Now users active tense
+
+Severity	Large - moved to Way of Working,  1 - Principles Established
+OMG 1.0	The stakeholder representatives support and respect the team's way of working.
+Short-hand Cards 1.0	representatives respect team way of working
+Proposal	representatives respect team's principals
+Rationale	"This checklist item describes the team's progression in Way of Working and should be in place in the Way of Working alpha, 1 - Principles Established state. The stakeholders respecting the team's Way of Working is an important component of the progression of Way of Working, its not part of the natural progression of the Stakeholder's alpha. Once it is in the context of the Way of Working alpha, using the phrase ""Way of Working"" is redundant. We rephrased it to be clear about the original intent"
+
+Severity	Revert back to OMG.
+OMG 1.0	The stakeholder representatives are authorized to carry out their responsibilities.
+Short-hand Cards 1.0	<Combined> stakeholder representatives agreed to take on responsibilities & authorized
+Proposal	stakeholder representatives empowered to take on responsibilities
+Rationale	"The Shord-Hand combined the second and fifth checklists from OMG. These are independent concepts and should be treated separately. We replace ""authorized"" with ""empowered"" as its a stronger and clearer verb"
+State	3 - Involved
+
+Severity	No Change
+OMG 1.0	The stakeholder representatives assist the team in accordance with their responsibilities.
+Short-hand Cards 1.0	stakeholder representatives carry out responsibilities
+Proposal	stakeholder representatives carry out responsibilities
+
+Severity	No Change
+OMG 1.0	The stakeholder representatives provide feedback and take part in decision making in a timely manner.
+Short-hand Cards 1.0	stakeholder representatives provide feedback & take part in decisions in timely way
+Proposal	stakeholder representatives provide feedback & take part in decisions in timely way
+
+Severity	No Change
+OMG 1.0	The stakeholder representatives promptly communicate changes that are relevant for their stakeholder groups.
+Short-hand Cards 1.0	stakeholder representatives promptly communicate to stakeholder group
+Proposal	stakeholder representatives promptly communicate to stakeholder group
+State	4 - In Agreement
+
+Severity	Minor wording changes
+OMG 1.0	The stakeholder representatives agree that their input is valued by the team and treated with respect.
+Short-hand Cards 1.0	stakeholder representative agree their input is valued & respected by the team
+Proposal	team values stakeholder representatives' input
+Rationale	"We reverse the wording in order to put into active tense. We shorten to make room on card for reciprocal team item, ""team values stakeholder representatives' input"""
+
+Severity	Minor wording changes
+OMG 1.0	<N/A>
+Short-hand Cards 1.0	stakeholder representative agree with priorities
+Proposal	stakeholder representatives agree with priorities
+Rationale	"Fixed grammar mistake. Plural form of ""representative"""
+
+Severity	No change
+OMG 1.0	The stakeholder representatives have agreed upon their minimal expectations for the next deployment of the new system.
+Short-hand Cards 1.0	stakeholder representatives agreed upon minimal expectations for deployment
+Proposal	stakeholder representatives agreed upon minimal expectations for deployment
+
+Severity	Minor wording changes
+OMG 1.0	The team members agree that their input is valued by the stakeholder representatives and treated with respect.
+Short-hand Cards 1.0	<Deleted>
+Proposal	stakeholder representatives value team's input
+Rationale	We reverse the wording in order to put into active tense. While this was dropped in the short-hand version, it’s important.  Respect should go both ways between the team and the stakeholder representatives. We observed one team where this was not the case.
+
+Severity	Drop OMG checklist item
+OMG 1.0	The stakeholder representatives agree with how their different priorities and perspectives are being balanced to provide a clear direction for the team.
+Short-hand Cards 1.0	<Deleted>
+Proposal	<Deleted>
+Rationale	We agree with the removal of this checklist item
+
+Severity	Drop OMG checklist item
+OMG 1.0	The stakeholder representatives are happy with their involvement in the work.
+Short-hand Cards 1.0	<Deleted>
+Proposal	<Deleted>
+Rationale	"We agree with the removal of this checklist item. This checklist item is covered by the first one on the card, ""team values stakeholder representatives' input."""
+State	5 -  Satisfied for Deployment
+
+Severity	Drop OMG and short-hand checklist item
+OMG 1.0	The stakeholder representatives provide feedback on the system from their stakeholder group perspective.
+Short-hand Cards 1.0	stakeholder representatives provide feedback on system from their stakeholder perspective
+Proposal	<Deleted>
+Rationale	"The two checklist items are almost identical. The phrase ""feedback on the system"" can imply that the system is already deployed. We want the client to authorize the deployment of the system. We observed people confused by this checklist item."
+
+Severity	No change
+OMG 1.0	The stakeholder representatives confirm that the system is ready for deployment.
+Short-hand Cards 1.0	stakeholder representatives confirm system ready for deployment
+Proposal	stakeholder representatives confirm system ready for deployment
+State	6 - Satisfied in Use
+
+Severity	Drop OMG and short-hand checklist item
+OMG 1.0	System has met or exceeded minimal stakeholder expectations
+Short-hand Cards 1.0	system has met or exceeded minimum stakeholder expectations
+Proposal	<Deleted>
+Rationale	"We deleted this as it is redundant with ""stakeholder need and expectations are being met"""
+
+Severity	Minor wording changes
+OMG 1.0	The stakeholders confirm that the new system meets their expectations.
+Short-hand Cards 1.0	stakeholder need and expectations are being met
+Proposal	Stakeholders confirm that system meets their expectations.
+Rationale	We put this in the active tense.
+
+Severity	New alpha state
+OMG 1.0	Stakeholders are using the new system and providing feedback on their experiences.
+Short-hand Cards 1.0	<Deleted>
+Proposal	"Add a new Alpha State, ""5.A - Providing Feedback"" with the checklist item ""Stakeholders provide feedback on their experiences"""
+Rationale	"There is a difference between acknolweding that a system is ready to be deployed, deploying it and collecting user feedback, and having the stakeholders be satisfied with its use. Its common for the initial deployment to surface issues that need to be addressed. This is a ""hidden"" state between Satisfied for Deployment and Satisfied in Use. In short, stakeholders are using the system and providing feedback."
+
+Alpha	Opportunity
+State	1 - Identified
+
+Severity	Minor wording changes
+OMG 1.0	An idea for a way of improving current ways of working, increasing market share or applying a new or innovative software system has been identified.
+Short-hand Cards 1.0	opportunity identified that could be addressed by a software-based solution
+Proposal	software-based solution addresses an identified opportunity
+Rationale	We put this in the active tense.
+
+Severity	No change
+OMG 1.0	At least one of the stakeholders wishes to make an investment in better understanding the opportunity and the value associated with addressing it.
+Short-hand Cards 1.0	a stakeholder wishes to make an investment in better understanding potential value
+Proposal	a stakeholder wishes to make an investment in better understanding potential value
+
+Severity	Drop OMG and short-hand checklist item
+OMG 1.0	The other stakeholders who share the opportunity have been identified.
+Short-hand Cards 1.0	other stakeholders who share opportunity identified
+Proposal	<Deleted>
+Rationale	This is unnecessary as it is covered by the Stakeholder alpha, where it belongs.
+State	2 - Solution Needed
+
+Severity	Reorder checklist items, significant rewording to clarify intent
+OMG 1.0	It has been confirmed that a software-based solution is needed.
+Short-hand Cards 1.0	need for software-based solution confirmed
+Proposal	3. Software can solve the problem.
+Rationale	Note. There appears to be a logical progression through three of the checklist items. This is troublesome since the checklist items typically are independent and could be accomplished in parallel. We've numbered them for clarity on the sequencing.
+
+Severity	Reorder checklist items, significant rewording to clarify intent
+OMG 1.0	The stakeholders' needs that generate the opportunity have been established.
+Short-hand Cards 1.0	stakeholder needs identified
+Proposal	2. opportunity addresses problem and stakeholder needs.
+
+Severity	Reorder checklist items, significant rewording to clarify intent
+OMG 1.0	Any underlying problems and their root causes have been identified.
+Short-hand Cards 1.0	underlying problem and root causes identified
+Proposal	1. problem is clearly articulated
+Rationale	The word, “underlying” implies that you found the opportunity first, then you discover the problem underneath it. While this often can happen on software projects, this is not always the case. Projects might clearly understand the problem then derive appropriate solutions.  Furthermore, the original wording implies a project management technique of root cause analysis. The core desired outcome is that the problem is clearly identified. Without properly identifying the problem, we fall into the anti-pattern of building a solution in need of a problem.
+
+Severity	Drop OMG and short-hand checklist item
+OMG 1.0	At least one software-based solution has been proposed.
+Short-hand Cards 1.0	at least 1 software-based solution proposed
+Proposal	<Deleted>
+Rationale	Delete as redundant with 4-Viable
+State	3 - Value Established
+
+Severity	Minor wording changes
+OMG 1.0	The value of addressing the opportunity has been quantified either in absolute terms or in returns or savings per time period (e.g. per annum).
+Short-hand Cards 1.0	the value of a successful solution established
+Proposal	projected value of software system established
+Rationale	*** clarified ???
+
+Severity	No change
+OMG 1.0	The impact of the solution on the stakeholders is understood.
+Short-hand Cards 1.0	impact of solution on stakeholders understood
+Proposal	impact of solution on stakeholders understood
+
+Severity	Drop OMG and short-hand checklist item
+OMG 1.0	The value that the software system offers to the stakeholders that fund and use the software system is understood.
+Short-hand Cards 1.0	value of software system understood
+Proposal	<Deleted>
+Rationale	"Two of these checklist items are redundant, ""value of software system understood"" and ""the value of a successful solution established"""
+State	4 - Viable
+
+Severity	Minor wording changes
+OMG 1.0	A solution has been outlined.
+Short-hand Cards 1.0	a solution has been identified
+Proposal	solution has been outlined
+Rationale	"The word ""outline"" implies that there is form and structure to the solution. A solution in someone's head could count as ""identified."""
+
+Severity	Minor wording changes
+OMG 1.0	The indications are that the solution can be developed and deployed within constraints.
+Short-hand Cards 1.0	indications are solutions can be developed & deployed within constraints
+Proposal	solution is deployable within constraints
+Rationale	"We tightened this phrase by removing the unnecessary words. ""Indications are"" paints the analysis as very informal. ***"
+
+Severity	Minor wording changes
+OMG 1.0	The risks associated with the solution are acceptable and manageable.
+Short-hand Cards 1.0	risks are manageable
+Proposal	risks associated with solution are acceptable and manageable.
+Rationale	In this context, these are not project risks, but risks associated with the solution meeting the needs of the opportunity. The original OMG version is clearer about this.
+
+Severity	Drop OMG checklist item
+OMG 1.0	The indicative (ball-park) costs of the solution are less than the anticipated value of the opportunity.
+Short-hand Cards 1.0	<Deleted>
+Proposal	<Deleted>
+Rationale	This is redundant with the state 3 - Value Established
+
+Severity	Drop OMG checklist item
+OMG 1.0	The reasons for the development of a software-based solution are understood by all members of the team.
+Short-hand Cards 1.0	<Deleted>
+Proposal	<Deleted>
+Rationale	This is not relevant to this achieving this state.
+
+Severity	Drop OMG checklist item
+OMG 1.0	It is clear that the pursuit of the opportunity is viable.
+Short-hand Cards 1.0	<Deleted>
+Proposal	<Deleted>
+Rationale	"This is redundant to checklist item ""solution is deployable within constraints"""
+State	5 - Addressed
+
+Severity	Minor wording changes
+OMG 1.0	A usable system that demonstrably addresses the opportunity is available.
+Short-hand Cards 1.0	a solution has been produced that demonstrably addresses opportunity
+Proposal	solution demonstrably addresses opportunity
+Rationale	We removed unnecessary words
+
+Severity	No change
+OMG 1.0	A usable system that demonstrably addresses the opportunity is available.
+Short-hand Cards 1.0	a usable system is available
+Proposal	a usable system is available
+Rationale	The short-hand version added this checklist item
+
+Severity	Minor wording changes
+OMG 1.0	The stakeholders agree that the available solution is worth deploying.
+Short-hand Cards 1.0	stakeholders agree worth deploying
+Proposal	solution is worth deploying
+Rationale	We added the subject back to the phrase
+
+Severity	Drop OMG and short-hand checklist item
+OMG 1.0	The stakeholders are satisfied that the solution produced addresses the opportunity.
+Short-hand Cards 1.0	stakeholders satisfied solution addresses opportunity
+Proposal	<Deleted>
+Rationale	"This is redundant with checklist item ""solution demonstrably addresses opportunity"""
+State	6 - Benefit Accrued
+
+Severity	Minor wording changes
+OMG 1.0	The solution has started to accrue benefits for the stakeholders.
+Short-hand Cards 1.0	operational use creating tangible benefits
+Proposal	operational use of solution creates tangible benefits
+Rationale	We use present tense and clarified direct object.

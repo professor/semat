@@ -41,6 +41,8 @@ heroku run rake  semat:import_alpha_cards
 
 rake assets:precompile RAILS_ENV=production
 
+heroku pgbackups:capture --expire --app semat
+
 heroku run rails console
 
  http://localhost:3000/api/v1/simple_alphas.json
@@ -54,4 +56,5 @@ AdminUser.create!(:email => 'admin@example.com', :password => 'password', :passw
 ## Great Tools
 http://jsonlint.com/
 Excellent Tutorial on Android and Rails: http://lucatironi.github.io/tutorial/2012/10/15/ruby_rails_android_app_authentication_devise_tutorial_part_one/
+
 

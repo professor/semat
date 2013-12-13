@@ -15,6 +15,7 @@ SEMAT::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   root :to => "welcome#index"
+  get "/state" => "welcome#state"  #Just for convenience
 
   resources :teams
 
