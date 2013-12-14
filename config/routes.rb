@@ -24,18 +24,21 @@ SEMAT::Application.routes.draw do
   get "alphas" => "alphas#index"
   get "alphas/:team_id" => "alphas#index"
 
-#  resources :alphas
   get "simple_alphas" => "alphas#simple_index"
   get "users/:email/teams" => "users#my_teams", as: :my_teams, :email => /[A-Za-z0-9@\.]+?/
   get 'static/about' => 'static#about', as: :about
 #  get 'static/:action' => 'static#:action'
 
+  get "versions" => "versions#index", as: :versions
+  get "versions/:name" => "versions#show", as: :version, :name => /[^\/]+/
 
   namespace :api do
     namespace :v1 do
        # Directs /admin/products/* to Admin::ProductsController
        # (app/controllers/admin/products_controller.rb)
        resources :alphas
+       get "versions" => "versions#index", as: :versions
+       get "versions/:name" => "versions#show", as: :version, :name => /[^\/]+(?=\.html\z|\.json\z)|[^\/]+/
        devise_scope :user do
          post 'sessions' => 'sessions#create', :as => 'login'
          delete 'sessions' => 'sessions#destroy', :as => 'logout'

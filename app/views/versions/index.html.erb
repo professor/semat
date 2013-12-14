@@ -1,0 +1,7 @@
+<h1>Essence Versions</h1>
+<div class="list-group">
+<% @versions.each do |version| %>
+     <%= link_to version.name, version_path(version), :class=> "list-group-item" %>
+<% end %>
+</div>
+
