@@ -19,6 +19,9 @@ class NewCardsAnalysisParser
     @current_alpha = nil
     @current_state = nil
 
+    @type = Hash.new
+    @severity = Hash.new
+
     row_index = 2
     while (row_index < s.last_row)
       puts row_index
@@ -27,6 +30,13 @@ class NewCardsAnalysisParser
     end
 
     @output.close
+
+    puts "Type-----------"
+    @type.inspect
+    puts "Type-----------"
+    @type.to_s
+    puts "Severity-------"
+    @severity.inspect
   end
 
   def self.parse_row(row)
@@ -62,14 +72,32 @@ class NewCardsAnalysisParser
     puts "handle_new_checklist " + row.inspect
     @output << []
     if row[5].present?
-      @output << ["Severity", row[5].strip] if row[5].present?
+      type = row[5].strip
+      @output << ["Type", type]
+      if(@type.include?(type))
+        @type[type] += 1
+      else
+        @type[type] = 1
+      end
+    else
+      @output << ["Type", ""]
+    end
+    if row[6].present?
+      severity = row[6].strip
+      @output << ["Severity", severity]
+      if(@severity.include?(severity))
+        @severity[severity] += 1
+      else
+        @severity[severity] = 1
+      end
+
     else
       @output << ["Severity", ""]
     end
     @output << ["OMG 1.0", row[1].strip]
     @output << ["Short-hand Cards 1.0", row[2].strip]
     @output << ["Proposal", row[4].strip]
-    @output << ["Rationale", row[6].strip] if row[6].present?
+    @output << ["Rationale", row[7].strip] if row[7].present?
 
 #    Checklist.create(:state_id => @current_state.id, :name => row[6].strip)
   end

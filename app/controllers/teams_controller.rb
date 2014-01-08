@@ -4,6 +4,7 @@ class TeamsController < ApplicationController
 
   def new
     @team = Team.new(:owner_id => current_user.id, :name => "Unnamed")
+    @team.essence_version = EssenceVersion.where(:name => "OMG 1.0").first
     @team.members = [current_user]
     if @team.save
       #@team.members = [current_user]
@@ -16,37 +17,38 @@ class TeamsController < ApplicationController
   end
 
   def edit
-    @team = Team.new(:owner_id => current_user.id)
-  end
-
-  def create
-    @team = Team.new(params[:team])
-
-    respond_to do |format|
-      if @team.save
-        format.html { redirect_to(teams_path, :notice => 'Team was successfully created.') }
-      else
-        format.html { render :action => "new" }
-      end
-    end
-  end
-
-  def update
     @team = Team.find(params[:id])
-#    authorize! :update, @team
-
-    respond_to do |format|
-      if @team.update_attributes(params[:team])
-        format.html { redirect_to(teams_path, :notice => notice_msg || 'Team was successfully updated.') }
-      else
-        format.html { render :action => "edit" }
-      end
-    end
+    @members = @team.members
   end
+
+  #def create
+  #  @team = Team.new(params[:team])
+  #
+  #  respond_to do |format|
+  #    if @team.save
+  #      format.html { redirect_to(teams_path, :notice => 'Team was successfully created.') }
+  #    else
+  #      format.html { render :action => "new" }
+  #    end
+  #  end
+  #end
+
+#  def update
+#    @team = Team.find(params[:id])
+##    authorize! :update, @team
+#
+#    respond_to do |format|
+#      if @team.update_attributes(params[:team])
+#        format.html { redirect_to(teams_path, :notice => notice_msg || 'Team was successfully updated.') }
+#      else
+#        format.html { render :action => "edit" }
+#      end
+#    end
+#  end
 
   def show
     @team = Team.find(params[:id])
-    @members = @team.members
+
   end
 
   def mass_invite

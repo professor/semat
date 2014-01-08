@@ -2,8 +2,12 @@ class State < ActiveRecord::Base
 
   acts_as_list scope: :alpha
 
-  has_many :checklists
+  has_many :checklists, :dependent => :destroy
   belongs_to :alpha
+
+  def self.visible
+    where(:visible => true)
+  end
 
   def achieved? checklist_ids_hash
     checklists.each do |checklist|

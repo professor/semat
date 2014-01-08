@@ -1,0 +1,20 @@
+<%
+   #Parameters: state
+   state = local_assigns[:state]  
+   color = local_assigns[:color] || "blue"
+   checklist_ids_hash = local_assigns[:checklist_ids_hash] || Hash.new
+
+   if local_assigns[:index]
+     index = (local_assigns[:index] + 1).to_s + ". "
+   else
+    index = ""
+   end
+
+
+%>
+
+<div class="panel panel-<%= color.downcase %>">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= state.number %>. <%= state.name%></h3>
+  </div>
+</div>

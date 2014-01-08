@@ -9,3 +9,8 @@
 <% end %>
 <%= link_to "Add a team", new_team_path, :class=> "list-group-item" %>
 </div>
+
+<h1>My Teams</h1>
+<% team = @teams.first %>
+<% snapshot = team.snapshots.last %>
+<%= render :partial => "teams/overview_horizontal", :locals => {:snapshot => snapshot, :essence_version => team.essence_version} %></div>

@@ -1,14 +1,15 @@
 class Team < ActiveRecord::Base
 
-  has_many :team_checklists
+  has_many :team_checklists, :dependent => :destroy
   has_many :checklists, :through => :team_checklists, :source => :checklist
 
-  has_many :team_users
+  has_many :team_users, :dependent => :destroy
   has_many :members, :through => :team_users, :source => :user
 
-  has_many :snapshots, -> { order("position ASC") }
+  has_many :snapshots, -> { order("position ASC") }, :dependent => :destroy
 
   belongs_to :owner, :class_name => :User
+  belongs_to :essence_version
 
 #  default_scope
 
@@ -46,7 +47,7 @@ class Team < ActiveRecord::Base
     latest_snapshot = self.snapshots.last
 
     if latest_snapshot.nil?
-      current_snapshot = Snapshot.new
+      current_snapshot = Snapshot.new_with_unknown_state_of_each_alpha(self.essence_version)
       self.snapshots << current_snapshot
     elsif latest_snapshot.created_at < 4.hours.ago
       current_snapshot = latest_snapshot.copy_as_new_snapshot

@@ -46,11 +46,15 @@ class AlphaCardParser
     puts "handle_new_alpha     " + row.inspect
     @current_alpha = Alpha.create(:essence_version_id => @version.id, :name => row[0].strip, :concern => row[1].strip, :color => row[2].strip,
                                   :definition => row[3].strip, :description => row[4].strip)
+    State.create(:alpha_id => @current_alpha.id, :name => "Unknown", :visible => false, :number => "?")
+    State.create(:alpha_id => @current_alpha.id, :name => "Initial", :visible => false, :number => "0")
+    @state_number = 0
   end
 
   def self.handle_new_state(row)
     puts "handle_new_state     " + row.inspect
-    @current_state = State.create(:alpha_id => @current_alpha.id, :name => row[5].strip)
+    @state_number += 1
+    @current_state = State.create(:alpha_id => @current_alpha.id, :name => row[5].strip, :visible => true, :number => @state_number.to_s)
   end
 
   def self.handle_new_checklist(row)

@@ -4,15 +4,15 @@ class Snapshot < ActiveRecord::Base
 
   belongs_to :team
 
-  has_many :snapshot_checklists
+  has_many :snapshot_checklists, dependent: :destroy
   has_many :checklists, :through => :snapshot_checklists, :source => :checklist
 
-  has_many :snapshot_alphas
+  has_many :snapshot_alphas, dependent: :destroy
   has_many :status_of_alphas, :through => :snapshot_alphas, :source => :alpha
 
   def copy_as_new_snapshot
     new_snapshot = self.dup
-    new_snapshot.order = nil
+    new_snapshot.position = nil
 
     self.snapshot_checklists.each { |checklist| new_snapshot.snapshot_checklists << checklist.dup } if self.snapshot_checklists.present?
     self.snapshot_alphas.each { |alpha_status| new_snapshot.snapshot_alphas << alpha_status.copy_as_new_alpha_status } if self.snapshot_alphas.present?
@@ -20,6 +20,13 @@ class Snapshot < ActiveRecord::Base
     new_snapshot
   end
 
+  def self.new_with_unknown_state_of_each_alpha(essence_version)
+    snapshot = Snapshot.create()
+    essence_version.alphas.each do |alpha|
+      SnapshotAlpha.create(:snapshot_id => snapshot.id, :alpha_id => alpha.id, :current_state_id => alpha.states.first.id)
+    end
+    snapshot
+  end
 
   def self.add_check(team, checklist, scribe)
     snapshot = team.find_latest_or_create_new_snapshot
@@ -48,15 +55,15 @@ class Snapshot < ActiveRecord::Base
 
   def update_current_alpha_state(alpha)
     checklist_ids_hash = self.team.checklist_ids_hash
-    state = alpha.first_unachieved_card(checklist_ids_hash)
+    state = alpha.last_achieved_card(checklist_ids_hash)
 
     if state.present?
-      logger.info "first_unachieved_card is " + state.id.to_s
+      logger.info "last_achieved_card is " + state.id.to_s
       alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => self.id, :alpha_id => alpha.id)
       alpha_summary.current_state_id = state.id
       alpha_summary.save
     else
-      logger.info "first_unachieved_card is 0 / nil"
+      logger.error "last_unachieved_card is 0 / nil"
     end
   end
 
@@ -89,6 +96,31 @@ class Snapshot < ActiveRecord::Base
     alpha_summary.scribe_id = scribe.id
     alpha_summary.save
   end
+
+  def snapshot_alphas_hash
+    alpha_id_to_snapshot_alpha_hash = Hash.new()
+    self.snapshot_alphas.each do |snapshot_alpha|
+      alpha_id_to_snapshot_alpha_hash[snapshot_alpha.alpha_id] = snapshot_alpha
+    end
+    alpha_id_to_snapshot_alpha_hash
+  end
+
+  #def snapshot_alphas_hash_for_all_alphas
+  #  alpha_id_to_snapshot_alpha_hash = Hash.new()
+  #
+  #  #Fill the hash with nils for each alpha
+  #  essence_version = self.team.essence_version
+  #  essence_version.alphas.each do |alpha|
+  #    alpha_id_to_snapshot_alpha_hash[alpha.id] = nil
+  #  end
+  #
+  #  #Fill the hash with the current values for alphas that have state
+  #  self.snapshot_alphas.each do |snapshot_alpha|
+  #    alpha_id_to_snapshot_alpha_hash[snapshot_alpha.alpha_id] = snapshot_alpha
+  #  end
+  #  alpha_id_to_snapshot_alpha_hash
+  #
+  #end
 
 
 end

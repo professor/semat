@@ -1,0 +1,28 @@
+<%
+   #Parameters:
+   snapshot = local_assigns[:snapshot]
+   essence_version = local_assigns[:essence_version]
+
+   #Derived variables
+    snapshot_alphas_hash = snapshot.snapshot_alphas_hash
+%>
+
+  <% essence_version.alphas.each do |alpha| %>
+      <div class="row">
+        <div class="col-md-3"><h3><%= alpha.name %></h3></div>
+<!--        <div class="panel panel">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= alpha.name%></h3>
+          </div>
+        </div>
+-->
+          <% snapshot_alpha = snapshot_alphas_hash[alpha.id] %>
+          <% if snapshot_alpha.present? %>
+             <div class="col-md-3"><%= render :partial => "alphas/overview_state_card", :locals => {:state => snapshot_alpha.current_state, :color => snapshot_alpha.alpha.color, :index => snapshot_alpha.current_state_id} %></div>
+          <% else %>
+            <div class="col-md-3"><%= render :partial => "alphas/overview_state_card", :locals => {:state => snapshot_alpha.current_state, :color => snapshot_alpha.alpha.color, :index => snapshot_alpha.current_state_id} %></div>
+            <% end %>
+      </div>
+  <% end %>
+
+</div>

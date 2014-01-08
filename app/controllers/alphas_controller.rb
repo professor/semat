@@ -4,14 +4,16 @@ class AlphasController < ApplicationController
 
 
   def index
-    @version = EssenceVersion.first
+#    @version = EssenceVersion.first
     @teams = current_user.teams
 
     team_id = params[:team_id]
     if team_id
       @team = Team.find(team_id)
+      @version = @team.essence_version
     else
       @team = current_user.teams.first
+      @version = @team.essence_version
     end
 
 

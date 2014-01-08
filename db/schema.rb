@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131213193147) do
+ActiveRecord::Schema.define(version: 20140107224951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,7 +134,11 @@ ActiveRecord::Schema.define(version: 20131213193147) do
     t.integer  "alpha_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "visible",    default: true
+    t.string   "number"
   end
+
+  add_index "states", ["visible"], name: "index_states_on_visible", using: :btree
 
   create_table "team_checklists", force: true do |t|
     t.integer  "team_id"
@@ -164,8 +168,10 @@ ActiveRecord::Schema.define(version: 20131213193147) do
     t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "essence_version_id"
   end
 
+  add_index "teams", ["essence_version_id"], name: "index_teams_on_essence_version_id", using: :btree
   add_index "teams", ["owner_id"], name: "index_teams_on_owner_id", using: :btree
 
   create_table "users", force: true do |t|

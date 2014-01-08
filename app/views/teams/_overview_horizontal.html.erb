@@ -1,0 +1,22 @@
+<%
+   #Parameters:
+   snapshot = local_assigns[:snapshot]
+   essence_version = local_assigns[:essence_version]
+
+%>
+
+<div class="row">
+  <% essence_version.alphas.each do |alpha| %>
+        <div class="col-md-2"><%= alpha.name %></div>
+  <% end %>
+</div>
+
+<div class="row">
+  <% snapshot.snapshot_alphas.each_with_index do |snapshot_alpha, index| %>
+        <div class="col-md-2"><%= render :partial => "alphas/overview_state_card", :locals => {:state => snapshot_alpha.current_state, :color => snapshot_alpha.alpha.color, :index => snapshot_alpha.current_state_id} %></div>
+        <% if index % 3 == 2 %>
+        </div><div class='row'>
+        <% end %>
+  <% end %>
+
+</div>

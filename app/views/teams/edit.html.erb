@@ -1,0 +1,95 @@
+<script>
+    $(document).ready(function () {
+        $('#team_name').change(function () {
+            name = $(this).val();
+            $.ajax({
+                type: 'post',
+                data: "name=" + name + "&user_email=<%=current_user.email%>",
+                dataType: 'script',
+                url: '/api/v1/teams/<%= @team.id %>/rename'});
+            $('h1.team-header').text(name);
+        });
+        $('.remove-member-action').click(function () {
+            email = $(this).parent().siblings("input").val();
+            $.ajax({
+                type: 'post',
+                data: "email=" + email + "&user_email=<%=current_user.email%>",
+                dataType: 'script',
+                url: '/api/v1/teams/<%= @team.id %>/remove_member'});
+            $(this).parents(".row").remove();
+        });
+        $('#add-member-action').click(function () {
+            email = $('#add-member').val();
+            $.ajax({
+                 type: 'post',
+                 data: "email=" + email + "&user_email=<%=current_user.email%>",
+                 dataType: 'script',
+                 url: '/api/v1/teams/<%= @team.id %>/add_member'});
+            location.reload();
+        });
+    });
+</script>
+
+<h1 class="team-header">Team <%= @team.name %></h1>
+<%= form_for @team, :html => {:class => "ngb", :id => "edit_job"} do |f| %>
+
+    <div class="input-group input-group-lg">
+      <span class="input-group-addon">Name</span>
+      <%= f.text_field :name, :class => "form-control", :placeholder => "Username" %>
+    </div>
+
+    <h2>Members</h2>
+    <% @team.members.each do |member| %>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="input-group input-group-lg">
+              <span class="input-group-addon">Email</span>
+              <input type="text" class="form-control" disabled value="<%= member.email %>">
+          <span class="input-group-btn">
+            <button class="btn btn-default remove-member-action" type="button">Remove</button>
+          </span>
+            </div>
+            <!-- /input-group -->
+          </div>
+          <div class="col-lg-2">
+
+            <% if member.encrypted_password.present? %>
+                <span class="icon-green"><span class="glyphicon glyphicon-check"></span> Registered</span>
+            <% else %>
+                <span class="icon-yellow"><span class="glyphicon glyphicon-unchecked icon-warning"></span> Invite sent</span>
+            <% end %>
+          </div>
+          <!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+        <br/>
+
+    <% end %>
+    <br/>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon">Email</span>
+          <input type="email" class="form-control" id="add-member" placeholder="first.last@email.com">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="add-member-action">Add</button>
+      </span>
+        </div>
+        <!-- /input-group -->
+      </div>
+    </div>
+<% end %>
+
+<%= form_tag(mass_invite_path(@team), method: "post", class: "ngb", id: "mass-invite-form") %>
+    <h2>Mass invite</h2>
+    <div class="form-group">
+      <label for="mass-invite-textarea">Email addresses</label>
+      <textarea id="mass_invite" name="mass_invite" class="form-control" rows="3" placeholder="Separate with commas using either first.last@email.com or First Last <first.last@email.com>"></textarea>
+    </div>
+      <button class="btn btn-default" type="submit">Send Invites</button>
+</form>
+
+    <br/>
+    <small>Team created by <%= @team.owner.email %></small>
+
+
