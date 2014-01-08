@@ -1,5 +1,5 @@
 require 'roo'
-require 'CSV'
+require 'csv'
 #require 'essence_version'
 #require '../app/models/alpha'
 #require '../app/models/state'
