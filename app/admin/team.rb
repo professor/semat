@@ -6,6 +6,7 @@ ActiveAdmin.register Team do
     selectable_column
     column :name
     column :owner
+    column :essence_version
     column :updated_at
     default_actions
   end
