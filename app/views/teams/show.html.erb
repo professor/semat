@@ -2,5 +2,4 @@
 
 <h1 class="team-header">Team <%= @team.name %></h1>
 
-<% snapshot = @team.find_latest_or_create_new_snapshot %>
-<%= render :partial => "teams/overview_vertical", :locals => {:snapshot => snapshot, :essence_version => @team.essence_version} %></div>
+<%= render :partial => "teams/overview_vertical", :locals => {:snapshot => @snapshot, :essence_version => @team.essence_version} %></div>
