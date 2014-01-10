@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140107224951) do
+ActiveRecord::Schema.define(version: 20140110002538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,13 +88,27 @@ ActiveRecord::Schema.define(version: 20140107224951) do
   add_index "logs", ["scribe_id"], name: "index_logs_on_scribe_id", using: :btree
   add_index "logs", ["team_id"], name: "index_logs_on_team_id", using: :btree
 
+  create_table "snapshot_alpha_actions", force: true do |t|
+    t.integer  "snapshot_alpha_id"
+    t.integer  "snapshot_alpha_action_id"
+    t.text     "description"
+    t.integer  "scribe_id"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "snapshot_alpha_actions", ["scribe_id"], name: "index_snapshot_alpha_actions_on_scribe_id", using: :btree
+  add_index "snapshot_alpha_actions", ["snapshot_alpha_action_id"], name: "index_snapshot_alpha_actions_on_snapshot_alpha_action_id", using: :btree
+  add_index "snapshot_alpha_actions", ["snapshot_alpha_id"], name: "index_snapshot_alpha_actions_on_snapshot_alpha_id", using: :btree
+  add_index "snapshot_alpha_actions", ["state"], name: "index_snapshot_alpha_actions_on_state", using: :btree
+
   create_table "snapshot_alphas", force: true do |t|
     t.integer  "snapshot_id"
     t.integer  "alpha_id"
     t.integer  "scribe_id"
     t.integer  "current_state_id"
     t.text     "notes"
-    t.text     "actions"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

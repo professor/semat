@@ -11,6 +11,15 @@
 </div>
 
 <h1>My Teams</h1>
-<% team = @teams.first %>
-<% snapshot = team.snapshots.last %>
-<%= render :partial => "teams/overview_horizontal", :locals => {:snapshot => snapshot, :essence_version => team.essence_version} %></div>
+<table class="table table-bordered">
+<% essence_version = EssenceVersion.where(:name => "CMU 1.1").first %>
+<tr>
+  <th>Team</th>
+  <% essence_version.alphas.each do |alpha| %>
+<th class="<%= alpha.color.downcase %>"><%= alpha.name %> </th>
+  <% end %>
+</tr>
+<% @teams.each do |team| %>
+      <%= render :partial => "teams/overview_table_row", :locals => {:name => team.name, :snapshot => team.snapshots.last, :essence_version => team.essence_version} %></div>
+<% end %>
+</table>

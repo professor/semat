@@ -42,6 +42,13 @@ class Team < ActiveRecord::Base
     checklist_ids_hash
   end
 
+  def notes_hash
+    latest_snapshot = self.snapshots.last
+    notes_hash = Hash.new
+    latest_snapshot.snapshot_alphas.collect { |d| notes_hash.store(d.alpha_id, d.notes) } if latest_snapshot.present?
+    notes_ids_hash
+  end
+
 
   def find_latest_or_create_new_snapshot
     latest_snapshot = self.snapshots.last

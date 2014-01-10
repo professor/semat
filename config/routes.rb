@@ -11,7 +11,6 @@ SEMAT::Application.routes.draw do
 
   
   devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   root :to => "welcome#index"
@@ -26,11 +25,15 @@ SEMAT::Application.routes.draw do
 
   get "simple_alphas" => "alphas#simple_index"
   get "users/:email/teams" => "users#my_teams", as: :my_teams, :email => /[A-Za-z0-9@\.]+?/
+  get "/admin/users/:email" => "admin/users#show", as: :admin_user_path, :email => /[A-Za-z0-9@\.]+?/
   get 'static/about' => 'static#about', as: :about
 #  get 'static/:action' => 'static#:action'
 
   get "versions" => "versions#index", as: :versions
   get "versions/:name" => "versions#show", as: :version, :name => /[^\/]+/
+  get "/admin/versions/:name" => "versions#show", as: :admin_essence_version_path, :name => /[^\/]+/
+
+  ActiveAdmin.routes(self)
 
   namespace :api do
     namespace :v1 do
@@ -47,6 +50,8 @@ SEMAT::Application.routes.draw do
        post "progress/:team_id/mark" => "progress#mark"
        post "progress/:team_id/save_notes" => "progress#save_notes"
        post "progress/:team_id/save_actions" => "progress#save_actions"
+       post "progress/:team_id/action_done" => "progress#action_done"
+       post "progress/:team_id/action_deleted" => "progress#action_deleted"
        get "progress/:team_id" => "progress#show"
        get "progress/:team_id/current_alpha_states" => "progress#current_alpha_states"
        get "users/:email/teams" => "users#my_teams", as: :my_teams, :email => /[A-Za-z0-9@\.]+?/

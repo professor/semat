@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
 
   def new
     @team = Team.new(:owner_id => current_user.id, :name => "Unnamed")
-    @team.essence_version = EssenceVersion.where(:name => "OMG 1.0").first
+    @team.essence_version = EssenceVersion.where(:name => "CMU 1.1").first
     @team.members = [current_user]
     if @team.save
       #@team.members = [current_user]

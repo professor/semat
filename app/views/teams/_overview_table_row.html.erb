@@ -1,0 +1,34 @@
+<%
+   #Parameters:
+   name = local_assigns[:name]
+   snapshot = local_assigns[:snapshot]
+   essence_version = local_assigns[:essence_version]
+
+   #Derived variables
+   snapshot_alphas_hash = snapshot.snapshot_alphas_hash
+%>
+
+
+<tr>
+  <td><%= name %></td>
+
+<% essence_version.alphas.each do |alpha| %>
+      <% snapshot_alpha = snapshot_alphas_hash[alpha.id] %>
+      <% if snapshot_alpha.present? %>
+          <td color="<%= snapshot_alpha.alpha.color %>"> <%= snapshot_alpha.current_state.number %>. <%= snapshot_alpha.current_state.name %></td>
+      <% else %>
+          <td>&nbsp;</td>
+        <% end %>
+<% end %>
+</tr>
+
+<!--<tr>-->
+  <!--<td><%= name %></td>-->
+  <!--<% snapshot_alphas_hash = snapshot.snapshot_alphas_hash %>-->
+  <!---->
+  <!---->
+  <!--<% snapshot.snapshot_alphas.each_with_index do |snapshot_alpha, index| %>-->
+        <!--<td color="<%= snapshot_alpha.alpha.color %>"> <%= snapshot_alpha.current_state.number %>. <%= snapshot_alpha.current_state.name %> <%= snapshot_alpha.alpha.name %></td>-->
+  <!--<% end %>-->
+
+<!--</tr>-->

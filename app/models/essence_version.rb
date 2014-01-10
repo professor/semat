@@ -6,4 +6,8 @@ class EssenceVersion < ActiveRecord::Base
     name
   end
 
+  def self.find_by_param(param)
+    EssenceVersion.where(:name => param)
+  end
+
 end

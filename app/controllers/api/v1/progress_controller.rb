@@ -65,6 +65,36 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
     end
   end
 
+  def action_done
+    begin
+      team = Team.find(params[:team_id])
+      authorize! :action_done, team
+
+      action = SnapshotAlphaAction.find(params[:action_id])
+      action.mark_done
+
+      @response = true
+
+    rescue ActiveRecord::RecordNotFound => e
+      @response = e.message
+    end
+  end
+
+  def action_deleted
+    begin
+      team = Team.find(params[:team_id])
+      authorize! :action_done, team
+
+      action = SnapshotAlphaAction.find(params[:action_id])
+      action.mark_deleted
+
+      @response = true
+
+    rescue ActiveRecord::RecordNotFound => e
+      @response = e.message
+    end
+  end
+
 
   # http://localhost:3000/api/v1/progress/1.json
   def show
@@ -84,7 +114,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
 
     version = EssenceVersion.first
     alphas = version.alphas
-    checklist_ids_hash = team.checklist_ids_hash
+    checklist_ids_hash = team.snapshots.latest.checklist_ids_hash
 
     @current_alpha_states = Hash.new()
 

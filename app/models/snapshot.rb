@@ -54,7 +54,7 @@ class Snapshot < ActiveRecord::Base
   end
 
   def update_current_alpha_state(alpha)
-    checklist_ids_hash = self.team.checklist_ids_hash
+    checklist_ids_hash = self.checklist_ids_hash
     state = alpha.last_achieved_card(checklist_ids_hash)
 
     if state.present?
@@ -67,19 +67,30 @@ class Snapshot < ActiveRecord::Base
     end
   end
 
-  def self.save_actions(team, alpha_id, scribe, action_text )
+  def self.save_actions_old(team, alpha_id, scribe, action_text )
     snapshot = team.find_latest_or_create_new_snapshot
 
     alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
     # remove this is once we set default in migration
-    if alpha_summary.actions.empty?
+    if alpha_summary.actions.blank?
       alpha_summary.actions = action_text
     else
-      alpha_summary.actions += action_text
+      alpha_summary.actions += "\n" + action_text
     end
     alpha_summary.scribe_id = scribe.id
     alpha_summary.save
+  end
+
+  def self.save_actions(team, alpha_id, scribe, action_text )
+    snapshot = team.find_latest_or_create_new_snapshot
+
+    alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
+
+    action = SnapshotAlphaAction.create(:snapshot_alpha_id => alpha_summary.id, :description => action_text,
+                                        :scribe_id => scribe.id, :state => "new")
+
+#    alpha_summary.snapshot_alpha_actions << action
   end
 
   def self.save_notes(team, alpha_id, scribe, notes_text )
@@ -88,10 +99,10 @@ class Snapshot < ActiveRecord::Base
     alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
     # remove this is once we set default in migration
-    if alpha_summary.notes.empty?
+    if alpha_summary.notes.blank?
       alpha_summary.notes =  notes_text
     else
-      alpha_summary.notes += notes_text
+      alpha_summary.notes += "\n" + notes_text
     end
     alpha_summary.scribe_id = scribe.id
     alpha_summary.save
@@ -105,22 +116,23 @@ class Snapshot < ActiveRecord::Base
     alpha_id_to_snapshot_alpha_hash
   end
 
-  #def snapshot_alphas_hash_for_all_alphas
-  #  alpha_id_to_snapshot_alpha_hash = Hash.new()
-  #
-  #  #Fill the hash with nils for each alpha
-  #  essence_version = self.team.essence_version
-  #  essence_version.alphas.each do |alpha|
-  #    alpha_id_to_snapshot_alpha_hash[alpha.id] = nil
-  #  end
-  #
-  #  #Fill the hash with the current values for alphas that have state
-  #  self.snapshot_alphas.each do |snapshot_alpha|
-  #    alpha_id_to_snapshot_alpha_hash[snapshot_alpha.alpha_id] = snapshot_alpha
-  #  end
-  #  alpha_id_to_snapshot_alpha_hash
-  #
-  #end
+  def checklist_ids_hash
+    checklist_ids_hash = Hash.new
+    self.checklists.collect { |d| checklist_ids_hash.store(d.id, true) }
+    checklist_ids_hash
+  end
 
+  def notes_hash
+    notes_hash = Hash.new
+    self.snapshot_alphas.collect { |d| notes_hash.store(d.alpha_id, d.notes) }
+    notes_hash
+  end
+
+  def actions_hash
+    actions_hash = Hash.new
+#    self.snapshot_alphas.collect { |d| actions_hash.store(d.alpha_id, d.snapshot_alpha_actions.to_a) }
+    self.snapshot_alphas.collect { |d| actions_hash.store(d.alpha_id, d.active_actions.to_a) }
+    actions_hash
+  end
 
 end

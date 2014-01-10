@@ -38,6 +38,26 @@
             $('#alert-actions-' + alpha_id).slideDown("slow").delay(1000).slideUp("slow");
 
         });
+        $('.action-done').click(function(){
+            id = $(this).val()
+            $.ajax({
+                type:'post',
+                data:"action_id=" + id + "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
+                dataType:'script',
+                url: '/api/v1/progress/<%= @team.id %>/action_done'});
+            row = $(this).parents(".action-list-item");
+            row.hide('fast', function(){ row.remove(); });
+        });
+        $('.action-delete').click(function(){
+            id = $(this).val()
+            $.ajax({
+                type:'post',
+                data:"action_id=" + id + "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
+                dataType:'script',
+                url: '/api/v1/progress/<%= @team.id %>/action_deleted'});
+            row = $(this).parents(".action-list-item");
+            row.hide('fast', function(){ row.remove(); });
+        });
 
 //        $('#example').popover(options)
         $("[data-toggle=popover]").popover()
@@ -58,9 +78,11 @@
 <% end %>
 
 <% @version.alphas.each do |alpha| %>
+<div class="clearfix"></div>
+<div class="row">
     <h2 class="alpha-header"><%= alpha.name %></h2>
     <span class="alpha-tooltip glyphicon glyphicon-info-sign"  data-toggle="popover" title="" data-html="true" data-content="<%= alpha.definition %><br/><br/><%= alpha.description %>" role="button" data-original-title="Definition & Description" ></span>
-
+</div>
 <div class="row">
   <% alpha.visible_states.each_with_index do |state, index| %>
         <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color, :checklist_ids_hash => @checklist_ids_hash} %></div>
@@ -75,6 +97,9 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="mass-invite-textarea">Notes</label>
+          <% if @notes_hash[alpha.id] %>
+          <textarea class="form-control" disabled rows="5"><%= @notes_hash[alpha.id] %></textarea>
+          <% end %>
           <textarea id="alpha_notes_<%= alpha.id%>" name="alpha_notes" data-id="<%= alpha.id %>" class="form-control alpha-notes" rows="5" placeholder="Enter notes about your current situation."></textarea>
         </div>
         <div id="alert-notes-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
@@ -82,7 +107,20 @@
       <div class="col-md-6">
         <div class="form-group">
           <label for="mass-invite-textarea">Possible Actions</label>
-          <textarea id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="5" placeholder="Enter possible actions your team can perform to achieve the next state."></textarea>
+          <% if @actions_hash[alpha.id].present? %>
+          <div class="action-list">
+            <% @actions_hash[alpha.id].each do |action| %>
+               <%= render :partial => "action", :locals => {:action => action} %>
+            <% end %>
+          </div>
+          <% end %>
+          <div class="input-group">
+            <input type="text" id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" placeholder="Enter possible actions your team can perform to achieve the next state."></input>
+            <span class="input-group-btn">
+              <button class="btn btn-default btn-success" type="button">Add</button>
+            </span>
+          </div>
+          <!--<textarea id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" placeholder="Enter possible actions your team can perform to achieve the next state."></textarea>-->
         </div>
         <div id="alert-actions-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
       </div>
