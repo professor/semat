@@ -65,7 +65,7 @@
                 data:"team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
                 dataType:'script',
                 url: '/api/v1/progress/<%= @team.id %>/email_summary'});
-            $(this).val()
+            $(this).prop('value', 'Email sent');
         });
 
 //        $('#example').popover(options)

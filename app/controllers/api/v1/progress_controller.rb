@@ -100,7 +100,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
       team = Team.find(params[:team_id])
       authorize! :email_summary, team
 
-      SnapshotMailer.summary(team.find_latest_or_create_new_snapshot)
+      SnapshotMailer.summary(team.find_latest_or_create_new_snapshot).deliver
 
       @response = true
 
