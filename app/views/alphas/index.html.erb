@@ -58,6 +58,15 @@
             row = $(this).parents(".action-list-item");
             row.hide('fast', function(){ row.remove(); });
         });
+        $('#email-team-notes').click(function(){
+            id = $(this).val()
+            $.ajax({
+                type:'post',
+                data:"team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
+                dataType:'script',
+                url: '/api/v1/progress/<%= @team.id %>/email_summary'});
+            $(this).val()
+        });
 
 //        $('#example').popover(options)
         $("[data-toggle=popover]").popover()
@@ -126,4 +135,5 @@
       </div>
     </div>
 <% end %>
-
+<div class="clearfix"></div>
+<button type="button" class="btn btn-success" id="email-team-notes">Email Team Notes</button>

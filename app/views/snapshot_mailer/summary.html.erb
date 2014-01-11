@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+
+<table>
+  <tr>
+    <th>Alpha</th>
+    <th>State</th>
+    <th>Notes</th>
+    <th>Actions</th>
+  </tr>
+<% @essence_version.alphas.each do |alpha| %>
+       <% snapshot_alpha = @snapshot.snapshot_alphas_hash[alpha.id] %>
+       <% if snapshot_alpha.present? %>
+       <tr><td><%= alpha.name %></td>
+            <td color="<%= snapshot_alpha.alpha.color %>"> <%= snapshot_alpha.current_state.number %>. <%= snapshot_alpha.current_state.name %></td>
+            <td><%= snapshot_alpha.notes %></td>
+            <td>
+              <% snapshot_alpha.active_actions.each do |action| %>
+                 <%= action.description %><br/>
+              <% end %>
+            </td>
+       </tr>
+       <% end %>
+ <% end %>
+</table>
+
+  </body>
+</html>

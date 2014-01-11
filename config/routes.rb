@@ -52,6 +52,7 @@ SEMAT::Application.routes.draw do
        post "progress/:team_id/save_actions" => "progress#save_actions"
        post "progress/:team_id/action_done" => "progress#action_done"
        post "progress/:team_id/action_deleted" => "progress#action_deleted"
+       post "progress/:team_id/email_summary" => "progress#email_summary"
        get "progress/:team_id" => "progress#show"
        get "progress/:team_id/current_alpha_states" => "progress#current_alpha_states"
        get "users/:email/teams" => "users#my_teams", as: :my_teams, :email => /[A-Za-z0-9@\.]+?/

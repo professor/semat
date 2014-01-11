@@ -95,6 +95,19 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
     end
   end
 
+  def email_summary
+    begin
+      team = Team.find(params[:team_id])
+      authorize! :email_summary, team
+
+      SnapshotMailer.summary(team.find_latest_or_create_new_snapshot)
+
+      @response = true
+
+    rescue ActiveRecord::RecordNotFound => e
+      @response = e.message
+    end
+  end
 
   # http://localhost:3000/api/v1/progress/1.json
   def show
