@@ -65,7 +65,8 @@
                 data:"team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
                 dataType:'script',
                 url: '/api/v1/progress/<%= @team.id %>/email_summary'});
-            $(this).prop('value', 'Email sent');
+            // $("#email-team-notes").prop('value', 'Email sent');
+            $(this).text('Email sent')
         });
 
 //        $('#example').popover(options)
@@ -76,13 +77,15 @@
 
 <% if @teams.count > 1 %>
 <div class="row">
-  <div class="pull-right">
-    <div class="input-group input-group-lg">
-    <label for="teams">Select team:</label>
+  <div class="col-md-12">	
+    <div class="pull-right">
+      <div class="input-group input-group-lg">
+        <label for="teams">Select team:</label>
 <!--    <span class="input-group-addon">Select team:</span> -->
-    <%= select_tag "teams", options_from_collection_for_select(@teams, "id", "name", @team.id), class: "form-control" %>
+        <%= select_tag "teams", options_from_collection_for_select(@teams, "id", "name", @team.id), class: "form-control" %>
       </div>
     </div>
+  </div>
 </div>
 <% end %>
 
@@ -136,4 +139,10 @@
     </div>
 <% end %>
 <div class="clearfix"></div>
-<button type="button" class="btn btn-success" id="email-team-notes">Email Team Notes</button>
+<div clsss="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <button type="button" class="btn btn-success" id="email-team-notes">Email summary to team</button>
+    </div>	
+  </div>
+</div>
