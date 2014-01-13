@@ -45,13 +45,6 @@ Short-hand Cards 1.0	collaboration approach agreed
 Proposal	Stakeholders agree on collaboration approach
 Rationale	Now users active tense
 
-Type	Moved to different alpha
-Severity	Major
-OMG 1.0	The stakeholder representatives support and respect the team's way of working.
-Short-hand Cards 1.0	representatives respect team way of working
-Proposal	Representatives respect team's principals
-Rationale	"This checklist item describes the team's progression in Way of Working and should be in place in the Way of Working alpha, 1 - Principles Established state. The stakeholders respecting the team's Way of Working is an important component of the progression of Way of Working, its not part of the natural progression of the Stakeholder's alpha. Once it is in the context of the Way of Working alpha, using the phrase ""Way of Working"" is redundant. We rephrased it to be clear about the original intent"
-
 Type	Revert back to OMG
 Severity	Medium
 OMG 1.0	The stakeholder representatives are authorized to carry out their responsibilities.
@@ -146,14 +139,14 @@ Type	Wording change
 Severity	Minor
 OMG 1.0	The stakeholders confirm that the new system meets their expectations.
 Short-hand Cards 1.0	stakeholder need and expectations are being met
-Proposal	Stakeholders confirm that system meets their expectations.
+Proposal	Stakeholders confirm that system meets their expectations
 Rationale	We put this in the active tense.
 
-Type	New alpha state
+Type	Moved to different card
 Severity	Major
 OMG 1.0	Stakeholders are using the new system and providing feedback on their experiences.
 Short-hand Cards 1.0	<deleted>
-Proposal	"Add a new Alpha State, ""5.A - Providing Feedback"" with the checklist item ""Stakeholders provide feedback on their experiences"""
+Proposal	<deleted>
 Rationale	"There is a difference between acknolweding that a system is ready to be deployed, deploying it and collecting user feedback, and having the stakeholders be satisfied with its use. Its common for the initial deployment to surface issues that need to be addressed. This is a ""hidden"" state between Satisfied for Deployment and Satisfied in Use. In short, stakeholders are using the system and providing feedback."
 
 Alpha	Opportunity
@@ -163,14 +156,14 @@ Type	Wording change
 Severity	Minor
 OMG 1.0	An idea for a way of improving current ways of working, increasing market share or applying a new or innovative software system has been identified.
 Short-hand Cards 1.0	opportunity identified that could be addressed by a software-based solution
-Proposal	Software-based solution addresses an identified opportunity
+Proposal	An idea for a software solution is identified
 Rationale	We put this in the active tense.
 
 Type	Wording change
 Severity	Minor
 OMG 1.0	At least one of the stakeholders wishes to make an investment in better understanding the opportunity and the value associated with addressing it.
 Short-hand Cards 1.0	a stakeholder wishes to make an investment in better understanding potential value
-Proposal	Stakeholders wishes to make an investment in better understanding potential value
+Proposal	Stakeholders wish to make an investment in better understanding potential value
 
 Type	Drop OMG and short-hand checklist item
 Severity	Medium
@@ -184,21 +177,21 @@ Type	Reorder checklist items, significant rewording to clarify intent
 Severity	Medium
 OMG 1.0	Any underlying problems and their root causes have been identified.
 Short-hand Cards 1.0	underlying problem and root causes identified
-Proposal	1. Problem is clearly articulated
+Proposal	Problem is clearly articulated
 Rationale	The word, “underlying” implies that you found the opportunity first, then you discover the problem underneath it. While this often can happen on software projects, this is not always the case. Projects might clearly understand the problem then derive appropriate solutions.  Furthermore, the original wording implies a project management technique of root cause analysis. The core desired outcome is that the problem is clearly identified. Without properly identifying the problem, we fall into the anti-pattern of building a solution in need of a problem.
 
 Type	Reorder checklist items, significant rewording to clarify intent
 Severity	Medium
 OMG 1.0	The stakeholders' needs that generate the opportunity have been established.
 Short-hand Cards 1.0	stakeholder needs identified
-Proposal	2. Opportunity addresses problem and stakeholder needs.
+Proposal	Opportunity addresses problem and stakeholder needs
 
 Type	Reorder checklist items, significant rewording to clarify intent
 Severity	Medium
 OMG 1.0	It has been confirmed that a software-based solution is needed.
 Short-hand Cards 1.0	need for software-based solution confirmed
-Proposal	3. Software can solve the problem.
-Rationale	Note. There appears to be a logical progression through three of the checklist items. This is troublesome since the checklist items typically are independent and could be accomplished in parallel. We've numbered them for clarity on the sequencing.
+Proposal	Need for a software solution is confirmed
+Rationale	Note. There appears to be a logical progression through three of the checklist items. This could be troublesome if the checklist items typically are independent and could be accomplished in parallel. This happens several times with the Essence cards.
 
 Type	Drop OMG and short-hand checklist item
 Severity	Medium
@@ -254,7 +247,7 @@ Type	Wording change
 Severity	Minor
 OMG 1.0	The risks associated with the solution are acceptable and manageable.
 Short-hand Cards 1.0	risks are manageable
-Proposal	Risks associated with solution are acceptable and manageable.
+Proposal	Risks associated with solution are acceptable and manageable
 Rationale	In this context, these are not project risks, but risks associated with the solution meeting the needs of the opportunity. The original OMG version is clearer about this.
 
 Type	Drop OMG checklist item
@@ -377,15 +370,15 @@ Type	Wording change
 Severity	Minor
 OMG 1.0	Constraints are identified and considered.
 Short-hand Cards 1.0	constraints and assumptions are identified
-Proposal	Scope constraints and assumptions are identified
+Proposal	Scope constraints are identified
 Rationale	Clarify that we are not talking about project management constraints.
 
-Type	Drop OMG checklist item
-Severity	Minor
+Type	Revert back to OMG
+Severity	Medium
 OMG 1.0	Assumptions are clearly stated.
 Short-hand Cards 1.0	<deleted>
-Proposal	<deleted>
-Rationale	"Covered by ""constraints and assumptions are identified"""
+Proposal	Assumptions made while defining requirements are captured
+Rationale	Capturing assumptions while making requirements is important.
 
 Type	Drop OMG checklist item
 Severity	Minor
@@ -439,14 +432,21 @@ Type	Wording change
 Severity	Medium
 OMG 1.0	Conflicting requirements are identified and attended to.
 Short-hand Cards 1.0	conflicts are addressed
-Proposal	Requirements make sense relative to each other
+Proposal	There are no conflicting requirements
 Rationale	We need to capture the notion of coherence in this checklist item. Coherence implies that they don't conflict with each other.
 
-Type	Combined two checklists together
+Type	Revert back to OMG
 Severity	Medium
+OMG 1.0	The rationale behind the requirements is clear.
+Short-hand Cards 1.0	<deleted>
+Proposal	Rationale is understood
+Rationale	Understanding the rationale behind each requirement is important, otherwise the team is potentially implementing features will little understand for its business value or benefit for the project.
+
+Type	No change
+Severity	""
 OMG 1.0	The impact of implementing the requirements is understood.
 Short-hand Cards 1.0	impact is understood
-Proposal	Rationale and impact are understood
+Proposal	Impact is understood
 Rationale	"Combined with ""The rationale behind the requirements is clear."""
 
 Type	Drop OMG checklist item
@@ -461,13 +461,6 @@ Severity	Minor
 OMG 1.0	The requirements communicate the essential characteristics of the system to be delivered.
 Short-hand Cards 1.0	<deleted>
 Proposal	<deleted>
-
-Type	Drop OMG checklist item
-Severity	Minor
-OMG 1.0	The rationale behind the requirements is clear.
-Short-hand Cards 1.0	<deleted>
-Proposal	<deleted>
-Rationale	"Very similiar with ""The impact of implementing the requirements is understood."""
 
 Type	Drop OMG checklist item
 Severity	Minor
@@ -486,7 +479,7 @@ Type	Wording change
 Severity	Medium
 OMG 1.0	The rate of change to the agreed requirements is relatively low and under control.
 Short-hand Cards 1.0	the rate of change to agreed requirements is low
-Proposal	Rate of change is appectable
+Proposal	Rate of change is acceptable
 Rationale	The original assumes that low rate of change is desirable. This depends upon the type of project. Since we want the kernel to be applicable to all projects, we have altered the wording to be neutral on the rate of change.
 
 Type	No change
@@ -604,15 +597,22 @@ Type	New checklist item
 Severity	Major
 OMG 1.0	<missing>
 Short-hand Cards 1.0	<missing>
-Proposal	Stakeholder agree on necessary documentation
+Proposal	Stakeholders agree on necessary documentation
 Rationale	This shows up later in this alpha. The team needs to have a discussion with the cient at the beginning of the project.
 
 Type	New checklist item
 Severity	Major
 OMG 1.0	<missing>
 Short-hand Cards 1.0	<missing>
-Proposal	Stakeolders agree on support service levels
+Proposal	Stakeholders agree on support service levels
 Rationale	This shows up later in this alpha. The team needs to have a discussion with the client at the beginning of the project.
+
+Type	New checklist item
+Severity	Major
+OMG 1.0	<missing>
+Short-hand Cards 1.0	<missing>
+Proposal	Non-functional architectural characteristics are considered
+Rationale	The team needs to consider quality attributes. In the next state, the team demonstrates key architecture characteristics, then the need to be identified in this state.
 State	2 - Demonstrable
 
 Type	Wording change
@@ -620,6 +620,7 @@ Severity	Minor
 OMG 1.0	Key architectural characteristics have been demonstrated.
 Short-hand Cards 1.0	key architecture characteristics demonstrated
 Proposal	Key architecture characteristics are demonstrated
+Rationale	We need a conversation start for them to discuss non-functional or qualitity attributes
 
 Type	Wording change
 Severity	Minor
@@ -631,8 +632,8 @@ Type	Wording change
 Severity	Minor
 OMG 1.0	Critical interfaces have been demonstrated.
 Short-hand Cards 1.0	critical interface and system configurations exercised
-Proposal	Critical interfaces and system configurations tested
-Rationale	"Our users don't immmediately understand ""exercised"", but they understand ""tested"""
+Proposal	Critical interfaces and system configurations demonstrated
+Rationale	"Our users don't immmediately understand ""exercised"", but they understand ""demonstrated"""
 
 Type	Drop OMG checklist item
 Severity	Minor
@@ -666,13 +667,14 @@ Type	Wording change
 Severity	Minor
 OMG 1.0	System is usable and has desired quality characteristics.
 Short-hand Cards 1.0	system is usable and has desired quality characteristics
-Proposal	System has desired quality characteristics
+Proposal	System has desired quality and performance characteristics
 
 Type	Wording change
 Severity	Minor
 OMG 1.0	The functionality provided by the system has been tested.
 Short-hand Cards 1.0	functionality and performance have been tested and accepted
-Proposal	Functionality and performance are tested and accepted
+Proposal	Functionality is tested and accepted
+Rationale	"Since performance is a quality attribute, we moved preformance from this checklist item to ""System has desired quality and performance characteristics."""
 
 Type	Wording change
 Severity	Minor
@@ -766,7 +768,7 @@ Type	New checklist item
 Severity	Major
 OMG 1.0	<missing>
 Short-hand Cards 1.0	<missing>
-Proposal	New requirements are accomodated
+Proposal	New requirements are accommodated
 
 Type	New checklist item
 Severity	Major
@@ -834,11 +836,11 @@ OMG 1.0	Mechanisms to grow the team are in place.
 Short-hand Cards 1.0	team knows how to grow to achieve mission
 Proposal	Team can grow to achieve opportunity
 
-Type	Wording change
-Severity	Minor
+Type	No change
+Severity	""
 OMG 1.0	Required competencies are identified.
 Short-hand Cards 1.0	required competencies are identifed
-Proposal	Required skills are identifed
+Proposal	Required competencies are identifed
 
 Type	Wording change
 Severity	Minor
@@ -870,7 +872,7 @@ Type	Revert back to OMG
 Severity	Medium
 OMG 1.0	The team's responsibilities are outlined.
 Short-hand Cards 1.0	<deleted>
-Proposal	Responsibilites and roles are outlined
+Proposal	Responsibilities and roles are outlined
 Rationale	Roles and responsibilities are an imortant part of a team charter and formation.
 
 Type	Drop OMG checklist item
@@ -897,7 +899,7 @@ Type	Wording change
 Severity	Minor
 OMG 1.0	Team has enough ressources to start the mission
 Short-hand Cards 1.0	team has enough resources to start the mission
-Proposal	Team has enough resources to address opportunity
+Proposal	Team has enough resources to start addressing opportunity
 Rationale	"Essence already introduces ""the opportunity"" as a way of describing the project. There is no need to create a new word ""mission"" here."
 
 Type	Wording change
@@ -1073,37 +1075,37 @@ State	1 - Principles Established
 
 Type	Wording change
 Severity	Minor
+OMG 1.0	The context within which the team will operate is understood.
+Short-hand Cards 1.0	context team operates is understood
+Proposal	Work context is understood
+
+Type	Wording change
+Severity	Minor
 OMG 1.0	Principles and constraints established
 Short-hand Cards 1.0	principles and constraints established
-Proposal	Principles and values are established
+Proposal	Values and principles are identified
+Rationale	When all the other items are in place, values and principles become established
 
 Type	Wording change
 Severity	Medium
 OMG 1.0	Principles and constraints are committed to by the team.
 Short-hand Cards 1.0	principles and constraints comitted to
-Proposal	Team commits to principles and values
-Rationale	"We introduce the term ""principles and values"" as one of the themes for way of working."
+Proposal	Team commits to values and principles
+Rationale	"We introduce the term ""values and principles"" as one of the themes for way of working."
 
 Type	Moved to different card
 Severity	Major
 OMG 1.0	Practices and tools agreed to
 Short-hand Cards 1.0	practices and tools agreed to
 Proposal	<moved>
-Rationale	Practices and tools can follow from principles and values.
-
-Type	Drop OMG and short-hand checklist item
-Severity	Major
-OMG 1.0	The context within which the team will operate is understood.
-Short-hand Cards 1.0	context team operates is understood
-Proposal	<deleted>
-Rationale	This is confusing to our users and un-necessary for way of working
+Rationale	Practices and tools can follow from values and principles.
 
 Type	Drop OMG checklist item
 Severity	Minor
 OMG 1.0	Principles and constraints are agreed to by the stakeholders.
 Short-hand Cards 1.0	<deleted>
 Proposal	<deleted>
-Rationale	"Covered by ""Stakeholders accept team's principals and values"""
+Rationale	"Covered by ""Stakeholders accept team's values and principals"""
 
 Type	Drop OMG checklist item
 Severity	Minor
@@ -1117,7 +1119,7 @@ OMG 1.0	A recommendation for the approach to be taken is available.
 Short-hand Cards 1.0	<deleted>
 Proposal	<deleted>
 
-Type	Drop OMG checklist item
+Type	Moved to different card
 Severity	Minor
 OMG 1.0	The constraints that apply to the selection, acquisition and use of practices and tools are known.
 Short-hand Cards 1.0	<deleted>
@@ -1127,9 +1129,16 @@ Type	Moved from different alpha
 Severity	Major
 OMG 1.0	<missing>
 Short-hand Cards 1.0	<missing>
-Proposal	Stakeholders accept team's principles and values
+Proposal	Stakeholders accept team's values and principles
 Rationale	"(Moved from Stakeholders 2 - Represented) This checklist item describes the team's progression in Way of Working and should be in place in the Way of Working alpha, 1 - Principles Established state. The stakeholders respecting the team's Way of Working is an important component of the progression of Way of Working, its not part of the natural progression of the Stakeholder's alpha. Once it is in the context of the Way of Working alpha, using the phrase ""Way of Working"" is redundant. We rephrased it to be clear about the original intent"
 State	2 - Foundation Established
+
+Type	Moved from different card
+Severity	Major
+OMG 1.0	<missing>
+Short-hand Cards 1.0	<missing>
+Proposal	Constraints about practices and tools are known
+Rationale	This state is more about practices and tools
 
 Type	Wording change
 Severity	Medium
@@ -1142,7 +1151,7 @@ Type	New checklist item
 Severity	Major
 OMG 1.0	<missing>
 Short-hand Cards 1.0	<missing>
-Proposal	Practices and tools are consistent with principles & values
+Proposal	Practices and tools are consistent with values and principles
 Rationale	Practices and tools flow from the principles and values
 
 Type	Wording change
@@ -1156,7 +1165,7 @@ Type	New checklist item
 Severity	Major
 OMG 1.0	<missing>
 Short-hand Cards 1.0	<missing>
-Proposal	Stakeholders accept external-facing practices & tools
+Proposal	Stakeholders accept external-facing practices and tools
 Rationale	Stakeholders need to be ok with the decisions that the teams make. If the teams chooses a tools that the stakholder needs to use, but is unable to do so, then there is an issue.
 
 Type	Drop OMG and short-hand checklist item
@@ -1305,12 +1314,12 @@ Short-hand Cards 1.0	way of working no longer in use by team
 Proposal	<deleted>
 Rationale	This is not necessary.
 
-Type	Wording change
+Type	Drop OMG and short-hand checklist item
 Severity	Medium
 OMG 1.0	Lessons learned are shared for future use.
 Short-hand Cards 1.0	lessons learned are shared for future use
-Proposal	Team captures lessons learned
-Rationale	"We shorten the phrase since ""for future use"" is implied with lessons learned. In general, the checklist items don't explain why they are included, so this one shouldn't either."
+Proposal	<deleted>
+Rationale	"First we shorten the phrase since ""for future use"" is implied with lessons learned and can be removed. After examinining all the states in this alpha, this state is not necessary. Lessons learned already exists in the Work alpha, so there is no need to duplicate it here."
 
 Alpha	Work
 State	1 - Initiated
@@ -1467,8 +1476,8 @@ Type	Wording change
 Severity	Minor
 OMG 1.0	Work progress is monitored.
 Short-hand Cards 1.0	work progress is monitored
-Proposal	Progress is monitored
-Rationale	"""Work"" is redudant since this is in the ""work"" alpha"
+Proposal	<deleted>
+Rationale	"This really belongs under the state ""Under Control"", however, we already have the item ""Progress metrics are tracked and acted upon"""
 State	4 - Under Control
 
 Type	Wording change
@@ -1481,8 +1490,8 @@ Rationale	"We separated this into two check list items. The first is really the 
 Type	Wording change
 Severity	Medium
 OMG 1.0	Unplanned work is under control.
-Short-hand Cards 1.0	uplanned work & re-work under control
-Proposal	Uplanned work is manageable
+Short-hand Cards 1.0	unplanned work & re-work under control
+Proposal	Unplanned work is manageable
 Rationale	Split this back into two items
 
 Type	Wording change
@@ -1557,15 +1566,16 @@ Rationale	Not everything needs to be archived.
 Type	Wording change
 Severity	Medium
 OMG 1.0	(OMG: Lessond learned and) metrics have been made available.
-Short-hand Cards 1.0	lessons learned and metrics made available
+Short-hand Cards 1.0	lessons learned and metrics made are available
 Proposal	Progress metrics are archived
 Rationale	Lessons learned does not need to be repeated in different alphas. We believe this is more about the way of working.
 
-Type	Drop OMG checklist item
-Severity	Minor
+Type	Revert back to OMG
+Severity	Medium
 OMG 1.0	Lessons learned have been itemized, recorded and discussed.
 Short-hand Cards 1.0	<deleted>
-Proposal	<deleted>
+Proposal	Lessons learned are captured
+Rationale	Reflecting on a project and capturing the lessons learned is an important component of software development. This also was duplicated in Way of Working and could be included in Essence once. Reflections tend to be tied to the project lifecycle, e.g. at the end of iteration, release, or a project.
 
 Type	Revert back to OMG
 Severity	Medium
