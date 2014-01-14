@@ -23,9 +23,10 @@ class User < ActiveRecord::Base
   end
 
   def put_user_on_default_team
-    default_team = Team.create(:name => "Sample", :owner_id => self.id)
-    self.teams = [default_team]
-    self.save
+    default_team = Team.create_default_team("Sample", self)
+#    default_team = Team.create(:name => "Sample", :owner_id => self.id)
+#    self.teams = [default_team]
+#    self.save
   end
 
   #def self.today_new_users

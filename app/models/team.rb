@@ -11,6 +11,8 @@ class Team < ActiveRecord::Base
   belongs_to :owner, :class_name => :User
   belongs_to :essence_version
 
+  validates_presence_of :essence_version_id, :team_name
+
 #  default_scope
 
   def add_member_or_invite(email, current_user)
@@ -27,6 +29,15 @@ class Team < ActiveRecord::Base
       self.members << user
     end
   end
+
+  def self.create_default_team(team_name, owner, version_name = "CMU 1.1")
+    default_team = Team.new(:name => team_name, :owner_id => owner.id)
+    default_team.essence_version = EssenceVersion.where(:name => version_name).first
+    default_team.members = [owner]
+    default_team.save
+    default_team
+  end
+
 
   #def checklist_ids_hash
   #  checklists = self.checklists
