@@ -11,7 +11,7 @@ class Team < ActiveRecord::Base
   belongs_to :owner, :class_name => :User
   belongs_to :essence_version
 
-  validates_presence_of :essence_version_id, :team_name
+  validates_presence_of :essence_version_id, :name
 
 #  default_scope
 
