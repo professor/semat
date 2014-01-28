@@ -17,8 +17,8 @@ class AlphasController < ApplicationController
     end
 
 
-#    latest_snapshot = @team.snapshots.last
-    latest_snapshot = @team.find_latest_or_create_new_snapshot
+   latest_snapshot = @team.find_latest_or_create_first_snapshot
+
     @checklist_ids_hash = latest_snapshot.checklist_ids_hash
     @notes_hash = latest_snapshot.notes_hash
     @actions_hash = latest_snapshot.actions_hash

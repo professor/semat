@@ -44,7 +44,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
-    @snapshot = @team.find_latest_or_create_new_snapshot
+    @snapshot = @team.find_latest_or_create_first_snapshot
 
   end
 

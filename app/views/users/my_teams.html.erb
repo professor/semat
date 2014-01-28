@@ -15,7 +15,7 @@
 </tr>
 <% @teams.each do |team| %>
       <%= puts team.id %>
-      <%= render :partial => "teams/overview_table_row", :locals => {:team => team, :snapshot => team.find_latest_or_create_new_snapshot, :essence_version => team.essence_version} %></div>
+      <%= render :partial => "teams/overview_table_row", :locals => {:team => team, :snapshot => team.find_latest_or_create_first_snapshot, :essence_version => team.essence_version} %></div>
 <% end %>
 </table>
 

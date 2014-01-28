@@ -61,7 +61,7 @@ class Team < ActiveRecord::Base
   end
 
 
-  def find_latest_or_create_new_snapshot
+  def find_latest_or_create_new_snapshot_if_older_than_4_hours
     latest_snapshot = self.snapshots.last
 
     if latest_snapshot.nil?
@@ -76,6 +76,20 @@ class Team < ActiveRecord::Base
 
     current_snapshot
   end
+
+  def find_latest_or_create_first_snapshot
+    latest_snapshot = self.snapshots.last
+
+    if latest_snapshot.nil?
+      current_snapshot = Snapshot.new_with_unknown_state_of_each_alpha(self.essence_version)
+      self.snapshots << current_snapshot
+    else
+      current_snapshot = latest_snapshot
+    end
+
+    current_snapshot
+  end
+
 
 
 end

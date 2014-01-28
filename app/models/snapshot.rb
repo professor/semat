@@ -29,7 +29,7 @@ class Snapshot < ActiveRecord::Base
   end
 
   def self.add_check(team, checklist, scribe)
-    snapshot = team.find_latest_or_create_new_snapshot
+    snapshot = team.find_latest_or_create_new_snapshot_if_older_than_4_hours
 
     checklist_present = SnapshotChecklist.where(:snapshot_id => snapshot.id, :checklist_id => checklist.id).first
     if checklist_present.nil?
@@ -42,7 +42,7 @@ class Snapshot < ActiveRecord::Base
   end
 
   def self.remove_check(team, checklist)
-    snapshot = team.find_latest_or_create_new_snapshot
+    snapshot = team.find_latest_or_create_new_snapshot_if_older_than_4_hours
 
     checklist_present = SnapshotChecklist.where(:snapshot_id => snapshot.id, :checklist_id => checklist.id).first
     if (checklist_present)
@@ -68,7 +68,7 @@ class Snapshot < ActiveRecord::Base
   end
 
   def self.save_actions_old(team, alpha_id, scribe, action_text )
-    snapshot = team.find_latest_or_create_new_snapshot
+    snapshot = team.find_latest_or_create_new_snapshot_if_older_than_4_hours
 
     alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
@@ -83,7 +83,7 @@ class Snapshot < ActiveRecord::Base
   end
 
   def self.save_actions(team, alpha_id, scribe, action_text )
-    snapshot = team.find_latest_or_create_new_snapshot
+    snapshot = team.find_latest_or_create_new_snapshot_if_older_than_4_hours
 
     alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
@@ -94,7 +94,7 @@ class Snapshot < ActiveRecord::Base
   end
 
   def self.save_notes(team, alpha_id, scribe, notes_text )
-    snapshot = team.find_latest_or_create_new_snapshot
+    snapshot = team.find_latest_or_create_new_snapshot_if_older_than_4_hours
 
     alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
