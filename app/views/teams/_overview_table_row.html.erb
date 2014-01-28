@@ -1,6 +1,6 @@
 <%
    #Parameters:
-   name = local_assigns[:name]
+   team = local_assigns[:team]
    snapshot = local_assigns[:snapshot]
    essence_version = local_assigns[:essence_version]
 
@@ -10,7 +10,7 @@
 
 
 <tr>
-  <td><%= name %></td>
+  <td><%= link_to team.name, team_path(team) %></td>
 
 <% essence_version.alphas.each do |alpha| %>
       <% snapshot_alpha = snapshot_alphas_hash[alpha.id] %>
@@ -21,14 +21,3 @@
         <% end %>
 <% end %>
 </tr>
-
-<!--<tr>-->
-  <!--<td><%= name %></td>-->
-  <!--<% snapshot_alphas_hash = snapshot.snapshot_alphas_hash %>-->
-  <!---->
-  <!---->
-  <!--<% snapshot.snapshot_alphas.each_with_index do |snapshot_alpha, index| %>-->
-        <!--<td color="<%= snapshot_alpha.alpha.color %>"> <%= snapshot_alpha.current_state.number %>. <%= snapshot_alpha.current_state.name %> <%= snapshot_alpha.alpha.name %></td>-->
-  <!--<% end %>-->
-
-<!--</tr>-->

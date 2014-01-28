@@ -8,7 +8,7 @@
 
 <div class="row">
   <% alpha.visible_states.each_with_index do |state, index| %>
-        <div class="col-md-4"><%= render :partial => "alphas/state_card", :locals => {:state => state, :color => alpha.color, :checklist_ids_hash => @checklist_ids_hash} %></div>
+        <div class="col-xs-4"><%= render :partial => "alphas/state_card", :locals => {:state => state, :color => alpha.color, :checklist_ids_hash => @checklist_ids_hash} %></div>
         <% if index % 3 == 2 %>
         </div><div class='row'>
         <% end %>

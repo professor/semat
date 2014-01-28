@@ -57,14 +57,6 @@
 
 <div class="container">
 
-  <div class="starter-template">
-    <h1>SEMAT Essence Kernel Tool</h1>
-    <p class="lead">Quickly start tracking your project.</p>
-    <% unless user_signed_in? %>
-    <a class="btn btn-lg btn-success" href="<%= new_user_registration_path %>" role="button">Sign up</a>
-    <% end %>
-  </div>
-
   <% if notice.present? %><div class="alert alert-success"><%= notice %></div><% end %>
   <% if alert.present? %><div class="alert alert-danger"><%= alert %></div><% end %>
 

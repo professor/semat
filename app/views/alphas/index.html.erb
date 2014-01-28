@@ -14,8 +14,8 @@
                 url: '/api/v1/progress/<%= @team.id %>/mark'});
         });
         $('select#teams').on('change', function() {
-          new_page = "<%= alphas_path %>/" + $(this).val();
-          window.location.replace(new_page);
+            new_page = "/teams/" + $(this).val() + "/alphas";
+            window.location.replace(new_page);
         });
         $('.alpha-notes').change(function () {
             text = $(this).val();
@@ -74,6 +74,14 @@
 
     });
 </script>
+
+<h1 class="team-header">Team <%= @team.name %></h1>
+<ul class="nav nav-tabs">
+  <li><%= link_to "Summary", team_path(@team) %></li>
+  <li class="active"><%= link_to "Update progress", update_progress_path(@team) %></li>
+  <li><%= link_to "Admin", edit_team_path(@team) %></li>
+</ul>
+<br/>
 
 <% if @teams.count > 1 %>
 <div class="row">

@@ -1,5 +1,10 @@
-
-
 <h1 class="team-header">Team <%= @team.name %></h1>
+<ul class="nav nav-tabs">
+  <li class="active"><%= link_to "Summary", team_path(@team) %></li>
+  <li><%= link_to "Update progress", update_progress_path(@team) %></li>
+  <li><%= link_to "Admin", edit_team_path(@team) %></li>
+</ul>
+<br/>
+
 
 <%= render :partial => "teams/overview_vertical", :locals => {:snapshot => @snapshot, :essence_version => @team.essence_version} %></div>

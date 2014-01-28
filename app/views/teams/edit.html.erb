@@ -7,7 +7,7 @@
                 data: "name=" + name + "&user_email=<%=current_user.email%>",
                 dataType: 'script',
                 url: '/api/v1/teams/<%= @team.id %>/rename'});
-            $('h1.team-header').text(name);
+            $('h1.team-header').text("Team " + name);
         });
         $('.remove-member-action').click(function () {
             email = $(this).parent().siblings("input").val();
@@ -31,6 +31,13 @@
 </script>
 
 <h1 class="team-header">Team <%= @team.name %></h1>
+<ul class="nav nav-tabs">
+  <li><%= link_to "Summary", team_path(@team) %></li>
+  <li><%= link_to "Update progress", update_progress_path(@team) %></li>
+  <li class="active"><%= link_to "Admin", edit_team_path(@team) %></li>
+</ul>
+<br/>
+
 <%= form_for @team, :html => {:class => "ngb", :id => "edit_job"} do |f| %>
 
     <div class="input-group input-group-lg">

@@ -17,11 +17,11 @@ SEMAT::Application.routes.draw do
   get "/state" => "welcome#state"  #Just for convenience
 
   resources :teams
+  get "teams/:team_id/alphas" => "alphas#index", as: :update_progress
 
   get "teams/checklists"
   post "teams/:team_id/mass_invite" => "teams#mass_invite", as: :mass_invite
   get "alphas" => "alphas#index"
-  get "alphas/:team_id" => "alphas#index"
 
   get "simple_alphas" => "alphas#simple_index"
   get "users/:email/teams" => "users#my_teams", as: :my_teams, :email => /[A-Za-z0-9@\.]+?/
