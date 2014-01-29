@@ -31,7 +31,8 @@
 
         <li><a href="#contact"><% current_user.email %></a></li>
 		<% else %>
-        <li><a href="<%= new_user_registration_path %>">Sign up</a></li>		
+        <li class="<%= 'active' if current_page?(versions_path) %>"><a href="<%= versions_path %>">Versions</a></li>
+        <li><a href="<%= new_user_registration_path %>">Sign up</a></li>
 		<% end %>
       </ul>
       <% if user_signed_in? %>
