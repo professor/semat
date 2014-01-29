@@ -87,9 +87,11 @@ class Snapshot < ActiveRecord::Base
 
     alpha_summary = SnapshotAlpha.find_or_create_by(:snapshot_id => snapshot.id, :alpha_id => alpha_id)
 
-    action = SnapshotAlphaAction.create(:snapshot_alpha_id => alpha_summary.id, :description => action_text,
-                                        :scribe_id => scribe.id, :state => "new")
+    action = Action.create(:snapshot_alpha_id => alpha_summary.id, :description => action_text,
+                                        :scribe_id => scribe.id, :team_id =>team.id, :alpha_id => alpha_id,  :state => "new")
 
+    SnapshotAlphaAction.create(:snapshot_alpha_id => alpha_summary.id,
+                               :action_id => action.id)
 #    alpha_summary.snapshot_alpha_actions << action
   end
 
@@ -107,6 +109,21 @@ class Snapshot < ActiveRecord::Base
     alpha_summary.scribe_id = scribe.id
     alpha_summary.save
   end
+
+  def self.mark_action_done(team, action_id)
+    snapshot = team.find_latest_or_create_new_snapshot_if_older_than_4_hours
+
+    action = Action.find(params[:action_id])
+    action.mark_done
+  end
+
+  def self.mark_action_deleted(team, action_id)
+    snapshot = team.find_latest_or_create_new_snapshot_if_older_than_4_hours
+
+    action = Action.find(params[:action_id])
+    action.mark_deleted
+  end
+
 
   def snapshot_alphas_hash
     alpha_id_to_snapshot_alpha_hash = Hash.new()

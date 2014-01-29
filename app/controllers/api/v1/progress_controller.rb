@@ -70,8 +70,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
       team = Team.find(params[:team_id])
       authorize! :action_done, team
 
-      action = SnapshotAlphaAction.find(params[:action_id])
-      action.mark_done
+      Snapshot.mark_action_done(team, params[:action_id])
 
       @response = true
 
@@ -85,8 +84,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
       team = Team.find(params[:team_id])
       authorize! :action_done, team
 
-      action = SnapshotAlphaAction.find(params[:action_id])
-      action.mark_deleted
+      Snapshot.mark_action_deleted(team, params[:action_id])
 
       @response = true
 
