@@ -3,6 +3,7 @@
    state = local_assigns[:state]  
    color = local_assigns[:color] || "blue"
    checklist_ids_hash = local_assigns[:checklist_ids_hash] || Hash.new
+   disabled_text = local_assigns[:disabled_text]
 
 %>
 
@@ -29,9 +30,9 @@
     <% state.checklists.each do |checklist| %>
         <li class="list-group-item">
          <% if checklist_ids_hash.has_key?(checklist.id) %>
-            <input type="checkbox" class="checklist_checkbox" value="<%= checklist.id %>" checked> <%= checklist.name %></li>
+            <input type="checkbox" class="checklist_checkbox" value="<%= checklist.id %>" <%= disabled_text %> checked> <%= checklist.name %></li>
          <% else %>
-            <input type="checkbox" class="checklist_checkbox" value="<%= checklist.id %>"> <%= checklist.name %></li>
+            <input type="checkbox" class="checklist_checkbox" value="<%= checklist.id %>" <%= disabled_text %>> <%= checklist.name %></li>
          <% end %>
     <% end %>
         </ul>

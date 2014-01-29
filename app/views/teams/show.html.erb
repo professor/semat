@@ -7,4 +7,18 @@
 <br/>
 
 
-<%= render :partial => "teams/overview_vertical", :locals => {:snapshot => @snapshot, :essence_version => @team.essence_version} %></div>
+<%= render :partial => "teams/overview_vertical", :locals => {:snapshot => @snapshot, :essence_version => @team.essence_version} %>
+
+<br/>
+<h2>Snapshots</h2>
+<div class="row">
+  <div class="col-md-12">
+<table class="table">
+<% @team.snapshots.reverse_each do |snapshot| %>
+   <tr><td><%= snapshot.position %></td><td><%= link_to I18n.l(snapshot.updated_at), snapshot_path(snapshot) %></td></tr>
+<% end %>
+</table>
+      </div>
+    </div>
+
+</div>

@@ -1,9 +1,9 @@
 <div class="input-group action-list-item">
   <span class="input-group-btn">
-    <button class="btn btn-default btn-success action-done" value="<%= action.id %>" type="button">Done</button>
+    <button class="btn btn-default btn-success action-done" value="<%= action.id %>" <%= disabled_text %> type="button">Done</button>
   </span>
   <input type="text" class="form-control" value="<%= action.description %>" disabled>
   <span class="input-group-btn">
-    <button class="btn btn-default btn-danger action-delete" value="<%= action.id %>" type="button">Delete</button>
+    <button class="btn btn-default btn-danger action-delete" value="<%= action.id %>" <%= disabled_text %> type="button">Delete</button>
   </span>
 </div>

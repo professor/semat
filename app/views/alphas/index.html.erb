@@ -1,5 +1,10 @@
 <script>
     $(document).ready(function () {
+        $('select#teams').on('change', function() {
+            new_page = "/teams/" + $(this).val() + "/alphas";
+            window.location.replace(new_page);
+        });
+    <% unless @disabled.present? %>
         $('.checklist_checkbox').click(function(){
             if($(this).is(':checked')){
                 checked = true;
@@ -12,10 +17,6 @@
                 data:"checklist_id=" + id + "&checked=" + checked +  "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
                 dataType:'script',
                 url: '/api/v1/progress/<%= @team.id %>/mark'});
-        });
-        $('select#teams').on('change', function() {
-            new_page = "/teams/" + $(this).val() + "/alphas";
-            window.location.replace(new_page);
         });
         $('.alpha-notes').change(function () {
             text = $(this).val();
@@ -68,12 +69,20 @@
             // $("#email-team-notes").prop('value', 'Email sent');
             $(this).text('Email sent')
         });
-
+        <% end %>
 //        $('#example').popover(options)
         $("[data-toggle=popover]").popover()
 
     });
 </script>
+
+<% if @disabled
+     disabled_text = "disabled"
+   else
+     disabled_text = ""
+   end
+%>
+
 
 <h1 class="team-header">Team <%= @team.name %></h1>
 <ul class="nav nav-tabs">
@@ -105,7 +114,7 @@
 </div>
 <div class="row">
   <% alpha.visible_states.each_with_index do |state, index| %>
-        <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color, :checklist_ids_hash => @checklist_ids_hash} %></div>
+        <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color, :checklist_ids_hash => @checklist_ids_hash, :disabled_text => disabled_text} %></div>
         <% if index % 3 == 2 %>
         </div><div class='row'>
         <% end %>
@@ -120,7 +129,7 @@
           <% if @notes_hash[alpha.id] %>
           <textarea class="form-control" disabled rows="5"><%= @notes_hash[alpha.id] %></textarea>
           <% end %>
-          <textarea id="alpha_notes_<%= alpha.id%>" name="alpha_notes" data-id="<%= alpha.id %>" class="form-control alpha-notes" rows="5" placeholder="Enter notes about your current situation."></textarea>
+          <textarea id="alpha_notes_<%= alpha.id%>" name="alpha_notes" data-id="<%= alpha.id %>" class="form-control alpha-notes" rows="5" <%= disabled_text %> placeholder="Enter notes about your current situation." ></textarea>
         </div>
         <div id="alert-notes-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
       </div>
@@ -130,14 +139,14 @@
           <% if @actions_hash[alpha.id].present? %>
           <div class="action-list">
             <% @actions_hash[alpha.id].each do |action| %>
-               <%= render :partial => "action", :locals => {:action => action} %>
+               <%= render :partial => "action", :locals => {:action => action, :disabled_text => disabled_text} %>
             <% end %>
           </div>
           <% end %>
           <div class="input-group">
-            <input type="text" id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" placeholder="Enter possible actions your team can perform to achieve the next state."></input>
+            <input type="text" id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" <%= disabled_text %> placeholder="Enter possible actions your team can perform to achieve the next state."></input>
             <span class="input-group-btn">
-              <button class="btn btn-default btn-success" type="button">Add</button>
+              <button class="btn btn-default btn-success" type="button" <%=disabled_text %> >Add</button>
             </span>
           </div>
           <!--<textarea id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" placeholder="Enter possible actions your team can perform to achieve the next state."></textarea>-->
@@ -150,7 +159,7 @@
 <div clsss="row">
   <div class="col-md-12">
     <div class="pull-right">
-      <button type="button" class="btn btn-success" id="email-team-notes">Email summary to team</button>
+      <button type="button" class="btn btn-success" <%=disabled_text %> id="email-team-notes">Email summary to team</button>
     </div>	
   </div>
 </div>

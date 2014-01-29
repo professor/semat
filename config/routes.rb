@@ -18,6 +18,7 @@ SEMAT::Application.routes.draw do
 
   resources :teams
   get "teams/:team_id/alphas" => "alphas#index", as: :update_progress
+  get "snapshots/:snapshot_id" => "alphas#version", as: :snapshot
 
   get "teams/checklists"
   post "teams/:team_id/mass_invite" => "teams#mass_invite", as: :mass_invite
