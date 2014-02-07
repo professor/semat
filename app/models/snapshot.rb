@@ -113,14 +113,14 @@ class Snapshot < ActiveRecord::Base
   def self.mark_action_done(team, action_id)
     snapshot = team.find_latest_or_create_new_snapshot_if_older_than_4_hours
 
-    action = Action.find(params[:action_id])
+    action = Action.find(action_id)
     action.mark_done
   end
 
   def self.mark_action_deleted(team, action_id)
     snapshot = team.find_latest_or_create_new_snapshot_if_older_than_4_hours
 
-    action = Action.find(params[:action_id])
+    action = Action.find(action_id)
     action.mark_deleted
   end
 
