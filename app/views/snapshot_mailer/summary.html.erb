@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-
-
 <h1>Action Items</h1>
 <% @essence_version.alphas.each do |alpha| %>
         <% snapshot_alpha = @snapshot.snapshot_alphas_hash[alpha.id] %>
@@ -19,17 +11,17 @@
   <% end %>
 
 <h1>Summary</h1>
-<table border="1">
-  <tr>
-    <th>Alpha</th>
-    <th>State</th>
-    <th>Notes</th>
-    <th>Actions</th>
+<table cellpadding="0" cellspacing="0" border="0" align="center">
+ <tr>
+    <td><b>Alpha</b></td>
+    <td><b>State</b></td>
+    <td><b>Notes</b></td>
+    <td><b>Actions</b></td>
   </tr>
 <% @essence_version.alphas.each do |alpha| %>
        <% snapshot_alpha = @snapshot.snapshot_alphas_hash[alpha.id] %>
        <% if snapshot_alpha.present? %>
-       <tr><td><%= alpha.name %></td>
+       <tr valign="top"><td><%= alpha.name %></td>
             <td color="<%= snapshot_alpha.alpha.color %>"> <%= snapshot_alpha.current_state.number %>. <%= snapshot_alpha.current_state.name %></td>
             <td><%= snapshot_alpha.notes %></td>
             <td>
@@ -41,6 +33,3 @@
        <% end %>
  <% end %>
 </table>
-
-  </body>
-</html>

@@ -14,7 +14,7 @@ SEMAT::Application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { :host => 'localhost:3000' } #Requested by Devise
 
   # Print deprecation notices to the Rails logger.
@@ -27,4 +27,20 @@ SEMAT::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+
+
+  ActionMailer::Base.perform_deliveries = false
+#  config.action_mailer.perform_deliveries = true
+
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.smtp_settings = {
+  #  :address => "smtp.gmail.com",
+  #  :port => 587,
+  #  :authentication => :plain,
+  #  :domain => ENV['GMAIL_SMTP_USER'],
+  #  :user_name => ENV['GMAIL_SMTP_USER'],
+  #  :password => ENV['GMAIL_SMTP_PASSWORD'],
+  #  :enable_starttls_auto => true
+  #}
 end
