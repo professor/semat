@@ -6,7 +6,20 @@
   <body>
 
 
-<table>
+<h1>Action Items</h1>
+<% @essence_version.alphas.each do |alpha| %>
+        <% snapshot_alpha = @snapshot.snapshot_alphas_hash[alpha.id] %>
+        <% if snapshot_alpha.present? && snapshot_alpha.active_actions.present? %>
+               <b><%= alpha.name %></b><br/>
+               <% snapshot_alpha.active_actions.each do |action| %>
+                  <%= action.description %><br/>
+               <% end %>
+               <br/>
+        <% end %>
+  <% end %>
+
+<h1>Summary</h1>
+<table border="1">
   <tr>
     <th>Alpha</th>
     <th>State</th>
