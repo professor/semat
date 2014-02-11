@@ -1,9 +1,7 @@
 ActiveAdmin.register Checklist do
 
+  permit_params :name, :position, :state_id
 
-
-#  permit_params :name, :owner
-#
   index do
     selectable_column
     column :id
