@@ -1,3 +1,4 @@
+require 'spreadsheet'
 class Snapshot < ActiveRecord::Base
 
   acts_as_list scope: :team
@@ -151,5 +152,50 @@ class Snapshot < ActiveRecord::Base
     self.snapshot_alphas.collect { |d| actions_hash.store(d.alpha_id, d.active_actions.to_a) }
     actions_hash
   end
+
+  def self.history(team)
+    essence_version = team.essence_version
+
+    snapshot_history = []
+    header = []
+    header << "Timestamp"
+    essence_version.alphas.each do |alpha|
+      header << alpha.name
+    end
+    snapshot_history << header
+
+    team.snapshots.reverse_each do |snapshot|
+#      history = [snapshot.created_at]
+      history = [I18n.l(snapshot.updated_at)]
+      snapshot_alphas_hash = snapshot.snapshot_alphas_hash
+      essence_version.alphas.each do |alpha|
+        snapshot_alpha = snapshot_alphas_hash[alpha.id]
+        if snapshot_alpha.present?
+          history << snapshot_alpha.current_state.number
+        else
+          history << nil
+        end
+      end
+      snapshot_history << history
+    end
+    snapshot_history
+  end
+
+  def self.export_history_to_spreadsheet(team, file_path)
+    Spreadsheet.client_encoding = 'UTF-8'
+    history_book = Spreadsheet::Workbook.new
+    history_sheet = history_book.create_worksheet
+    history_sheet.name = "#{team.name}"
+
+    snapshot_history = Snapshot.history(team)
+    snapshot_history.each_with_index do |history, history_index|
+      history.each_with_index do |value, index|
+        history_sheet[history_index, index] = value
+      end
+    end
+
+    history_book.write(file_path)
+  end
+  
 
 end

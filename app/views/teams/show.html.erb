@@ -2,6 +2,7 @@
 <ul class="nav nav-tabs">
   <li class="active"><%= link_to "Summary", team_path(@team) %></li>
   <li><%= link_to "Update progress", update_progress_path(@team) %></li>
+  <li><%= link_to "History", snapshot_history_path(@team) %></li>
   <li><%= link_to "Admin", edit_team_path(@team) %></li>
 </ul>
 <br/>
@@ -11,6 +12,7 @@
 
 <br/>
 <h2>Snapshots</h2>
+<%= link_to "History", snapshot_history_path(@team) %>
 <div class="row">
   <div class="col-md-12">
 <table class="table">

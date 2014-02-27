@@ -238,6 +238,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
+  spreadsheet
   thin
   turbolinks
   uglifier (>= 1.3.0)

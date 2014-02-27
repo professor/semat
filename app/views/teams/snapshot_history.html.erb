@@ -1,0 +1,48 @@
+<h1 class="team-header">Team <%= @team.name %></h1>
+<ul class="nav nav-tabs">
+  <li><%= link_to "Summary", team_path(@team) %></li>
+  <li><%= link_to "Update progress", update_progress_path(@team) %></li>
+  <li class="active"><%= link_to "History", snapshot_history_path(@team) %></li>
+  <li><%= link_to "Admin", edit_team_path(@team) %></li>
+</ul>
+<br/>
+<div clsss="row">
+  <div class="col-md-12">
+    <div class="pull-right">
+      <%= form_for :snapshot_export, :url=>{:controller=>"teams", :action=>"snapshot_export"} do |f| %>
+        <%= submit_tag 'Export', :class => "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<br/>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table">
+
+      <% @snapshot_history.each_with_index do |history, row| %>
+        <% if row == 0 %>
+          <tr>
+            <th>Position</th>
+            <% history.each do |header| %>
+                <th><%= header %></th>
+            <% end %>
+          </tr>
+        <% else %>
+          <tr>
+            <td><%= @snapshot_history.length - row %></td>
+            <% history.each_with_index do |value, column| %>
+                <% if column != 0 %>
+                   <td><%= value %></td>
+                <% else %>
+                   <td><%= link_to value, snapshot_path(@snapshots[row - 1]) %></td>
+                <% end %>
+            <% end %>
+          </tr>
+         <% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+

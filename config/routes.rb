@@ -18,6 +18,10 @@ SEMAT::Application.routes.draw do
 
   resources :teams
   get "teams/:team_id/alphas" => "alphas#index", as: :update_progress
+  get "teams/:id/shapshot_history" => "teams#snapshot_history", as: :snapshot_history
+  get "teams/:id/shapshot_history_first" => "teams#snapshot_history_first"
+  match 'teams/:id/snapshot_export' => 'teams#snapshot_export', :as=>:export, :via => :post
+
   get "snapshots/:snapshot_id" => "alphas#version", as: :snapshot
 
   get "teams/checklists"

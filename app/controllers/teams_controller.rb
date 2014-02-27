@@ -62,4 +62,34 @@ class TeamsController < ApplicationController
     @team = Team.find(params[:id])
     @checked_checklists = @team.checklists
   end
+
+  def snapshot_history_first
+    @team = Team.find(params[:id])
+    @essence_version = @team.essence_version
+
+    @snapshots = []
+    @snapshot_history = []
+    @team.snapshots.reverse_each do |snapshot|
+      @snapshots << snapshot
+      @snapshot_history = snapshot.snapshot_alphas_hash
+    end
+
+  end
+
+  def snapshot_history
+    @team = Team.find(params[:id])
+    @snapshot_history = Snapshot.history(@team)
+    @snapshots = @team.snapshots.reverse
+
+  end
+
+  def snapshot_export
+    @team = Team.find(params[:id])
+    temp_file_path = File.expand_path("#{Rails.root}/tmp/#{Process.pid}_") + "export.xls"
+    Snapshot.export_history_to_spreadsheet(@team, temp_file_path)
+    flash[:notice] = "snapshot history was exported to " + temp_file_path
+    send_file(temp_file_path, :filename => "Snapshots_#{@team.name.parameterize}.xls")
+  end
+
+
 end
