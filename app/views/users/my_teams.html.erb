@@ -22,7 +22,7 @@
 <form action="<%= new_team_path %>">
   <input type="submit" class="btn btn-success" value="Add a team">
   <label for="version">Select version:</label>
-  <%= select_tag(:version_name, options_from_collection_for_select(@essence_versions, :name, :name)) %>
+  <%= select_tag(:version_name, options_from_collection_for_select(@essence_versions, :name, :name, @default_version)) %>
   <span class="alpha-tooltip glyphicon glyphicon-info-sign"  data-toggle="popover" title="" data-html="true" data-content="We recommend using 'CMU 1.1'<br/><br./>For more information, click on Versions in the top menu." role="button" data-original-title="Which version to use?" ></span>
 </form>
 <br/>
