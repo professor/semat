@@ -25,3 +25,5 @@ public/assets/
 /log/*.log
 /tmp
 .env
+
+database.yml
