@@ -6,7 +6,7 @@ class Team < ActiveRecord::Base
   has_many :team_users, :dependent => :destroy
   has_many :members, :through => :team_users, :source => :user
 
-  has_many :snapshots, -> { order("position ASC") }, :dependent => :destroy
+  has_many :snapshots, -> { order('position ASC') }, :dependent => :destroy
 
   belongs_to :owner, :class_name => :User
   belongs_to :essence_version
@@ -17,20 +17,17 @@ class Team < ActiveRecord::Base
 
   def add_member_or_invite(email, current_user)
     user = User.where(:email => email).first
-    puts "***"
-    puts user
     if user.nil?
-      puts "*** creating user"
+      puts '*** creating user'
       user = User.invite!({:email => email}, current_user)
     end
-    puts "user email*****"
-    puts user.email
+    puts "*** user email: #{user.email}"
     unless self.members.include?(user)
       self.members << user
     end
   end
 
-  def self.create_default_team(team_name, owner, version_name = "CMU 1.1")
+  def self.create_default_team(team_name, owner, version_name = 'CMU 1.1')
     default_team = Team.new(:name => team_name, :owner_id => owner.id)
     default_team.essence_version = EssenceVersion.where(:name => version_name).first
     default_team.members = [owner]
