@@ -25,7 +25,9 @@
                  data: "email=" + email + "&user_email=<%=current_user.email%>",
                  dataType: 'script',
                  url: '/api/v1/teams/<%= @team.id %>/add_member'});
-            location.reload();
+            setTimeout(function () {
+              location.reload();
+            }, 1000);
         });
     });
 </script>
