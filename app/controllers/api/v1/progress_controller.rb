@@ -7,8 +7,8 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
   def mark
     #Maybe we can remove these finds if saving TeamChecklist fails if the FK's don't exist
     begin
-      team = Team.find(params[:team_id])
-      checklist = Checklist.find(params[:checklist_id])
+      team = Team.find(params[:team_id].to_i)
+      checklist = Checklist.find(params[:checklist_id].to_i)
       authorize! :mark, team
 
       checked = params[:checked]
@@ -39,7 +39,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
 
   def save_actions
     begin
-      team = Team.find(params[:team_id])
+      team = Team.find(params[:team_id].to_i)
 #      authorize! :save_actions, team
 
       Snapshot.save_actions(team, params[:alpha_id], current_user, params[:actions] )
@@ -53,7 +53,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
 
   def save_notes
     begin
-      team = Team.find(params[:team_id])
+      team = Team.find(params[:team_id].to_i)
 #      authorize! :save_notes, team
 
       Snapshot.save_notes(team, params[:alpha_id], current_user, params[:notes] )
@@ -67,7 +67,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
 
   def action_done
     begin
-      team = Team.find(params[:team_id])
+      team = Team.find(params[:team_id].to_i)
       authorize! :action_done, team
 
       Snapshot.mark_action_done(team, params[:action_id])
@@ -81,7 +81,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
 
   def action_deleted
     begin
-      team = Team.find(params[:team_id])
+      team = Team.find(params[:team_id].to_i)
       authorize! :action_done, team
 
       Snapshot.mark_action_deleted(team, params[:action_id])
@@ -95,7 +95,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
 
   def email_summary
     begin
-      team = Team.find(params[:team_id])
+      team = Team.find(params[:team_id].to_i)
       authorize! :email_summary, team
 
       SnapshotMailer.summary(team.find_latest_or_create_first_snapshot).deliver
@@ -109,7 +109,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
 
   # http://localhost:3000/api/v1/progress/1.json
   def show
-    team = Team.find(params[:team_id])
+    team = Team.find(params[:team_id].to_i)
     authorize! :read, team
 
     checklists = team.checklists
@@ -120,7 +120,7 @@ class Api::V1::ProgressController < Api::V1::APIController  # ApplicationControl
   # returns a hash of alpha to current card index
   #
   def current_alpha_states
-    team = Team.find(params[:team_id])
+    team = Team.find(params[:team_id].to_i)
     authorize! :read, team
 
     version = EssenceVersion.first

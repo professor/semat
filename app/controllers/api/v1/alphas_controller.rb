@@ -2,7 +2,7 @@ class Api::V1::AlphasController < ApplicationController
 
 
   def show
-    @alpha = Alpha.find(params[:id])
+    @alpha = Alpha.find(params[:id].to_i)
   end
 
   def index

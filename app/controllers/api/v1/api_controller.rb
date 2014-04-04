@@ -8,7 +8,7 @@ class Api::V1::APIController < ApplicationController
 
   def authenticate_user_from_token!
     user_email = params[:user_email].presence
-    user       = user_email && User.find_by_email(user_email)
+    user       = user_email && User.find_by_email(user_email.to_s)
 
     # Notice how we use Devise.secure_compare to compare the token
     # in the database with the token given in the params, mitigating

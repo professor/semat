@@ -2,7 +2,7 @@ class Api::V1::TeamsController < ApplicationController
 
   def rename
     begin
-      team = Team.find(params[:team_id])
+      team = Team.find(params[:team_id].to_i)
       authorize! :rename, team
 
       result = team.update_attributes(:name => params[:name])
@@ -19,7 +19,7 @@ class Api::V1::TeamsController < ApplicationController
   end
 
   def remove_member
-    team = Team.find(params[:team_id])
+    team = Team.find(params[:team_id].to_i)
     authorize! :remove_member, team
 
     remove_user = User.where(:email => params[:email]).first
@@ -31,7 +31,7 @@ class Api::V1::TeamsController < ApplicationController
   end
 
   def add_member
-    team = Team.find(params[:team_id])
+    team = Team.find(params[:team_id].to_i)
     authorize! :add_member, team
 
     email = params[:email]

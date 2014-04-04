@@ -10,7 +10,7 @@ class AlphasController < ApplicationController
 
     team_id = params[:team_id]
     if team_id
-      @team = Team.find(team_id)
+      @team = Team.find(team_id.to_i)
       @version = @team.essence_version
     else
       @team = current_user.teams.first
@@ -32,7 +32,7 @@ class AlphasController < ApplicationController
 
 
  def version
-   snapshot = Snapshot.find(params[:snapshot_id])
+   snapshot = Snapshot.find(params[:snapshot_id].to_i)
    @team = snapshot.team
 
    authorize! :show_snapshot_version, @team
