@@ -1,33 +1,30 @@
 <h2>Snapshot History</h2>
 <div class="row">
   <div class="col-md-12">
-<table class="table">
-<tr>
-  <th>Position</th>
-  <th>Timestamp</th>
-  <% @essence_version.alphas.each do |alpha| %>
-     <th><%= alpha.name %></th>
-  <% end %>
-</tr>
+    <table class="table">
+      <tr>
+        <th>Position</th>
+        <th>Timestamp</th>
+        <% @essence_version.alphas.each do |alpha| %>
+            <th><%= alpha.name %></th>
+        <% end %>
+      </tr>
 
-
-
-<% @team.snapshots.reverse_each do |snapshot| %>
-   <% snapshot_alphas_hash = snapshot.snapshot_alphas_hash %>
-
-   <tr><td><%= snapshot.position %></td><td><%= link_to I18n.l(snapshot.updated_at), snapshot_path(snapshot) %></td>
-     <% @essence_version.alphas.each do |alpha| %>
-         <% snapshot_alpha = snapshot_alphas_hash[alpha.id] %>
-         <% if snapshot_alpha.present? %>
-               <td><%= snapshot_alpha.current_state.number %></td>
-             <% else %>
-         <td>&nbsp;</td>
-         <% end %>
-
-     <% end %>
-
-   </tr>
-<% end %>
-</table>
-      </div>
-    </div>
+      <% @team.snapshots.reverse_each do |snapshot| %>
+          <% snapshot_alphas_hash = snapshot.snapshot_alphas_hash %>
+          <tr>
+            <td><%= snapshot.position %></td>
+            <td><%= link_to I18n.l(snapshot.updated_at), . %></td>
+            <% @essence_version.alphas.each do |alpha| %>
+                <% snapshot_alpha = snapshot_alphas_hash[alpha.id] %>
+                <% if snapshot_alpha.present? %>
+                    <td><%= snapshot_alpha.current_state.number %></td>
+                <% else %>
+                    <td>&nbsp;</td>
+                <% end %>
+            <% end %>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
