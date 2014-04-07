@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 20140129173808) do
     t.integer  "alpha_id"
     t.integer  "scribe_id"
     t.integer  "current_state_id"
-    t.text     "notes"
+    t.text     "notes",            default: ""
     t.datetime "created_at"
     t.datetime "updated_at"
   end

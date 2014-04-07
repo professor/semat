@@ -1,9 +1,11 @@
-<script>
+<script type= text/javascript>
     $(document).ready(function () {
+
         $('select#teams').on('change', function() {
             new_page = "/teams/" + $(this).val() + "/alphas";
             window.location.replace(new_page);
         });
+
     <% unless @disabled.present? %>
         $('.checklist_checkbox').click(function(){
             if($(this).is(':checked')){
@@ -11,12 +13,20 @@
             } else {
                 checked = false;
             }
-            id = $(this).val()
+            id = $(this).val();
             $.ajax({
                 type:'post',
                 data:"checklist_id=" + id + "&checked=" + checked +  "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
                 dataType:'script',
-                url: '/api/v1/progress/<%= @team.id %>/mark'});
+                url: '/api/v1/progress/<%= @team.id %>/mark',
+                error: function(xhr, status, error){
+                    if(xhr.status == 0){
+                        $('#server-status').show();
+                        alert("Server Error, please refresh the page and try again");
+                    }
+
+                }
+            });
         });
         $('.alpha-notes').change(function () {
             text = $(this).val();
@@ -40,7 +50,7 @@
 
         });
         $('.action-done').click(function(){
-            id = $(this).val()
+            id = $(this).val();
             $.ajax({
                 type:'post',
                 data:"action_id=" + id + "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
@@ -50,7 +60,7 @@
             row.hide('fast', function(){ row.remove(); });
         });
         $('.action-delete').click(function(){
-            id = $(this).val()
+            id = $(this).val();
             $.ajax({
                 type:'post',
                 data:"action_id=" + id + "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
@@ -60,7 +70,7 @@
             row.hide('fast', function(){ row.remove(); });
         });
         $('#email-team-notes').click(function(){
-            id = $(this).val()
+            id = $(this).val();
             $.ajax({
                 type:'post',
                 data:"team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
@@ -76,6 +86,7 @@
     });
 </script>
 
+
 <% if @disabled
      disabled_text = "disabled"
    else
@@ -83,7 +94,9 @@
    end
 %>
 
-
+<div id = "server-status" hidden="true" class="alert alert-danger">
+  <strong>Error!</strong> The server is down.
+</div>
 <h1 class="team-header">Team <%= @team.name %></h1>
 <ul class="nav nav-tabs">
   <li><%= link_to "Summary", team_path(@team) %></li>
@@ -123,7 +136,7 @@
 
 </div>
 
-    <div clsss="row">
+    <div class="row">
       <div class="col-md-6">
         <div class="form-group">
           <label for="mass-invite-textarea">Notes</label>
@@ -145,7 +158,7 @@
           </div>
           <% end %>
           <div class="input-group">
-            <input type="text" id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" <%= disabled_text %> placeholder="Enter possible actions your team can perform to achieve the next state."></input>
+            <input type="text" id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" <%= disabled_text %> placeholder="Enter possible actions your team can perform to achieve the next state.">
             <span class="input-group-btn">
               <button class="btn btn-default btn-success" type="button" <%=disabled_text %> >Add</button>
             </span>
@@ -157,7 +170,7 @@
     </div>
 <% end %>
 <div class="clearfix"></div>
-<div clsss="row">
+<div class="row">
   <div class="col-md-12">
     <div class="pull-right">
       <button type="button" class="btn btn-success" <%=disabled_text %> id="email-team-notes">Email summary to team</button>
