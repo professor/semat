@@ -1,5 +1,8 @@
 <p>Hello <%= @resource.email %>!</p>
 
+<p>Attention UCI students, today in class we will demo this tool. Feel free to accept this invitation. We will show
+you how to use the tool in class.</p>
+
 <% if @resource.invited_by.present? %>
 <p><%= @resource.invited_by.email %> has invited you to the SEMAT Kernel Tool, <%= root_url %></p>
 <% else %>
