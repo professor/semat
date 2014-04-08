@@ -84,7 +84,7 @@ class TeamsController < ApplicationController
   end
 
   def snapshot_export
-    @team = Team.find(params[:id]).to_i)
+    @team = Team.find(params[:id].to_i)
     temp_file_path = File.expand_path("#{Rails.root}/tmp/#{Process.pid}_") + "export.xls"
     Snapshot.export_history_to_spreadsheet(@team, temp_file_path)
     flash[:notice] = "snapshot history was exported to " + temp_file_path
