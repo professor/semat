@@ -6,6 +6,8 @@
             window.location.replace(new_page);
         });
 
+        ajax_error_message = "We are unable to save your change please refresh the page and try again";
+
     <% unless @disabled.present? %>
         $('.checklist_checkbox').click(function(){
             if($(this).is(':checked')){
@@ -21,8 +23,9 @@
                 url: '/api/v1/progress/<%= @team.id %>/mark',
                 error: function(xhr, status, error){
                     if(xhr.status == 0){
+                        $('#server-status').text(ajax_error_message);
                         $('#server-status').show();
-                        alert("Server Error, please refresh the page and try again");
+                        alert(ajax_error_message);
                     }
 
                 }
@@ -80,7 +83,6 @@
             $(this).text('Email sent')
         });
         <% end %>
-//        $('#example').popover(options)
         $("[data-toggle=popover]").popover()
 
     });
@@ -94,9 +96,7 @@
    end
 %>
 
-<div id = "server-status" hidden="true" class="alert alert-danger">
-  <strong>Error!</strong> The server is down.
-</div>
+<div id = "server-status" hidden="true" class="alert alert-danger"></div>
 <h1 class="team-header">Team <%= @team.name %></h1>
 <ul class="nav nav-tabs">
   <li><%= link_to "Summary", team_path(@team) %></li>
@@ -163,7 +163,6 @@
               <button class="btn btn-default btn-success" type="button" <%=disabled_text %> >Add</button>
             </span>
           </div>
-          <!--<textarea id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" placeholder="Enter possible actions your team can perform to achieve the next state."></textarea>-->
         </div>
         <div id="alert-actions-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
       </div>

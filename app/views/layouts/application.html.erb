@@ -26,7 +26,7 @@
 
         <% if user_signed_in? %>
         <li class="<%= 'active' if current_page?(alphas_path) %>"><a href="<%= alphas_path %>">Alphas</a></li>
-        <li class="<%= 'active' if current_page?("/users/#{current_user.email}/teams") %>"><a href="/users/#{current_user}/teams"> Teams </a></li>
+        <li class="<%= 'active' if current_page?(my_teams_path(current_user)) %>"><a href="<%= my_teams_path(current_user) %>">Teams</a></li>
         <li class="<%= 'active' if current_page?(versions_path) %>"><a href="<%= versions_path %>">Versions</a></li>
 
         <li><a href="#contact"><% current_user.email %></a></li>
