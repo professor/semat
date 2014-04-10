@@ -14,6 +14,7 @@ class TeamsController < ApplicationController
 
   def edit
     @team = Team.find(params[:id].to_i)
+    authorize! :update, @team
     @members = @team.members
   end
 
@@ -44,12 +45,13 @@ class TeamsController < ApplicationController
 
   def show
     @team = Team.find(params[:id].to_i)
+    authorize! :read, @team
     @snapshot = @team.find_latest_or_create_first_snapshot
-
   end
 
   def mass_invite
     team = Team.find(params[:team_id].to_i)
+    authorize! :update, team
     mass_invite = params[:mass_invite]
     mass_invite.split(",").each do |email|
       team.add_member_or_invite(email, current_user) if email.present?
@@ -60,11 +62,13 @@ class TeamsController < ApplicationController
 
   def checklists
     @team = Team.find(params[:id].to_i)
+    authorize! :read, @team
     @checked_checklists = @team.checklists
   end
 
   def snapshot_history_first
     @team = Team.find(params[:id].to_i)
+    authorize! :read, @team
     @essence_version = @team.essence_version
 
     @snapshots = []
@@ -78,6 +82,7 @@ class TeamsController < ApplicationController
 
   def snapshot_history
     @team = Team.find(params[:id].to_i)
+    authorize! :read, @team
     @snapshot_history = Snapshot.history(@team)
     @snapshots = @team.snapshots.reverse
 
@@ -85,6 +90,7 @@ class TeamsController < ApplicationController
 
   def snapshot_export
     @team = Team.find(params[:id].to_i)
+    authorize! :read, @team
     temp_file_path = File.expand_path("#{Rails.root}/tmp/#{Process.pid}_") + "export.xls"
     Snapshot.export_history_to_spreadsheet(@team, temp_file_path)
     flash[:notice] = "snapshot history was exported to " + temp_file_path

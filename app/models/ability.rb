@@ -15,62 +15,10 @@ class Ability
 
     can :manage, Team, :members => {:id => user.id}
 
-    #
-    #can :update, PageAttachment
-    #can :see_student_grades, Course
-    #
-    #
-    #if (user.human_name == "Todd Sedano" ||user.human_name == "Chris Zeise" || user.human_name == "Gerry Panelo Elizondo")
-    #  can :upload, Course
-    #end
-    #
-    ##  This next line is for testing purposes only when working on managing active directory from whiteboard
-    #if (user.human_name == "Edward Akoto" || user.human_name == "Jazz Sabian"  || user.human_name == "Albert Liu" || user.human_name == "Stacy Marshall" || user.human_name == "Todd Sedano" || user.human_name == "Gerry Panelo Elizondo")
-    #  can :create, User
-    #else
-    #  cannot :create, User
-    #end
-    #
-    #if (user.is_admin? || user.human_name == "Rofaida Abdelaal")
-    #  can :upload_official_photo, User
-    #  can :update, User
-    #else
-    #  cannot :upload_official_photo, User
-    #end
-    #
-    #
-    ##Contracts manager
-    #if (user.is_admin? || user.human_name == "Ngoc Ho" || user.human_name == "Hector Rastrullo")
-    #  can :manage, SponsoredProjectAllocation
-    #  can :manage, SponsoredProjectEffort
-    #  can :manage, SponsoredProjectSponsor
-    #  can :manage, SponsoredProject
-    #end
-    #
-    #if (user.is_admin? || user.is_staff?)
-    #  can :view_assignments, Job
-    #end
-    #
-    #
-    #if (user.is_admin?)
-    #  can :manage, Course
-    #  can :manage, Job
-    #  can :manage, User
-    #  can :see_current_sign_in_ip, User
-    #else
-    #  cannot :see_current_sign_in_ip, User
-    #end
-    #
-    #if  (user.is_staff?)
-    #  can [:teach, :create, :update, :peer_evaluation, :team_formation], Course
-    #  can :manage, Assignment
-    #  can [:create, :see_job_details], Job
-    #end
-    #can [:teach, :update, :peer_evaluation, :team_formation], Course, :faculty => {:id => user.id} #Useful for TAs.
-    #can :update, Job, :supervisors => {:id => user.id}
-    #
-    #
-    #
+    if (user.email == 'todd.sedano@sv.cmu.edu')
+      can :manage, User
+      can :manage, Team
+    end
 
     # The first argument to `can` is the action you are giving the user permission to do.
     # If you pass :manage it will apply to every action. Other common actions here are
