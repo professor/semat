@@ -1,14 +1,19 @@
 <script type= text/javascript>
     $(document).ready(function () {
+        ajax_error_message = "We are unable to save your change please refresh the page and try again";
+
+        function display_error(jqXhr, status, error){
+            $('#server-status').text(ajax_error_message);
+            $('#server-status').show();
+            alert(ajax_error_message);
+        }
 
         $('select#teams').on('change', function() {
             new_page = "/teams/" + $(this).val() + "/alphas";
             window.location.replace(new_page);
         });
 
-        ajax_error_message = "We are unable to save your change please refresh the page and try again";
-
-    <% unless @disabled.present? %>
+        <% unless @disabled.present? %>
         $('.checklist_checkbox').click(function(){
             if($(this).is(':checked')){
                 checked = true;
@@ -19,16 +24,10 @@
             $.ajax({
                 type:'post',
                 data:"checklist_id=" + id + "&checked=" + checked +  "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
-                dataType:'script',
-                url: '/api/v1/progress/<%= @team.id %>/mark',
-                error: function(xhr, status, error){
-                    if(xhr.status == 0){
-                        $('#server-status').text(ajax_error_message);
-                        $('#server-status').show();
-                        alert(ajax_error_message);
-                    }
-
-                }
+                dataType:'json',
+                url: '/api/v1/progress/<%= @team.id %>/mark'
+            }).fail(function(jqXhr, status, error){
+                display_error(jqXhr, status, error);
             });
         });
         $('.alpha-notes').change(function () {
@@ -37,9 +36,13 @@
             $.ajax({
                 type: 'post',
                 data: "alpha_id=" + alpha_id + "&user_email=<%=current_user.email%>" + "&notes=" + text,
-                dataType: 'script',
-                url: '/api/v1/progress/<%= @team.id %>/save_notes'});
-            $('#alert-notes-' + alpha_id).slideDown("slow").delay(1000).slideUp("slow");
+                dataType: 'json',
+                url: '/api/v1/progress/<%= @team.id %>/save_notes'
+            }).done(function(data, status){
+                $('#alert-notes-' + alpha_id).slideDown("slow").delay(1000).slideUp("slow");
+            }).fail(function(jqXhr, status, error){
+                display_error(jqXhr, status, error);
+            });
         });
         $('.alpha-actions').change(function () {
             text = $(this).val();
@@ -47,46 +50,63 @@
             $.ajax({
                 type: 'post',
                 data: "alpha_id=" + alpha_id + "&user_email=<%=current_user.email%>" + "&actions=" + text,
-                dataType: 'script',
-                url: '/api/v1/progress/<%= @team.id %>/save_actions'});
-            $('#alert-actions-' + alpha_id).slideDown("slow").delay(1000).slideUp("slow");
-
+                dataType: 'json',
+                url: '/api/v1/progress/<%= @team.id %>/save_actions'
+            }).done(function(data, status){
+                $('#alert-actions-' + alpha_id).slideDown("slow").delay(1000).slideUp("slow");
+            }).fail(function(jqXhr, status, error){
+                display_error(jqXhr, status, error);
+            });
         });
         $('.action-done').click(function(){
             id = $(this).val();
             $.ajax({
                 type:'post',
                 data:"action_id=" + id + "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
-                dataType:'script',
-                url: '/api/v1/progress/<%= @team.id %>/action_done'});
-            row = $(this).parents(".action-list-item");
-            row.hide('fast', function(){ row.remove(); });
+                dataType:'json',
+                url: '/api/v1/progress/<%= @team.id %>/action_done'
+            }).done(function(data, status){
+                row = $(this).parents(".action-list-item");
+                row.hide('fast', function(){ row.remove(); });
+            }).fail(function(jqXhr, status, error){
+                display_error(jqXhr, status, error);
+            });
         });
         $('.action-delete').click(function(){
             id = $(this).val();
             $.ajax({
                 type:'post',
                 data:"action_id=" + id + "&team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
-                dataType:'script',
-                url: '/api/v1/progress/<%= @team.id %>/action_deleted'});
-            row = $(this).parents(".action-list-item");
-            row.hide('fast', function(){ row.remove(); });
+                dataType:'json',
+                url: '/api/v1/progress/<%= @team.id %>/action_deleted'
+            }).done(function(data, status){
+                row = $(this).parents(".action-list-item");
+                row.hide('fast', function(){ row.remove(); });
+            }).fail(function(jqXhr, status, error){
+                display_error(jqXhr, status, error);
+            });
         });
         $('#email-team-notes').click(function(){
             id = $(this).val();
+            button = $(this);
             $.ajax({
                 type:'post',
                 data:"team_id=<%=@team.id%>&user_email=<%=current_user.email%>",
-                dataType:'script',
-                url: '/api/v1/progress/<%= @team.id %>/email_summary'});
-            // $("#email-team-notes").prop('value', 'Email sent');
-            $(this).text('Email sent')
+                dataType:'json',
+                url: '/api/v1/progress/<%= @team.id %>/email_summary'
+            }).done(function(data, status){
+                button.text('Email sent')
+            }).fail(function(jqXhr, status, error){
+                display_error(jqXhr, status, error);
+            });
         });
         <% end %>
         $("[data-toggle=popover]").popover()
 
     });
 </script>
+
+
 
 
 <% if @disabled
@@ -107,72 +127,72 @@
 <br/>
 
 <% if @teams.count > 1 %>
-<div class="row">
-  <div class="col-md-12">	
-    <div class="pull-right">
-      <div class="input-group input-group-lg">
-        <label for="teams">Select team:</label>
-<!--    <span class="input-group-addon">Select team:</span> -->
-        <%= select_tag "teams", options_from_collection_for_select(@teams, "id", "name", @team.id), class: "form-control" %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-right">
+          <div class="input-group input-group-lg">
+            <label for="teams">Select team:</label>
+            <!--    <span class="input-group-addon">Select team:</span> -->
+            <%= select_tag "teams", options_from_collection_for_select(@teams, "id", "name", @team.id), class: "form-control" %>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 <% end %>
 
 <% @version.alphas.each do |alpha| %>
-<div class="clearfix"></div>
-<div class="row">
-    <h2 class="alpha-header"><%= alpha.name %></h2>
-    <span class="alpha-tooltip glyphicon glyphicon-info-sign"  data-toggle="popover" title="" data-html="true" data-content="<%= alpha.definition %><br/><br/><%= alpha.description %>" role="button" data-original-title="Definition & Description" ></span>
-</div>
-<div class="row">
-  <% alpha.visible_states.each_with_index do |state, index| %>
-        <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color, :checklist_ids_hash => @checklist_ids_hash, :disabled_text => disabled_text} %></div>
-        <% if index % 3 == 2 %>
-        </div><div class='row'>
-        <% end %>
-  <% end %>
-
-</div>
-
+    <div class="clearfix"></div>
     <div class="row">
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="mass-invite-textarea">Notes</label>
-          <% if @notes_hash[alpha.id] %>
-          <textarea class="form-control" disabled rows="5"><%= @notes_hash[alpha.id] %></textarea>
+      <h2 class="alpha-header"><%= alpha.name %></h2>
+      <span class="alpha-tooltip glyphicon glyphicon-info-sign"  data-toggle="popover" title="" data-html="true" data-content="<%= alpha.definition %><br/><br/><%= alpha.description %>" role="button" data-original-title="Definition & Description" ></span>
+    </div>
+    <div class="row">
+      <% alpha.visible_states.each_with_index do |state, index| %>
+          <div class="col-md-4"><%= render :partial => "state_card", :locals => {:state => state, :color => alpha.color, :checklist_ids_hash => @checklist_ids_hash, :disabled_text => disabled_text} %></div>
+          <% if index % 3 == 2 %>
+              </div><div class='row'>
           <% end %>
-          <textarea id="alpha_notes_<%= alpha.id%>" name="alpha_notes" data-id="<%= alpha.id %>" class="form-control alpha-notes" rows="5" <%= disabled_text %> placeholder="Enter notes about your current situation." ></textarea>
-        </div>
-        <div id="alert-notes-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
+      <% end %>
+
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label for="mass-invite-textarea">Possible Actions</label>
-          <% if @actions_hash[alpha.id].present? %>
-          <div class="action-list">
-            <% @actions_hash[alpha.id].each do |action| %>
-               <%= render :partial => "action", :locals => {:action => action, :disabled_text => disabled_text} %>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="mass-invite-textarea">Notes</label>
+            <% if @notes_hash[alpha.id] %>
+                <textarea class="form-control" disabled rows="5"><%= @notes_hash[alpha.id] %></textarea>
             <% end %>
+            <textarea id="alpha_notes_<%= alpha.id%>" name="alpha_notes" data-id="<%= alpha.id %>" class="form-control alpha-notes" rows="5" <%= disabled_text %> placeholder="Enter notes about your current situation." ></textarea>
           </div>
-          <% end %>
-          <div class="input-group">
-            <input type="text" id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" <%= disabled_text %> placeholder="Enter possible actions your team can perform to achieve the next state.">
+          <div id="alert-notes-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="mass-invite-textarea">Possible Actions</label>
+            <% if @actions_hash[alpha.id].present? %>
+                <div class="action-list">
+                  <% @actions_hash[alpha.id].each do |action| %>
+                      <%= render :partial => "action", :locals => {:action => action, :disabled_text => disabled_text} %>
+                  <% end %>
+                </div>
+            <% end %>
+            <div class="input-group">
+              <input type="text" id="alpha_actions_<%= alpha.id%>" name="alpha_actions" data-id="<%= alpha.id %>" class="form-control alpha-actions" rows="1" <%= disabled_text %> placeholder="Enter possible actions your team can perform to achieve the next state.">
             <span class="input-group-btn">
               <button class="btn btn-default btn-success" type="button" <%=disabled_text %> >Add</button>
             </span>
+            </div>
           </div>
+          <div id="alert-actions-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
         </div>
-        <div id="alert-actions-<%= alpha.id%>" class="alert alert-info" style="display: none;">You have successfully saved</div>
       </div>
-    </div>
 <% end %>
 <div class="clearfix"></div>
 <div class="row">
   <div class="col-md-12">
     <div class="pull-right">
       <button type="button" class="btn btn-success" <%=disabled_text %> id="email-team-notes">Email summary to team</button>
-    </div>	
+    </div>
   </div>
 </div>
