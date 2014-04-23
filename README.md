@@ -24,6 +24,7 @@ rake assets:precompile RAILS_ENV=production
 
 
 
+
 ## Setup
 rake semat:import_alpha_cards
 
@@ -40,6 +41,8 @@ heroku run rake db:migrate --app semat
 ## Initialize on production
 heroku run rake semat:import_alpha_cards
 
+## Console access
+heroku run rails console --app semat
 
 ## Great Tools
 http://jsonlint.com/
