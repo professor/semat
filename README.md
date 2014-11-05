@@ -33,7 +33,7 @@ AdminUser.create!(:email => 'admin@example.com', :password => 'password', :passw
 
 
 ## Admin on production
-heroku run rails console
+heroku run rails console --app semat
 git push heroku master
 heroku pgbackups:capture --expire --app semat
 heroku run rake db:migrate --app semat
