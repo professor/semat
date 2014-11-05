@@ -48,6 +48,8 @@ heroku run rails console --app semat
 http://jsonlint.com/
 Excellent Tutorial on Android and Rails: http://lucatironi.github.io/tutorial/2012/10/15/ruby_rails_android_app_authentication_devise_tutorial_part_one/
 
+## Quick Reference for helps
+version = EssenceVersion.find_by_name('CMU 1.1')
 
 ## Copy production database to local machine
 heroku pg:pull HEROKU_POSTGRESQL_AMBER_URL SEMAT_heroku --app semat
