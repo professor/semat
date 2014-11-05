@@ -9,6 +9,9 @@ SEMAT::Application.routes.draw do
     match "/(*path)" => redirect {|params, req| "https://semat.herokuapp.com/#{params[:path]}"}, via: [:get, :post]
   end
 
+  constraints(:protocol => 'http', :host => /semat.herokuapp.com/) do
+    match "/(*path)" => redirect {|params, req| "https://semat.herokuapp.com/#{params[:path]}"}, via: [:get, :post]
+  end
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users, :controllers => { :registrations => "registrations" }
