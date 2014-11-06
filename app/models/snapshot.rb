@@ -196,6 +196,7 @@ class Snapshot < ActiveRecord::Base
 
     history_book.write(file_path)
   end
-  
+
+  include SnapshotDelta
 
 end

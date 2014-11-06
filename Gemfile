@@ -66,3 +66,5 @@ gem 'rails_12factor', group: :production
 gem 'spreadsheet'
 
 gem 'anjlab-bootstrap-rails', '~> 3.0.2.0', :require => 'bootstrap-rails'
+
+gem 'JSON', group: [:development, :test]

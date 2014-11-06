@@ -87,6 +87,16 @@ class Team < ActiveRecord::Base
     current_snapshot
   end
 
-
+  def delta_array_of_checklists
+    delta = []
+    previous_snapshot_hash = {}
+    self.snapshots.each do |snapshot|
+      current_snapshot_hash = snapshot.delta_from(previous_snapshot_hash)
+      # binding.pry
+      delta << current_snapshot_hash
+      previous_snapshot_hash = snapshot.checklist_ids_hash
+    end
+    delta
+  end
 
 end
