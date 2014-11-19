@@ -36,20 +36,13 @@ class Team < ActiveRecord::Base
   end
 
 
-  #def checklist_ids_hash
-  #  checklists = self.checklists
-  #  checklist_ids_hash = Hash.new
-  #  checklists.collect { |d| checklist_ids_hash.store(d.id, true) }
-  #  checklist_ids_hash
-  #end
-
+  #Does anyone use this? It looks like we always go to the similiar method on snapshot
   def checklist_ids_hash
     latest_snapshot = self.snapshots.last
-    checklist_ids_hash = Hash.new
-    latest_snapshot.checklists.collect { |d| checklist_ids_hash.store(d.id, true) } if latest_snapshot.present?
-    checklist_ids_hash
+    latest_snapshot.present? ? latest_snapshot.checklist_ids_hash : {}
   end
 
+  #Does anyone use this? It looks like we always go to the similiar method on snapshot
   def notes_hash
     latest_snapshot = self.snapshots.last
     notes_hash = Hash.new

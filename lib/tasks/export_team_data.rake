@@ -20,13 +20,13 @@ namespace :semat do
       hash = snapshot.checklist_ids_hash
       data << hash unless hash == {}
     end
-    json_string = JSON.generate(data)
+    json_string = JSON.pretty_generate(data)
     File.write(File.expand_path("../../generated_json/team_#{team.id}_weekly.json", __FILE__), json_string)
   end
 
   def generate_json_for_deltas(team)
     delta_meetings = team.delta_array_of_checklists.delete_if {|item| item == {}}
-    json_string = delta_meetings.to_json
+    json_string = JSON.pretty_generate(delta_meetings)
     File.write(File.expand_path("../../generated_json/team_#{team.id}_deltas.json", __FILE__), json_string)
   end
 end
