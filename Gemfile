@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# ruby '2.0.0'
+ruby '2.1.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
@@ -67,4 +67,6 @@ gem 'spreadsheet'
 
 gem 'anjlab-bootstrap-rails', '~> 3.0.2.0', :require => 'bootstrap-rails'
 
-gem 'JSON', group: [:development, :test]
+gem 'json', group: [:development, :test]
+gem 'pry', group: :development
+gem 'pry-rails', :group => :development
