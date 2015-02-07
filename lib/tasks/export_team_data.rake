@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'rake'
-require 'JSON'
+require 'json'
 
 namespace :semat do
 
